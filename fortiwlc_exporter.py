@@ -29,12 +29,12 @@ wlcarray = sys.argv[1]
 
 class FortiwlcCollector(object):
     def collect(self):
-        client_count = GaugeMetricFamily('client_count','help',labels=['ap_name','campus_name','profile_name','model','wlc','status','state'])
+        fortiwlc_clients_by_ap_count = GaugeMetricFamily('fortiwlc_clients_by_ap_count','help',labels=['ap_name','campus_name','profile_name','model','wlc','status','state'])
 
         for ap_name, ap_data in main(ssidapi,wlcarray)['ap'].items():
             client_count.add_metric([ap_name,ap_data['campus_name'],ap_data['profile_name'],ap_data['model'],ap_data['wlc'],ap_data['status'],ap_data['state']], ap_data['client_count'])
 
-        yield client_count
+        yield fortiwlc_clients_by_ap_count
 
         '''client_count = GaugeMetricFamily('ap_client_count','help',labels=['ap_name'])
         ssid_count = GaugeMetricFamily('ssid_count','help',labels=['ap_name'])'''
