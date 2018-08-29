@@ -66,9 +66,12 @@ def client_count(path,ap,perradio):
         path['per_radio']['2'] = radio2clients
 
 
-def wlc_hostname(z):
+def wlc_hostname(z,wlcarray):
     wlc_name = ''
-    wlc_name = productionapiarray[z]
+    if wlcarray == 'production':
+        wlc_name = production[z]
+    elif wlcarray == 'testing':
+        wlc_name = testing[z]
     cutstring = ''
     cutstring = wlc_name.split('/')
     wlc_name = cutstring[2]
@@ -125,27 +128,46 @@ def ap_read_trough(wlc_name):
         ap_write(ap,wlc_name)
 
 
-def main(ssidapi,productionapiarray,wlc):
+def main(ssidapi,wlcarray):
     global data, datassid
     init()
     z = 0
-    for wlc in production:
-        wlc_hostname(z)
-        '''ssidclienturl = ssidclientapi[z]
-        ssidclientrresponse = requests.get(ssidclienturl)
-        datassid = (ssidresponse.json()['results'])'''
+    if wlcarray == 'production':
+        for wlc in production:
+            wlc_hostname(z,wlcarray)
+            '''ssidclienturl = ssidclientapi[z]
+            ssidclientrresponse = requests.get(ssidclienturl)
+            datassid = (ssidresponse.json()['results'])'''
 
-        '''ssidcurl = ssidapi[z]
-        ssidresponse = requests.get(ssidurl)
-        datassid = (ssidresponse.json()['results'])'''
+            '''ssidcurl = ssidapi[z]
+            ssidresponse = requests.get(ssidurl)
+            datassid = (ssidresponse.json()['results'])'''
 
-        url = productionapiarray[z]
-        response = requests.get(url)
-        data = (response.json()['results'])
-        ap_read_trough(wlc_hostname(z))
-        z += 1
-    return maindict
+            url = production[z]
+            response = requests.get(url)
+            data = (response.json()['results'])
+            ap_read_trough(wlc_hostname(z,wlcarray))
+            z += 1
+        return maindict
+
+    elif wlcarray == 'testing':
+        for wlc in testing:
+            wlc_hostname(z,wlcarray)
+            '''ssidclienturl = ssidclientapi[z]
+            ssidclientrresponse = requests.get(ssidclienturl)
+            datassid = (ssidresponse.json()['results'])'''
+
+            '''ssidcurl = ssidapi[z]
+            ssidresponse = requests.get(ssidurl)
+            datassid = (ssidresponse.json()['results'])'''
+
+            url = testing[z]
+            response = requests.get(url)
+            data = (response.json()['results'])
+            ap_read_trough(wlc_hostname(z,wlcarray))
+            z += 1
+        return maindict
 
 
-if __name__ == "__main__":
-    print(json.dumps(main(ssidapi,productionapiarray), indent = 4, sort_keys = False))
+#if __name__ == "__main__":
+#    print(json.dumps(main(ssidapi,production), indent = 4, sort_keys = False))
