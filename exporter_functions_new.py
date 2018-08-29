@@ -1,5 +1,6 @@
 import requests
 import json
+import sys
 from pprint import pprint
 
 ssidapi = ['https://wlc1.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
@@ -169,5 +170,6 @@ def main(ssidapi,wlcarray):
         return maindict
 
 
-#if __name__ == "__main__":
-#    print(json.dumps(main(ssidapi,production), indent = 4, sort_keys = False))
+if __name__ == "__main__":
+    wlcarray = sys.argv[1]
+    print(json.dumps(main(ssidapi,wlcarray), indent = 4, sort_keys = False))
