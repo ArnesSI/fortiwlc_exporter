@@ -119,7 +119,7 @@ def ap_write(ap,wlc_name):
     appath['profile_name'] = ap_profile_string(ap)[2]
     appath['model'] = ap_profile_string(ap)[0]
     appath['wlc'] = wlc_name
-    appath['status'] = ap['status']
+    appath['status'] = ap.get(['status'])
     appath['state'] = ap['state']
     client_count(appath,ap,True)
 
