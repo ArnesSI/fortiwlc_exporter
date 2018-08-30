@@ -29,8 +29,8 @@ wlcarray = sys.argv[1]
 
 class FortiwlcCollector(object):
     def collect(self):
-        fortiwlc_clients_by_ap = GaugeMetricFamily('fortiwlc_clients_by_ap','help',labels=['ap_name','campus_name','profile_name','model','wlc','status','state'])
-        fortiwlc_up = GaugeMetricFamily('fortiwlc_up','help')
+        fortiwlc_clients_by_ap = GaugeMetricFamily('fortiwlc_clients_by_ap','Number of clients connected to a specific access point. Retrieved from wifi/managed_ap/select/ API endpoint.',labels=['ap_name','campus_name','profile_name','model','wlc','status','state'])
+        fortiwlc_up = GaugeMetricFamily('fortiwlc_up','Was the last scrape of data from all FortiNET WLC instances successful.')
 
         try:
             wlc_data = main(ssidapi,wlcarray)
