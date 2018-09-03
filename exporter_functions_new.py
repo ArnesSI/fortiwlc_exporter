@@ -3,24 +3,32 @@ import json
 import sys
 from pprint import pprint
 
-ssidapi = ['https://wlc1.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
-            'https://wlc2.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
-            'https://wlc3.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
-            'https://wlc4.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw']
-
-ssidclientapi = ['https://wlc1.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
-            'https://wlc2.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
-            'https://wlc3.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
-            'https://wlc4.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw']
+ssidapi = [
+    'https://wlc1.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
+    'https://wlc2.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
+    'https://wlc3.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
+    'https://wlc4.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw',
+    'https://wlc5.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
+]
+ssidclientapi = [
+    'https://wlc1.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
+    'https://wlc2.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
+    'https://wlc3.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
+    'https://wlc4.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw',
+    'https://wlc5.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
+]
 
 #test source api
 testing = ['https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=r8g1y84z1q73x96s91gQq0pfGNd4x7']
 
 #production source api
-production = ['https://wlc1.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
-          'https://wlc2.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
-          'https://wlc3.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
-          'https://wlc4.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw']
+production = [
+    'https://wlc1.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
+    'https://wlc2.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
+    'https://wlc3.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
+    'https://wlc4.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw',
+    'https://wlc5.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
+]
 
 #ap_profile dictionaries
 ap_profile_dict = {}
