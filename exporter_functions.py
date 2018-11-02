@@ -10,6 +10,7 @@ ssidapi = [
     'https://wlc5.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
     'https://wlc6.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=g50dd0m861fw7zdh7HdQ391nrg5f41',
     'https://wlc7.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=y9Qksyrs3940ctfr9x7drdcss3n0dg',
+    'https://wlc8.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=wdcnQb48qcdqr39wxwm6Hx5tsp8h5m',
 ]
 
 #test source api
@@ -24,6 +25,7 @@ productionapiarray = [
     'https://wlc5.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
     'https://wlc6.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=g50dd0m861fw7zdh7HdQ391nrg5f41',
     'https://wlc7.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=y9Qksyrs3940ctfr9x7drdcss3n0dg',
+    'https://wlc8.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=wdcnQb48qcdqr39wxwm6Hx5tsp8h5m',
 ]
 
 
