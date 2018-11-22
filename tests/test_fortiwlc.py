@@ -60,7 +60,6 @@ class TestFortiWLC(unittest.TestCase):
         self.assertEqual(wlc.api_key, 'r8g1y84z1q73x96s91gQq0pfGNd4x7')
         self.assertEqual(wlc_data, response_data['results'])
 
-
     @responses.activate
     def test_clients_1_ok(self):
         """ Test successfull API call for clients """

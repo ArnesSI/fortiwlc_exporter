@@ -41,7 +41,7 @@ class FortiwlcCollector:
         try:
             self.poll_wlcs()
             self.parse_metrics()
-        except:
+        except Exception:
             fortiwlc_up.add_metric([], 0)
         else:
             fortiwlc_up.add_metric([], 1)
