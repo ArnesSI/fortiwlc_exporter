@@ -2,8 +2,6 @@ import json
 import unittest
 import responses
 import requests
-from prometheus_client import start_http_server
-from prometheus_client.core import REGISTRY
 
 from exporter import start_server
 
