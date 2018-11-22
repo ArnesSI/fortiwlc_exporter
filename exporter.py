@@ -1,10 +1,7 @@
-import requests
-import json
 import time
 import sys
 from prometheus_client import start_http_server
 from prometheus_client.core import REGISTRY
-from prometheus_client import Gauge
 from fortiwlc_exporter.collector import FortiwlcCollector
 
 
@@ -37,8 +34,6 @@ try:
 except IndexError:
     wlcarray = 'testing'
 
-#print(json.dumps(main(ssidapi,wlcarray), indent=4, sort_keys=True))
-
 
 def start_server(port=9118):
     REGISTRY.register(FortiwlcCollector(ssidapi, wlcarray))
@@ -47,7 +42,8 @@ def start_server(port=9118):
 
 def main():
     start_server()
-    while True: time.sleep(1)
+    while True:
+        time.sleep(1)
 
 
 if __name__ == "__main__":
