@@ -8,3 +8,19 @@ for Prometheus.
 ## Running
 
 ## Description
+
+## Developing
+
+The project uses `pipenv` for managing python virtual environments.
+
+To setup development vrtual environment:
+
+```
+pipenv install --dev
+```
+
+Running tests:
+
+```
+pipenv run python setup.py test
+```
