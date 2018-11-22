@@ -32,7 +32,10 @@ production = [
     'https://wlc7.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=y9Qksyrs3940ctfr9x7drdcss3n0dg',
 ]
 
-wlcarray = sys.argv[1]
+try:
+    wlcarray = sys.argv[1]
+except IndexError:
+    wlcarray = 'testing'
 
 #print(json.dumps(main(ssidapi,wlcarray), indent=4, sort_keys=True))
 
