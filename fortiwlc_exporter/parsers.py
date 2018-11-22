@@ -1,4 +1,4 @@
-def client_count(path,ap,perradio):
+def client_count(path, ap, perradio):
     clients = ap['clients']
     path['client_count'] += clients
 
@@ -25,16 +25,18 @@ def ap_profile_string(ap):
         return model
     else:
         return [model, campus]'''
-    return [model,campus,ap_profile]
+    return model, campus, ap_profile
 
 
 def parse_ap_data(ap_data, wlc_name):
+    """ Parses AP data from WLC API into format suitable for metric export """
     name = ap_data['name']
+    model, campus_name, profile_name = ap_profile_string(ap_data)
     ap = {
         'name': name,
-        'campus_name': ap_profile_string(ap_data)[1],
-        'profile_name': ap_profile_string(ap_data)[2],
-        'model': ap_profile_string(ap_data)[0],
+        'campus_name': campus_name,
+        'profile_name': profile_name,
+        'model': model,
         'wlc': wlc_name,
         'status': ap_data.get('status', None),
         'state': ap_data['state'],
