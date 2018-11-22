@@ -3,38 +3,8 @@ import json
 import sys
 from pprint import pprint
 
-ssidapi = [
-    'https://wlc1.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
-    'https://wlc2.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
-    'https://wlc3.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
-    'https://wlc4.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw',
-    'https://wlc5.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
-    'https://wlc6.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=g50dd0m861fw7zdh7HdQ391nrg5f41',
-    'https://wlc7.anso.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=y9Qksyrs3940ctfr9x7drdcss3n0dg',
-]
-ssidclientapi = [
-    'https://wlc1.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
-    'https://wlc2.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
-    'https://wlc3.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
-    'https://wlc4.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw',
-    'https://wlc5.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
-    'https://wlc6.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=g50dd0m861fw7zdh7HdQ391nrg5f41',
-    'https://wlc7.anso.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=y9Qksyrs3940ctfr9x7drdcss3n0dg',
-]
+from .fortiwlc import FortiWLC
 
-#test source api
-testing = ['https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=r8g1y84z1q73x96s91gQq0pfGNd4x7']
-
-#production source api
-production = [
-    'https://wlc1.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=kQ0bg3jg6pfn19kr4GdgzGx41dmk9w',
-    'https://wlc2.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=9dprpq3xs8bxwGs10w03N5N9bt6dpp',
-    'https://wlc3.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=60dzxQ3wNb1GbjjshryQ000NwN3yyj',
-    'https://wlc4.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=wGzjNw1pQg5snmxp6m1jphQ94n41mw',
-    'https://wlc5.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=3696nbbws84k3078fnpzz3sN740zdc',
-    'https://wlc6.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=g50dd0m861fw7zdh7HdQ391nrg5f41',
-    'https://wlc7.anso.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=y9Qksyrs3940ctfr9x7drdcss3n0dg',
-]
 
 #ap_profile dictionaries
 ap_profile_dict = {}
@@ -79,18 +49,6 @@ def client_count(path,ap,perradio):
     if perradio:
         path['per_radio']['1'] = radio1clients
         path['per_radio']['2'] = radio2clients
-
-
-def wlc_hostname(z,wlcarray):
-    wlc_name = ''
-    if wlcarray == 'production':
-        wlc_name = production[z]
-    elif wlcarray == 'testing':
-        wlc_name = testing[z]
-    cutstring = ''
-    cutstring = wlc_name.split('/')
-    wlc_name = cutstring[2]
-    return wlc_name
 
 
 def ap_profile_string(ap):
@@ -143,47 +101,16 @@ def ap_read_trough(wlc_name):
         ap_write(ap,wlc_name)
 
 
-def main(ssidapi,wlcarray):
+def main(wlc_group):
     global data, datassid
     init()
-    z = 0
-    if wlcarray == 'production':
-        for wlc in production:
-            wlc_hostname(z,wlcarray)
-            '''ssidclienturl = ssidclientapi[z]
-            ssidclientrresponse = requests.get(ssidclienturl)
-            datassid = (ssidresponse.json()['results'])'''
 
-            '''ssidcurl = ssidapi[z]
-            ssidresponse = requests.get(ssidurl)
-            datassid = (ssidresponse.json()['results'])'''
-
-            url = production[z]
-            response = requests.get(url)
-            data = (response.json()['results'])
-            ap_read_trough(wlc_hostname(z,wlcarray))
-            z += 1
-        return maindict
-
-    elif wlcarray == 'testing':
-        for wlc in testing:
-            wlc_hostname(z,wlcarray)
-            '''ssidclienturl = ssidclientapi[z]
-            ssidclientrresponse = requests.get(ssidclienturl)
-            datassid = (ssidresponse.json()['results'])'''
-
-            '''ssidcurl = ssidapi[z]
-            ssidresponse = requests.get(ssidurl)
-            datassid = (ssidresponse.json()['results'])'''
-
-            url = testing[z]
-            response = requests.get(url)
-            data = (response.json()['results'])
-            ap_read_trough(wlc_hostname(z,wlcarray))
-            z += 1
-        return maindict
+    for wlc_name, api_key in wlc_group:
+        data = FortiWLC(wlc_name, api_key).get_managed_ap()
+        ap_read_trough(wlc_name)
+    return maindict
 
 
-if __name__ == "__main__":
-    wlcarray = sys.argv[1]
-    print(json.dumps(main(ssidapi,wlcarray), indent = 4, sort_keys = False))
+#if __name__ == "__main__":
+#    wlcarray = sys.argv[1]
+#    print(json.dumps(main(ssidapi,wlcarray), indent = 4, sort_keys = False))

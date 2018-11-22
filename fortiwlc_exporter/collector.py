@@ -4,9 +4,8 @@ from .exporter_functions_new import main
 
 
 class FortiwlcCollector:
-    def __init__(self, ssidapi, wlcarray):
-        self.ssidapi = ssidapi
-        self.wlcarray = wlcarray
+    def __init__(self, wlc_group):
+        self.wlc_group = wlc_group
 
     def collect(self):
         fortiwlc_clients_by_ap = GaugeMetricFamily(
@@ -30,7 +29,7 @@ class FortiwlcCollector:
         )
 
         try:
-            wlc_data = main(self.ssidapi, self.wlcarray)
+            wlc_data = main(self.wlc_group)
 
             for ap_name, ap_data in wlc_data['ap'].items():
                 fortiwlc_clients_by_ap.add_metric(
