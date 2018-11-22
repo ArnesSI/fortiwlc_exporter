@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from fortiwlc_exporter.exporter_functions_new import parse_ap_data
+from fortiwlc_exporter.parsers import parse_ap_data
 
 
 class TestApParser(unittest.TestCase):

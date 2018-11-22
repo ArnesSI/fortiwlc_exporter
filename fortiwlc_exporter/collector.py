@@ -1,6 +1,6 @@
 from prometheus_client.core import GaugeMetricFamily
 
-from .exporter_functions_new import parse_ap_data
+from .parsers import parse_ap_data
 from .fortiwlc import FortiWLC
 
 
