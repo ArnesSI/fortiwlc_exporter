@@ -1,11 +1,21 @@
 from prometheus_client.core import GaugeMetricFamily
 
-from .exporter_functions_new import main
+from .exporter_functions_new import parse_ap_data
+from .fortiwlc import FortiWLC
 
 
 class FortiwlcCollector:
-    def __init__(self, wlc_group):
-        self.wlc_group = wlc_group
+    def __init__(self, wlc_config):
+        self.wlc_config = wlc_config
+        self.wlcs = self.init_wlcs()
+        self.by_ap = {}
+
+    def init_wlcs(self):
+        """ Initializes FortiWLC instances """
+        wlcs = []
+        for wlc_name, api_key in self.wlc_config:
+            wlcs.append(FortiWLC(wlc_name, api_key))
+        return wlcs
 
     def collect(self):
         fortiwlc_clients_by_ap = GaugeMetricFamily(
@@ -29,27 +39,47 @@ class FortiwlcCollector:
         )
 
         try:
-            wlc_data = main(self.wlc_group)
-
-            for ap_name, ap_data in wlc_data['ap'].items():
-                fortiwlc_clients_by_ap.add_metric(
-                    [
-                        ap_name,
-                        ap_data['campus_name'],
-                        ap_data['profile_name'],
-                        ap_data['model'],
-                        ap_data['wlc'],
-                        ap_data['status'],
-                        ap_data['state']
-                    ],
-                    ap_data['client_count']
-                )
-
+            self.poll_wlcs()
+            self.parse_metrics()
         except:
             fortiwlc_up.add_metric([], 0)
-
         else:
             fortiwlc_up.add_metric([], 1)
 
+        for ap_data in self.by_ap.values():
+            fortiwlc_clients_by_ap.add_metric(
+                [
+                    ap_data['name'],
+                    ap_data['campus_name'],
+                    ap_data['profile_name'],
+                    ap_data['model'],
+                    ap_data['wlc'],
+                    ap_data['status'],
+                    ap_data['state']
+                ],
+                ap_data['client_count']
+            )
+
         yield fortiwlc_clients_by_ap
         yield fortiwlc_up
+
+    def poll_wlcs(self):
+        """ Polls all data from all WLCs APIs """
+        for wlc in self.wlcs:
+            wlc.poll()
+
+    def parse_metrics(self):
+        """ Parses collected WLC data """
+        self.parse_by_ap()
+        self.parse_by_ssid()
+
+    def parse_by_ap(self):
+        """ Parses data from WLCs and generates info (dict) about each AP """
+        self.by_ap = {}
+        for wlc in self.wlcs:
+            for ap_data in wlc.managed_ap:
+                self.by_ap[ap_data['name']] = parse_ap_data(ap_data, wlc.name)
+
+    def parse_by_ssid(self):
+        # not yet implemented
+        pass

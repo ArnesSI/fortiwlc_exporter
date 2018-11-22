@@ -11,6 +11,12 @@ class FortiWLC:
     def __init__(self, name, api_key):
         self.name = name
         self.api_key = api_key
+        self.clear()
+
+    def clear(self):
+        self.managed_ap = None
+        self.vap_group = None
+        self.clients = None
 
     def _get(self, url):
         resp = requests.get(url)
@@ -31,3 +37,9 @@ class FortiWLC:
         """ Returns info about connected WIFI clients """
         url = self.CLIENT_URL.format(name=self.name, api_key=self.api_key)
         return self._get(url)
+
+    def poll(self):
+        self.clear()
+        self.managed_ap = self.get_managed_ap()
+        self.vap_group = self.get_vap_group()
+        self.clients = self.get_clients()

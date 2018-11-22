@@ -20,12 +20,26 @@ class TestServer(unittest.TestCase):
             json=json.load(open('./tests/data/wlc.ansoext.arnes.si-managed_ap-200.json')),
             status=200
         )
+        responses.add(
+            responses.GET,
+            'https://wlc.ansoext.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=r8g1y84z1q73x96s91gQq0pfGNd4x7',
+            json=json.load(open('./tests/data/wlc.ansoext.arnes.si-vap_group-200.json')),
+            status=200
+        )
+        responses.add(
+            responses.GET,
+            'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=r8g1y84z1q73x96s91gQq0pfGNd4x7',
+            json=json.load(open('./tests/data/wlc.ansoext.arnes.si-client-1-200.json')),
+            status=200
+        )
         responses.add_passthru('http://localhost:{}'.format(port))
+        expected_lines = open('./tests/data/wlc.ansoext.arnes.si-managed_ap-200.result').read().splitlines()
+
         start_server('testing', port)
-        self.assertEqual(len(responses.calls), 1)
+        self.assertEqual(len(responses.calls), 3)
         r = requests.get('http://localhost:{}'.format(port))
         r.raise_for_status()
-        self.assertEqual(len(responses.calls), 2)
-        resp_lines = r.text.split('\n')
-        for expected_line in open('./tests/data/wlc.ansoext.arnes.si-managed_ap-200.result'):
-            self.assertIn(expected_line.rstrip('\n'), resp_lines)
+        self.assertEqual(len(responses.calls), 6)
+        resp_lines = [l for l in r.text.split('\n') if 'fortiwlc' in l]
+        print(resp_lines)
+        self.assertEqual(resp_lines, expected_lines)

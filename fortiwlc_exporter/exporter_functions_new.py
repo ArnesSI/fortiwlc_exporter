@@ -66,15 +66,16 @@ def ap_profile_string(ap):
     return [model,campus,ap_profile]
 
 
-def ap_write(ap,wlc_name):
-    name = ap['name']
-    maindict['ap'][name] = {
-        'campus_name': '',
-        'profile_name': '',
-        'model': '',
-        'wlc': '',
-        'status': '',
-        'state': '',
+def parse_ap_data(ap_data, wlc_name):
+    name = ap_data['name']
+    ap = {
+        'name': name,
+        'campus_name': ap_profile_string(ap_data)[1],
+        'profile_name': ap_profile_string(ap_data)[2],
+        'model': ap_profile_string(ap_data)[0],
+        'wlc': wlc_name,
+        'status': ap_data.get('status', None),
+        'state': ap_data['state'],
         'client_count': 0,
         'per_radio': {
             '1': 0,
@@ -86,19 +87,14 @@ def ap_write(ap,wlc_name):
             'radious_group': ''
         }
     }
-    appath = maindict['ap'][name]
-    appath['campus_name'] = ap_profile_string(ap)[1]
-    appath['profile_name'] = ap_profile_string(ap)[2]
-    appath['model'] = ap_profile_string(ap)[0]
-    appath['wlc'] = wlc_name
-    appath['status'] = ap.get('status', None)
-    appath['state'] = ap['state']
-    client_count(appath,ap,True)
+    client_count(ap, ap_data, True)
+    return ap
 
 
 def ap_read_trough(wlc_name):
     for ap in data:
-        ap_write(ap,wlc_name)
+        break
+        #ap_write(ap,wlc_name)
 
 
 def main(wlc_group):
