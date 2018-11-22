@@ -14,6 +14,7 @@ WLCS = {
         ('wlc5.anso.arnes.si', '3696nbbws84k3078fnpzz3sN740zdc'),
         ('wlc6.anso.arnes.si', 'g50dd0m861fw7zdh7HdQ391nrg5f41'),
         ('wlc7.anso.arnes.si', 'y9Qksyrs3940ctfr9x7drdcss3n0dg'),
+        ('wlc8.anso.arnes.si', 'wdcnQb48qcdqr39wxwm6Hx5tsp8h5m'),
     ],
     'testing': [
         ('wlc.ansoext.arnes.si', 'r8g1y84z1q73x96s91gQq0pfGNd4x7'),
