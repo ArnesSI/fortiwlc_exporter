@@ -1,0 +1,11 @@
+image: zelenjak.arnes.si:5000/python:3.6
+
+stages:
+  - test
+
+test:
+  stage: test
+  script: 
+    - pip install pipenv
+    - pipenv install --dev
+    - pipenv run python setup.py test
