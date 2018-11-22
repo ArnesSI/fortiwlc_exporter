@@ -24,3 +24,5 @@ Running tests:
 ```
 pipenv run python setup.py test
 ```
+
+Tests include flake8 checks by default.
