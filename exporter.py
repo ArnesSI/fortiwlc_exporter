@@ -3,9 +3,9 @@ import json
 import time
 import sys
 from prometheus_client import start_http_server
-from prometheus_client.core import GaugeMetricFamily, REGISTRY
+from prometheus_client.core import REGISTRY
 from prometheus_client import Gauge
-from fortiwlc_exporter.exporter_functions_new import main
+from fortiwlc_exporter.collector import FortiwlcCollector
 
 
 ssidapi = [
@@ -40,28 +40,15 @@ except IndexError:
 #print(json.dumps(main(ssidapi,wlcarray), indent=4, sort_keys=True))
 
 
-class FortiwlcCollector(object):
-    def collect(self):
-        fortiwlc_clients_by_ap = GaugeMetricFamily('fortiwlc_clients_by_ap','Number of clients connected to a specific access point. Retrieved from wifi/managed_ap/select/ API endpoint.',labels=['ap_name','campus_name','profile_name','model','wlc','status','state'])
-        fortiwlc_up = GaugeMetricFamily('fortiwlc_up','Was the last scrape of data from all FortiNET WLC instances successful.')
+def start_server(port=9118):
+    REGISTRY.register(FortiwlcCollector(ssidapi, wlcarray))
+    start_http_server(port)
 
-        try:
-            wlc_data = main(ssidapi,wlcarray)
 
-            for ap_name, ap_data in wlc_data['ap'].items():
-                fortiwlc_clients_by_ap.add_metric([ap_name,ap_data['campus_name'],ap_data['profile_name'],ap_data['model'],ap_data['wlc'],ap_data['status'],ap_data['state']], ap_data['client_count'])
-
-        except:
-            fortiwlc_up.add_metric([],0)
-
-        else:
-            fortiwlc_up.add_metric([],1)
-
-        yield fortiwlc_clients_by_ap
-        yield fortiwlc_up
+def main():
+    start_server()
+    while True: time.sleep(1)
 
 
 if __name__ == "__main__":
-    REGISTRY.register(FortiwlcCollector())
-    start_http_server(9118)
-    while True: time.sleep(1)
+    main()

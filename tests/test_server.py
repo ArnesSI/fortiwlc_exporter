@@ -5,7 +5,7 @@ import requests
 from prometheus_client import start_http_server
 from prometheus_client.core import REGISTRY
 
-from exporter import FortiwlcCollector
+from exporter import start_server
 
 
 class TestServer(unittest.TestCase):
@@ -20,8 +20,7 @@ class TestServer(unittest.TestCase):
             json=json.load(open('./tests/data/wlc.ansoext.arnes.si-managed_ap-200.json')),
             status=200
         )
-        REGISTRY.register(FortiwlcCollector())
-        start_http_server(self.port)
+        start_server(self.port)
 
     @responses.activate
     def test_output(self):
