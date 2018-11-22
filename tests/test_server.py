@@ -5,12 +5,12 @@ import requests
 from prometheus_client import start_http_server
 from prometheus_client.core import REGISTRY
 
-from fortiwlc_exporter import FortiwlcCollector
+from exporter import FortiwlcCollector
 
 
 class TestServer(unittest.TestCase):
     """ Test if exporter http server returns expected data """
-    
+
     @responses.activate
     def setUp(self):
         self.port = 23344

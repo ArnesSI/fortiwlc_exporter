@@ -5,7 +5,7 @@ import sys
 from prometheus_client import start_http_server
 from prometheus_client.core import GaugeMetricFamily, REGISTRY
 from prometheus_client import Gauge
-from exporter_functions_new import main
+from fortiwlc_exporter.exporter_functions_new import main
 
 
 ssidapi = [
