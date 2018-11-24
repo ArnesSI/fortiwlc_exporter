@@ -5,16 +5,16 @@ from .fortiwlc import FortiWLC
 
 
 class FortiwlcCollector:
-    def __init__(self, wlc_config):
-        self.wlc_config = wlc_config
+    def __init__(self, config):
+        self.config = config
         self.wlcs = self.init_wlcs()
         self.by_ap = {}
 
     def init_wlcs(self):
         """ Initializes FortiWLC instances """
         wlcs = []
-        for wlc_name, api_key in self.wlc_config:
-            wlcs.append(FortiWLC(wlc_name, api_key))
+        for wlc_params in self.config.get('wlcs', []):
+            wlcs.append(FortiWLC(**wlc_params))
         return wlcs
 
     def collect(self):

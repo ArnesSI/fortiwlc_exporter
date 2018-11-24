@@ -1,39 +1,28 @@
+import argparse
 import time
-import sys
 from prometheus_client import start_http_server
 from prometheus_client.core import REGISTRY
 from fortiwlc_exporter.collector import FortiwlcCollector
+from fortiwlc_exporter.config import get_config
 
 
-WLCS = {
-    'production': [
-        ('wlc1.anso.arnes.si', 'kQ0bg3jg6pfn19kr4GdgzGx41dmk9w'),
-        ('wlc2.anso.arnes.si', '9dprpq3xs8bxwGs10w03N5N9bt6dpp'),
-        ('wlc3.anso.arnes.si', '60dzxQ3wNb1GbjjshryQ000NwN3yyj'),
-        ('wlc4.anso.arnes.si', 'wGzjNw1pQg5snmxp6m1jphQ94n41mw'),
-        ('wlc5.anso.arnes.si', '3696nbbws84k3078fnpzz3sN740zdc'),
-        ('wlc6.anso.arnes.si', 'g50dd0m861fw7zdh7HdQ391nrg5f41'),
-        ('wlc7.anso.arnes.si', 'y9Qksyrs3940ctfr9x7drdcss3n0dg'),
-        ('wlc8.anso.arnes.si', 'wdcnQb48qcdqr39wxwm6Hx5tsp8h5m'),
-    ],
-    'testing': [
-        ('wlc.ansoext.arnes.si', 'r8g1y84z1q73x96s91gQq0pfGNd4x7'),
-    ],
-}
-
-
-def start_server(group_name, port=9118):
-    wlc_group = WLCS.get(group_name, [])
-    REGISTRY.register(FortiwlcCollector(wlc_group))
-    start_http_server(port)
+def start_server(config):
+    REGISTRY.register(FortiwlcCollector(config))
+    start_http_server(config['port'])
 
 
 def main():
-    try:
-        group_name = sys.argv[1]
-    except IndexError:
-        group_name = 'testing'
-    start_server(group_name)
+    parser = argparse.ArgumentParser(description='FortiOS WLC Prometheus Collector')
+    parser.add_argument(
+        '-c',
+        dest='config_file',
+        help='Configuration file',
+        default='fortiwlc.ini',
+        type=argparse.FileType('r')
+    )
+    args = parser.parse_args()
+    config = get_config(args.config_file)
+    start_server(config)
     while True:
         time.sleep(1)
 
