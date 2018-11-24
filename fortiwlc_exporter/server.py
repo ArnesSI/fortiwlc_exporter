@@ -1,7 +1,10 @@
+#!/usr/bin/env python
+
 import argparse
 import time
 from prometheus_client import start_http_server
 from prometheus_client.core import REGISTRY
+
 from fortiwlc_exporter.collector import FortiwlcCollector
 from fortiwlc_exporter.config import get_config
 

@@ -3,7 +3,7 @@ import unittest
 import responses
 import requests
 
-from exporter import start_server
+from fortiwlc_exporter.server import start_server
 
 
 class TestServer(unittest.TestCase):
