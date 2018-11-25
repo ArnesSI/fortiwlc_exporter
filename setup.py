@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fortiwlc_exporter",
-    version="0.0.1",
+    version="1.0.0",
     author="Luka Vadnjal",
     author_email="luka@vadnjal.net",
     description="FortiWLC Prometheus exporter",
@@ -13,6 +13,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://git.arnes.si/monitoring/fortiwlc_exporter",
     packages=setuptools.find_packages(),
+    entry_points={
+        'console_scripts': ['fortiwlc=fortiwlc_exporter.server:main'],
+    },
+    install_requires=['prometheus_client', 'requests'],
     setup_requires=["pytest-runner"],
     tests_require=["pytest"],
     classifiers=[
