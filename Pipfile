@@ -1,0 +1,17 @@
+[[source]]
+url = "https://zelenjak.arnes.si:9102/nexus/repository/ArnesGroupPyPI/simple"
+verify_ssl = true
+name = "arnes_pypi"
+
+[packages]
+prometheus-client = "*"
+requests = "*"
+
+[dev-packages]
+pytest = "*"
+pytest-flake8 = "*"
+responses = "*" 
+pylint = "*"
+
+[requires]
+python_version = "3"
