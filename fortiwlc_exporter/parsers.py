@@ -53,3 +53,8 @@ def parse_ap_data(ap_data, wlc_name):
     }
     client_count(ap, ap_data, True)
     return ap
+
+
+def parse_wifi_name(wifi_name):
+    """ Returns wifi name and ssid """
+    return (wifi_name, wifi_name.split('_')[-1])
