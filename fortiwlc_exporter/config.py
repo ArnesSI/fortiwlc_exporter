@@ -3,6 +3,7 @@ import configparser
 
 DEFAULTS = {
     'port': 9118,
+    'debug': False,
 }
 
 
@@ -20,7 +21,7 @@ def get_config(file):
     if config_parser.has_section('main'):
         for opt, default_value in DEFAULTS.items():
             if isinstance(default_value, bool):
-                config[opt] = config_parser['main'].getbool(opt, default_value)
+                config[opt] = config_parser['main'].getboolean(opt, default_value)
             elif isinstance(default_value, int):
                 config[opt] = config_parser['main'].getint(opt, default_value)
             else:

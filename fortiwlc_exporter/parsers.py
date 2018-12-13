@@ -1,18 +1,3 @@
-def client_count(path, ap, perradio):
-    clients = ap['clients']
-    path['client_count'] += clients
-
-    if ap['radio'][0]['mode'] == 'AP':
-        radio1clients = ap['radio'][0]['client_count']
-
-    if ap['radio'][1]['mode'] == 'AP':
-        radio2clients = ap['radio'][1]['client_count']
-
-    if perradio:
-        path['per_radio']['1'] = radio1clients
-        path['per_radio']['2'] = radio2clients
-
-
 def ap_profile_string(ap):
     ap_profile = ap['ap_profile']
     cutstring = ''
@@ -30,26 +15,20 @@ def ap_profile_string(ap):
 
 def parse_ap_data(ap_data, wlc_name):
     """ Parses AP data from WLC API into format suitable for metric export """
-    name = ap_data['name']
-    model, campus_name, profile_name = ap_profile_string(ap_data)
-    ap = {
-        'name': name,
-        'campus_name': campus_name,
-        'profile_name': profile_name,
-        'model': model,
-        'wlc': wlc_name,
-        'status': ap_data.get('status', None),
-        'state': ap_data['state'],
-        'client_count': 0,
-        'per_radio': {
-            '1': 0,
-            '2': 0
-        },
-        'ssid': {
-            'ssid': '',
-            'campus_id': '',
-            'radious_group': ''
-        }
-    }
-    client_count(ap, ap_data, True)
+    model, campus, profile = ap_profile_string(ap_data)
+    ap = [
+        wlc_name,
+        ap_data['name'],
+        ap_data['status'],
+        ap_data['state'],
+        profile,
+        model,
+    ]
+    if campus:
+        ap.append(campus)
     return ap
+
+
+def parse_wifi_name(wifi_name):
+    """ Returns wifi name and ssid """
+    return (wifi_name, wifi_name.split('_', maxsplit=1)[-1])

@@ -3,43 +3,140 @@ import unittest
 import responses
 import requests
 
-from fortiwlc_exporter.server import start_server
+from prometheus_client import start_http_server
+from prometheus_client.core import REGISTRY
+
+from fortiwlc_exporter.collector import FortiwlcCollector
 
 
-class TestServer(unittest.TestCase):
+def responses_add(test_case, host, resource, method=responses.GET):
+    if resource == 'vap_group':
+        url = 'https://{}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=123'.format(host)
+    elif resource == 'clients':
+        url = 'https://{}/api/v2/monitor/wifi/client/select/?vdom=root&access_token=123'.format(host)
+    elif resource == 'managed_ap':
+        url = 'https://{}/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=123'.format(host)
+    response_data = json.load(open('./tests/data/{}/{}-{}.json'.format(
+        test_case, host, resource
+    )))
+    responses.add(method, url, json=response_data, status=200)
+
+
+class BaseServerRunner(unittest.TestCase):
     def setUp(self):
-        self.port = 23344
-        self.config = {'port': self.port, 'wlcs': [{'name': 'wlc.ansoext.arnes.si', 'api_key': 'r8g1y84z1q73x96s91gQq0pfGNd4x7'}]}
+        self._responses_calls = 0
 
-    @responses.activate
-    def test_output(self):
-        """ Test if exporter http server returns expected data """
-        responses.add(
-            responses.GET,
-            'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=r8g1y84z1q73x96s91gQq0pfGNd4x7',
-            json=json.load(open('./tests/data/wlc.ansoext.arnes.si-managed_ap-200.json')),
-            status=200
-        )
-        responses.add(
-            responses.GET,
-            'https://wlc.ansoext.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=r8g1y84z1q73x96s91gQq0pfGNd4x7',
-            json=json.load(open('./tests/data/wlc.ansoext.arnes.si-vap_group-200.json')),
-            status=200
-        )
-        responses.add(
-            responses.GET,
-            'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=r8g1y84z1q73x96s91gQq0pfGNd4x7',
-            json=json.load(open('./tests/data/wlc.ansoext.arnes.si-client-1-200.json')),
-            status=200
-        )
+    def _run_test_case(self):
+        for host in self.hosts:
+            responses_add(self.test_case, host, 'clients')
+            responses_add(self.test_case, host, 'vap_group')
+            responses_add(self.test_case, host, 'managed_ap')
         responses.add_passthru('http://localhost:{}'.format(self.port))
-        expected_lines = open('./tests/data/wlc.ansoext.arnes.si-managed_ap-200.result').read().splitlines()
+        expected_lines = open(
+            './tests/data/{}/result.txt'.format(self.test_case)
+        ).read().splitlines()
 
-        start_server(self.config)
-        self.assertEqual(len(responses.calls), 3)
+        self.assertEqual(len(responses.calls), 0+self._responses_calls)
         r = requests.get('http://localhost:{}'.format(self.port))
         r.raise_for_status()
-        self.assertEqual(len(responses.calls), 6)
+        self.assertEqual(len(responses.calls), 3*len(self.hosts)+self._responses_calls)
         resp_lines = [l for l in r.text.split('\n') if 'fortiwlc' in l]
-        print(resp_lines)
+
+        print('\n'.join(resp_lines))
+        print('\n'.join(expected_lines))
+
+        expected_lines.sort()
+        resp_lines.sort()
+
         self.assertEqual(resp_lines, expected_lines)
+        self._responses_calls = len(responses.calls)
+
+
+class TestServerOneWLC(BaseServerRunner):
+    ''' Test full code stack: starts server and grabs response '''
+    @classmethod
+    def setUpClass(cls):
+        cls.port = 23344
+        cls.hosts = ['wlc.ansoext.arnes.si']
+        cls.config = {
+            'port': cls.port,
+            'debug': False,
+            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}]
+        }
+        cls.collector = FortiwlcCollector(cls.config)
+        REGISTRY.register(cls.collector)
+        start_http_server(cls.config['port'])
+
+    @classmethod
+    def tearDownClass(cls):
+        REGISTRY.unregister(cls.collector)
+
+    @responses.activate
+    def test_output_no_clients(self):
+        """ Test if exporter http server returns expected data """
+        self.test_case = 'no_clients'
+        self._run_test_case()
+
+    @responses.activate
+    def test_output_one_client(self):
+        """ Test if exporter http server returns expected data """
+        self.test_case = 'one_client'
+        self._run_test_case()
+
+
+class TestServerTwoWLC(BaseServerRunner):
+    ''' Test full code stack: starts server and grabs response '''
+    @classmethod
+    def setUpClass(cls):
+        # can't kill server from above test class. Just start new one on new port
+        cls.port = 23345
+        cls.hosts = ['wlc1.anso.arnes.si', 'wlc2.anso.arnes.si']
+        cls.config = {
+            'port': cls.port,
+            'debug': False,
+            'wlcs': [
+                {'name': 'wlc1.anso.arnes.si', 'api_key': '123'},
+                {'name': 'wlc2.anso.arnes.si', 'api_key': '123'}
+            ]
+        }
+        cls.collector = FortiwlcCollector(cls.config)
+        REGISTRY.register(cls.collector)
+        start_http_server(cls.config['port'])
+
+    @classmethod
+    def tearDownClass(cls):
+        REGISTRY.unregister(cls.collector)
+
+    @responses.activate
+    def test_output_many_clients(self):
+        """ Test if exporter http server returns expected data """
+        self.test_case = 'many_clients'
+        self._run_test_case()
+
+
+class TestServerRunTwice(BaseServerRunner):
+    ''' Test full code stack: starts server and grabs response '''
+    @classmethod
+    def setUpClass(cls):
+        # can't kill server from above test class. Just start new one on new port
+        cls.port = 23346
+        cls.hosts = ['wlc.ansoext.arnes.si']
+        cls.config = {
+            'port': cls.port,
+            'debug': False,
+            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}]
+        }
+        cls.collector = FortiwlcCollector(cls.config)
+        REGISTRY.register(cls.collector)
+        start_http_server(cls.config['port'])
+
+    @classmethod
+    def tearDownClass(cls):
+        REGISTRY.unregister(cls.collector)
+
+    @responses.activate
+    def test_output_many_clients(self):
+        """ Test if polling twice works ok """
+        self.test_case = 'one_client'
+        self._run_test_case()
+        self._run_test_case()
