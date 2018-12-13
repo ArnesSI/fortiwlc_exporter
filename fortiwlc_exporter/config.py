@@ -6,6 +6,8 @@ DEFAULTS = {
     'debug': False,
 }
 
+CONFIG = {}
+
 
 def get_config(file, extra=None):
     config_parser = configparser.ConfigParser()
@@ -19,13 +21,13 @@ def get_config(file, extra=None):
         wlc_params = dict(config_parser[section])
         wlc_params['name'] = section
         wlcs.append(wlc_params)
-    config = {'wlcs': wlcs}
+    CONFIG['wlcs'] = wlcs
     for opt, default_value in DEFAULTS.items():
         if isinstance(default_value, bool):
-            config[opt] = config_parser['main'].getboolean(opt, default_value)
+            CONFIG[opt] = config_parser['main'].getboolean(opt, default_value)
         elif isinstance(default_value, int):
-            config[opt] = config_parser['main'].getint(opt, default_value)
+            CONFIG[opt] = config_parser['main'].getint(opt, default_value)
         else:
-            config[opt] = config_parser['main'].get(opt, default_value)
-        config[opt] = getattr(extra, opt, config[opt])
-    return config
+            CONFIG[opt] = config_parser['main'].get(opt, default_value)
+        CONFIG[opt] = getattr(extra, opt, CONFIG[opt])
+    return CONFIG
