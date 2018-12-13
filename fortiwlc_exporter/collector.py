@@ -30,8 +30,8 @@ class FortiwlcCollector:
             wlcs.append(FortiWLC(**wlc_params))
         return wlcs
 
-    def collect(self):
-        fortiwlc_clients = GaugeMetricFamily(
+    def init_metrics(self):
+        self.fortiwlc_clients = GaugeMetricFamily(
             'fortiwlc_clients',
             'Number of clients connected to a specific combination of access '
             'point, radio and wifi network.',
@@ -41,7 +41,7 @@ class FortiwlcCollector:
                 'wifi_network',
             ]
         )
-        fortiwlc_ap_info = InfoMetricFamily(
+        self.fortiwlc_ap_info = InfoMetricFamily(
             'fortiwlc_ap',
             'Access point information',
             labels=[
@@ -54,7 +54,7 @@ class FortiwlcCollector:
                 'campus',
             ],
         )
-        fortiwlc_wifi_info = InfoMetricFamily(
+        self.fortiwlc_wifi_info = InfoMetricFamily(
             'fortiwlc_wifi',
             'Wireless network (SSID) information',
             labels=[
@@ -62,11 +62,21 @@ class FortiwlcCollector:
                 'ssid',
             ],
         )
-        fortiwlc_up = GaugeMetricFamily(
+        self.fortiwlc_up = GaugeMetricFamily(
             'fortiwlc_up',
             'Was the last scrape of data from all FortiNET WLC instances '
             'successful.',
         )
+
+    def describe(self):
+        self.init_metrics()
+        yield self.fortiwlc_clients
+        yield self.fortiwlc_ap_info
+        yield self.fortiwlc_wifi_info
+        yield self.fortiwlc_up
+
+    def collect(self):
+        self.init_metrics()
 
         try:
             self.poll_wlcs()
@@ -74,23 +84,23 @@ class FortiwlcCollector:
         except Exception:
             if self.config['debug']:
                 raise
-            fortiwlc_up.add_metric([], 0)
+            self.fortiwlc_up.add_metric([], 0)
         else:
-            fortiwlc_up.add_metric([], 1)
+            self.fortiwlc_up.add_metric([], 1)
 
         for key, count in self.clients.items():
-            fortiwlc_clients.add_metric(key, count)
+            self.fortiwlc_clients.add_metric(key, count)
 
         for _, labels in self.ap_info.items():
-            fortiwlc_ap_info.add_metric(labels, {})
+            self.fortiwlc_ap_info.add_metric(labels, {})
 
         for _, labels in self.wifi_info.items():
-            fortiwlc_wifi_info.add_metric(labels, {})
+            self.fortiwlc_wifi_info.add_metric(labels, {})
 
-        yield fortiwlc_clients
-        yield fortiwlc_ap_info
-        yield fortiwlc_wifi_info
-        yield fortiwlc_up
+        yield self.fortiwlc_clients
+        yield self.fortiwlc_ap_info
+        yield self.fortiwlc_wifi_info
+        yield self.fortiwlc_up
 
     def poll_wlcs(self):
         """ Polls all data from all WLCs APIs """
