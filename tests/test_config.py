@@ -1,6 +1,8 @@
 import unittest
+
 from copy import deepcopy
 from io import StringIO
+from unittest.mock import MagicMock
 
 from fortiwlc_exporter.config import get_config, DEFAULTS
 
@@ -44,3 +46,15 @@ class TestConfigParser(unittest.TestCase):
         ]
         config = get_config(config_file)
         self.assertEqual(config, expected_config)
+
+    def test_config_extra(self):
+        ''' Provide extra option that overrides config '''
+        config_file = StringIO('''
+        [main]
+        port=1234
+        debug=yes
+        ''')
+        extra = MagicMock(port=4321)
+        config = get_config(config_file, extra=extra)
+        self.assertEqual(config['port'], 4321)
+        self.assertTrue(config['debug'])
