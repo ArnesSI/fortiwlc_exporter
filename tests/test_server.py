@@ -23,6 +23,9 @@ def responses_add(test_case, host, resource, method=responses.GET):
 
 
 class BaseServerRunner(unittest.TestCase):
+    def setUp(self):
+        self._responses_calls = 0
+
     def _run_test_case(self):
         for host in self.hosts:
             responses_add(self.test_case, host, 'clients')
@@ -33,10 +36,10 @@ class BaseServerRunner(unittest.TestCase):
             './tests/data/{}/result.txt'.format(self.test_case)
         ).read().splitlines()
 
-        self.assertEqual(len(responses.calls), 0)
+        self.assertEqual(len(responses.calls), 0+self._responses_calls)
         r = requests.get('http://localhost:{}'.format(self.port))
         r.raise_for_status()
-        self.assertEqual(len(responses.calls), 3*len(self.hosts))
+        self.assertEqual(len(responses.calls), 3*len(self.hosts)+self._responses_calls)
         resp_lines = [l for l in r.text.split('\n') if 'fortiwlc' in l]
 
         print('\n'.join(resp_lines))
@@ -46,6 +49,7 @@ class BaseServerRunner(unittest.TestCase):
         resp_lines.sort()
 
         self.assertEqual(resp_lines, expected_lines)
+        self._responses_calls = len(responses.calls)
 
 
 class TestServerOneWLC(BaseServerRunner):
@@ -107,4 +111,32 @@ class TestServerTwoWLC(BaseServerRunner):
     def test_output_many_clients(self):
         """ Test if exporter http server returns expected data """
         self.test_case = 'many_clients'
+        self._run_test_case()
+
+
+class TestServerRunTwice(BaseServerRunner):
+    ''' Test full code stack: starts server and grabs response '''
+    @classmethod
+    def setUpClass(cls):
+        # can't kill server from above test class. Just start new one on new port
+        cls.port = 23346
+        cls.hosts = ['wlc.ansoext.arnes.si']
+        cls.config = {
+            'port': cls.port,
+            'debug': False,
+            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}]
+        }
+        cls.collector = FortiwlcCollector(cls.config)
+        REGISTRY.register(cls.collector)
+        start_http_server(cls.config['port'])
+
+    @classmethod
+    def tearDownClass(cls):
+        REGISTRY.unregister(cls.collector)
+
+    @responses.activate
+    def test_output_many_clients(self):
+        """ Test if polling twice works ok """
+        self.test_case = 'one_client'
+        self._run_test_case()
         self._run_test_case()
