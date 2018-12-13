@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from fortiwlc_exporter.parsers import parse_ap_data
+from fortiwlc_exporter.parsers import parse_ap_data, parse_wifi_name
 
 
 class TestApParser(unittest.TestCase):
@@ -21,3 +21,17 @@ class TestApParser(unittest.TestCase):
         }
         parsed = parse_ap_data(ap_data, 'mywlc')
         self.assertEqual(parsed, expected_data)
+
+    def test_parse_wifi_name(self):
+        self.assertEqual(
+            parse_wifi_name('1_wifi'),
+            ('1_wifi', 'wifi')
+        )
+        self.assertEqual(
+            parse_wifi_name('1_wifi_new'),
+            ('1_wifi_new', 'wifi_new')
+        )
+        self.assertEqual(
+            parse_wifi_name('wifi'),
+            ('wifi', 'wifi')
+        )

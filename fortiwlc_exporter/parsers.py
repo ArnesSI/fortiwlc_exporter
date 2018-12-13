@@ -57,4 +57,4 @@ def parse_ap_data(ap_data, wlc_name):
 
 def parse_wifi_name(wifi_name):
     """ Returns wifi name and ssid """
-    return (wifi_name, wifi_name.split('_')[-1])
+    return (wifi_name, wifi_name.split('_', maxsplit=1)[-1])
