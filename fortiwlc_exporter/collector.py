@@ -1,7 +1,7 @@
 from collections import defaultdict
 from prometheus_client.core import GaugeMetricFamily, InfoMetricFamily
 
-from .parsers import ap_profile_string, parse_wifi_name
+from .parsers import parse_ap_data, parse_wifi_name
 from .fortiwlc import FortiWLC
 
 
@@ -105,18 +105,9 @@ class FortiwlcCollector:
         """ Generates labels for each AP/radio/SSID combo """
         for wlc in self.wlcs:
             for ap_data in wlc.managed_ap:
-                model, campus, profile = ap_profile_string(ap_data)
-                self.ap_info[ap_data['name']] = [
-                    wlc.name,
-                    ap_data['name'],
-                    ap_data['status'],
-                    ap_data['state'],
-                    profile,
-                    model,
-                ]
-                if campus:
-                    self.ap_info[ap_data['name']].append(campus)
-
+                ap = parse_ap_data(ap_data, wlc.name)
+                self.ap_info[ap[1]] = ap
+                
                 wifi_networks = self.get_wifi_networks(ap_data, wlc)
                 for wifi_network in wifi_networks:
                     self.wifi_info[wifi_network[0]] = wifi_network
