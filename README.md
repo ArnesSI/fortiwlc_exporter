@@ -18,10 +18,12 @@ Parameters for `main` section:
 * `port` - TCP port for collector to listen on (default: 9118)
 * `workers` - Number of WLC instances to poll at the same time (default: 2)
 * `debug` - Run server in debug mode (default: "no")
+* `username` & `password` - If you want to use the same username for all WLC instances, specify them in `main` section. Specifying `api_key` or `username` and `password` on WLC instance will override global setting for that instance.
 
 WLC instance section parameters:
 
-* `api_key` - REST API key to use when gathering data from this WLC (required)
+* `api_key` - REST API key to use when gathering data from this WLC
+* `username` & `password` - If not using API keys specify username and password to login with
 
 Example:
 
