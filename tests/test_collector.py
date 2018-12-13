@@ -1,6 +1,7 @@
 import json
 import unittest
 import responses
+from unittest.mock import MagicMock
 
 from fortiwlc_exporter.collector import FortiwlcCollector
 from fortiwlc_exporter.fortiwlc import FortiWLC
@@ -20,6 +21,7 @@ def responses_add(test_case, host, resource, method=responses.GET):
 
 
 class TestCollectorInit(unittest.TestCase):
+    ''' Testing collector initialization '''
     def test_init(self):
         ''' Test initialization of collector '''
         config = {'wlcs': [{'name': 'mywlc', 'api_key': '123'}]}
@@ -34,6 +36,7 @@ class TestCollectorInit(unittest.TestCase):
 
 
 class TestCollectorPoll(unittest.TestCase):
+    ''' Testing polling methods '''
     @responses.activate
     def test_poll(self):
         ''' Test polling function '''
@@ -50,6 +53,7 @@ class TestCollectorPoll(unittest.TestCase):
 
 
 class TestCollectorParse(unittest.TestCase):
+    ''' Testing parsing methods '''
     @responses.activate
     def test_parse_no_clients(self):
         ''' Test parsing wlc with no clients '''
@@ -104,7 +108,7 @@ class TestCollectorParse(unittest.TestCase):
         })
         self.assertEqual(col.wifi_info, {
             '1_eduroam': ('1_eduroam', 'eduroam'),
-            '1_tolos_psk': ('1_tolos_psk', 'psk'),
+            '1_tolos_psk': ('1_tolos_psk', 'tolos_psk'),
             '2_eduroam': ('2_eduroam', 'eduroam'),
         })
         self.assertEqual(col.radio_types, set(['802.11ac', '802.11g', '802.11n', '802.11n-5G', 'unknown']))
@@ -163,7 +167,7 @@ class TestCollectorParse(unittest.TestCase):
         })
         self.assertEqual(col.wifi_info, {
             '1_eduroam': ('1_eduroam', 'eduroam'),
-            '1_tolos_psk': ('1_tolos_psk', 'psk'),
+            '1_tolos_psk': ('1_tolos_psk', 'tolos_psk'),
             '2_eduroam': ('2_eduroam', 'eduroam'),
         })
         self.assertEqual(col.radio_types, set(['802.11ac', '802.11g', '802.11n', '802.11n-5G', 'unknown']))
@@ -232,24 +236,28 @@ class TestCollectorParse(unittest.TestCase):
 
 
 class TestCollectorCollect(unittest.TestCase):
+    ''' Testing collect method '''
     @responses.activate
     def test_collect_no_clients(self):
-        test_case = 'no_clients'
         host = 'wlc.ansoext.arnes.si'
         config = {'wlcs': [{'name': host, 'api_key': '123'}]}
-        responses_add(test_case, host, 'clients')
-        responses_add(test_case, host, 'vap_group')
-        responses_add(test_case, host, 'managed_ap')
+
         col = FortiwlcCollector(config)
-        self.assertEqual(len(col.wlcs), 1)
-        col.poll_wlcs()
-        self.assertEqual(len(responses.calls), 3)
-        col.parse_metrics()
+        col.poll_wlcs = MagicMock()
+        col.parse_metrics = MagicMock()
+
         for metric in col.collect():
             if metric.name == 'fortiwlc_up':
                 self.assertEqual(len(metric.samples), 1)
-            for s in metric.samples:
-                if s.name == 'fortiwlc_up':
-                    self.assertEqual(s.value, 1)
-                    self.assertEqual(s.labels, {})
-        self.assertAlmostEqual(True, False)
+                self.assertEqual(metric.samples[0].value, 1)
+                self.assertEqual(metric.samples[0].labels, {})
+            elif metric.name == 'fortiwlc_clients':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_ap':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_wifi':
+                self.assertEqual(len(metric.samples), 0)
+            else:
+                raise Exception('Unknown metric {}'.format(metric))
+        col.poll_wlcs.assert_called_once()
+        col.parse_metrics.assert_called_once()
