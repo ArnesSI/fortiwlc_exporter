@@ -9,6 +9,6 @@ def timeit(method):
         result = method(*args, **kw)
         te = time.time()
         if CONFIG.get('debug'):
-            print('{} {} ms'.format(method.__name__, (te - ts) * 1000))
+            print('{}: {:0.6f} s'.format(method.__name__, (te - ts)))
         return result
     return timed
