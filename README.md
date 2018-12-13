@@ -16,6 +16,7 @@ of those sections should match the name of the WLC instance.
 Parameters for `main` section:
 
 * `port` - TCP port for collector to listen on (default: 9118)
+* `workers` - Number of WLC instances to poll at the same time (default: 2)
 * `debug` - Run server in debug mode (default: "no")
 
 WLC instance section parameters:

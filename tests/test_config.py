@@ -27,6 +27,7 @@ class TestConfigParser(unittest.TestCase):
         expected_config['wlcs'] = []
         expected_config['port'] = 1234
         expected_config['debug'] = True
+        expected_config['workers'] = 2
         config = get_config(config_file)
         self.assertEqual(config, expected_config)
 
@@ -39,13 +40,12 @@ class TestConfigParser(unittest.TestCase):
         user=a
         pass=b
         ''')
-        expected_config = deepcopy(DEFAULTS)
-        expected_config['wlcs'] = [
+        expected_config = [
             {'name': 'mywlc1', 'api_key': '1234'},
             {'name': 'mywlc2', 'user': 'a', 'pass': 'b'}
         ]
         config = get_config(config_file)
-        self.assertEqual(config, expected_config)
+        self.assertEqual(config['wlcs'], expected_config)
 
     def test_config_extra(self):
         ''' Provide extra option that overrides config '''

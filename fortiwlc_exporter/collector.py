@@ -108,7 +108,7 @@ class FortiwlcCollector:
     @timeit
     def poll_wlcs(self):
         """ Polls all data from all WLCs APIs """
-        with PoolExecutor(max_workers=8) as executor:
+        with PoolExecutor(max_workers=self.config['workers']) as executor:
             for wlc in self.wlcs:
                 executor.submit(wlc.poll)
 

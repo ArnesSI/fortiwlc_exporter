@@ -24,7 +24,7 @@ class TestCollectorInit(unittest.TestCase):
     ''' Testing collector initialization '''
     def test_init(self):
         ''' Test initialization of collector '''
-        config = {'wlcs': [{'name': 'mywlc', 'api_key': '123'}]}
+        config = {'workers': 1, 'wlcs': [{'name': 'mywlc', 'api_key': '123'}]}
         c = FortiwlcCollector(config)
         self.assertEqual(len(c.wlcs), 1)
         self.assertIsInstance(c.wlcs[0], FortiWLC)
@@ -42,7 +42,7 @@ class TestCollectorPoll(unittest.TestCase):
         ''' Test polling function '''
         test_case = 'no_clients'
         host = 'wlc.ansoext.arnes.si'
-        config = {'wlcs': [{'name': host, 'api_key': '123'}]}
+        config = {'workers': 1, 'wlcs': [{'name': host, 'api_key': '123'}]}
         responses_add(test_case, host, 'clients')
         responses_add(test_case, host, 'vap_group')
         responses_add(test_case, host, 'managed_ap')
@@ -59,7 +59,7 @@ class TestCollectorParse(unittest.TestCase):
         ''' Test parsing wlc with no clients '''
         test_case = 'no_clients'
         host = 'wlc.ansoext.arnes.si'
-        config = {'wlcs': [{'name': host, 'api_key': '123'}]}
+        config = {'workers': 1, 'wlcs': [{'name': host, 'api_key': '123'}]}
         responses_add(test_case, host, 'clients')
         responses_add(test_case, host, 'vap_group')
         responses_add(test_case, host, 'managed_ap')
@@ -118,7 +118,7 @@ class TestCollectorParse(unittest.TestCase):
         ''' Test parsing wlc with no clients '''
         test_case = 'one_client'
         host = 'wlc.ansoext.arnes.si'
-        config = {'wlcs': [{'name': host, 'api_key': '123'}]}
+        config = {'workers': 1, 'wlcs': [{'name': host, 'api_key': '123'}]}
         responses_add(test_case, host, 'clients')
         responses_add(test_case, host, 'vap_group')
         responses_add(test_case, host, 'managed_ap')
@@ -178,7 +178,7 @@ class TestCollectorParse(unittest.TestCase):
         test_case = 'many_clients'
         host1 = 'wlc1.anso.arnes.si'
         host2 = 'wlc2.anso.arnes.si'
-        config = {'wlcs': [
+        config = {'workers': 1, 'wlcs': [
             {'name': host1, 'api_key': '123'},
             {'name': host2, 'api_key': '123'},
         ]}
@@ -203,7 +203,7 @@ class TestCollectorParse(unittest.TestCase):
         ''' Test if a new radio type appears in clients endpoint '''
         test_case = 'extra_radio'
         host = 'wlc.ansoext.arnes.si'
-        config = {'wlcs': [{'name': host, 'api_key': '123'}]}
+        config = {'workers': 1, 'wlcs': [{'name': host, 'api_key': '123'}]}
         responses_add(test_case, host, 'clients')
         responses_add(test_case, host, 'vap_group')
         responses_add(test_case, host, 'managed_ap')
@@ -240,7 +240,7 @@ class TestCollectorCollect(unittest.TestCase):
     @responses.activate
     def test_collect_no_clients(self):
         host = 'wlc.ansoext.arnes.si'
-        config = {'wlcs': [{'name': host, 'api_key': '123'}]}
+        config = {'workers': 1, 'wlcs': [{'name': host, 'api_key': '123'}]}
 
         col = FortiwlcCollector(config)
         col.poll_wlcs = MagicMock()
