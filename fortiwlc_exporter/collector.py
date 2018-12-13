@@ -72,6 +72,8 @@ class FortiwlcCollector:
             self.poll_wlcs()
             self.parse_metrics()
         except Exception:
+            if config['debug']:
+                raise
             fortiwlc_up.add_metric([], 0)
         else:
             fortiwlc_up.add_metric([], 1)

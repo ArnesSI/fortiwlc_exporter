@@ -19,10 +19,12 @@ class TestConfigParser(unittest.TestCase):
         config_file = StringIO('''
         [main]
         port=1234
+        debug=yes
         ''')
-        expected_config = deepcopy(DEFAULTS)
+        expected_config = {}
         expected_config['wlcs'] = []
         expected_config['port'] = 1234
+        expected_config['debug'] = True
         config = get_config(config_file)
         self.assertEqual(config, expected_config)
 
