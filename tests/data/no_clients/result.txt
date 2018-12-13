@@ -1,0 +1,29 @@
+# HELP fortiwlc_clients Number of clients connected to a specific combination of access point, radio and wifi network.
+# TYPE fortiwlc_clients gauge
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="unknown",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11ac",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11g",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="unknown",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11ac",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11g",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="unknown",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11n",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11ac",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11g",wifi_network="2_eduroam"} 0.0
+# HELP fortiwlc_ap_info Access point information
+# TYPE fortiwlc_ap_info gauge
+fortiwlc_ap_info{ap_name="w1-tolos.cpe.arnes.si",ap_state="authorized",ap_status="connected",campus="tolos",model="FAP221E",profile="tolos_FAP221E",wlc="wlc.ansoext.arnes.si"} 1.0
+fortiwlc_ap_info{ap_name="w1-volantis.cpe.arnes.si",ap_state="authorized",ap_status="connected",campus="volantis",model="FAP221E",profile="volantis_FAP221E",wlc="wlc.ansoext.arnes.si"} 1.0
+# HELP fortiwlc_wifi_info Wireless network (SSID) information
+# TYPE fortiwlc_wifi_info gauge
+fortiwlc_wifi_info{ssid="eduroam",wifi_network="1_eduroam"} 1.0
+fortiwlc_wifi_info{ssid="tolos_psk",wifi_network="1_tolos_psk"} 1.0
+fortiwlc_wifi_info{ssid="eduroam",wifi_network="2_eduroam"} 1.0
+# HELP fortiwlc_up Was the last scrape of data from all FortiNET WLC instances successful.
+# TYPE fortiwlc_up gauge
+fortiwlc_up 1.0
