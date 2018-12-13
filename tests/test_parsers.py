@@ -6,7 +6,7 @@ from fortiwlc_exporter.parsers import parse_ap_data, parse_wifi_name
 
 class TestApParser(unittest.TestCase):
     def test_parse_ap_data(self):
-        ap_data = json.load(open('./tests/data/wlc.ansoext.arnes.si-managed_ap-200.json'))['results'][0]
+        ap_data = json.load(open('./tests/data/one_client/wlc.ansoext.arnes.si-managed_ap.json'))['results'][0]
         expected_data = [
             "mywlc",
             "w1-tolos.cpe.arnes.si",

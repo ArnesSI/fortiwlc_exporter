@@ -1,7 +1,0 @@
-# HELP fortiwlc_clients_by_ap Number of clients connected to a specific access point. Retrieved from wifi/managed_ap/select/ API endpoint.
-# TYPE fortiwlc_clients_by_ap gauge
-fortiwlc_clients_by_ap{ap_name="w1-tolos.cpe.arnes.si",campus_name="tolos",model="FAP221E",profile_name="tolos_FAP221E",state="authorized",status="connected",wlc="wlc.ansoext.arnes.si"} 6.0
-fortiwlc_clients_by_ap{ap_name="w1-volantis.cpe.arnes.si",campus_name="volantis",model="FAP221E",profile_name="volantis_FAP221E",state="authorized",status="connected",wlc="wlc.ansoext.arnes.si"} 0.0
-# HELP fortiwlc_up Was the last scrape of data from all FortiNET WLC instances successful.
-# TYPE fortiwlc_up gauge
-fortiwlc_up 1.0
