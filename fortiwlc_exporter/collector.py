@@ -1,8 +1,10 @@
 from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor as PoolExecutor
 from prometheus_client.core import GaugeMetricFamily, InfoMetricFamily
 
 from .parsers import parse_ap_data, parse_wifi_name
 from .fortiwlc import FortiWLC
+from .utils import timeit
 
 
 class FortiwlcCollector:
@@ -75,6 +77,7 @@ class FortiwlcCollector:
         yield self.fortiwlc_wifi_info
         yield self.fortiwlc_up
 
+    @timeit
     def collect(self):
         self.init_metrics()
 
@@ -102,11 +105,14 @@ class FortiwlcCollector:
         yield self.fortiwlc_wifi_info
         yield self.fortiwlc_up
 
+    @timeit
     def poll_wlcs(self):
         """ Polls all data from all WLCs APIs """
-        for wlc in self.wlcs:
-            wlc.poll()
+        with PoolExecutor(max_workers=self.config['workers']) as executor:
+            for wlc in self.wlcs:
+                executor.submit(wlc.poll)
 
+    @timeit
     def parse_metrics(self):
         """ Parses collected WLC data """
         self.init_data()

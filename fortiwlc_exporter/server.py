@@ -23,8 +23,12 @@ def main():
         default='fortiwlc.ini',
         type=argparse.FileType('r')
     )
+    parser.add_argument(
+        '--debug',
+        action='store_true',
+    )
     args = parser.parse_args()
-    config = get_config(args.config_file)
+    config = get_config(args.config_file, extra=args)
     start_server(config)
     while True:
         time.sleep(1)

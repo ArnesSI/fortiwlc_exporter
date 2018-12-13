@@ -61,6 +61,7 @@ class TestServerOneWLC(BaseServerRunner):
         cls.config = {
             'port': cls.port,
             'debug': False,
+            'workers': 1,
             'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}]
         }
         cls.collector = FortiwlcCollector(cls.config)
@@ -94,6 +95,7 @@ class TestServerTwoWLC(BaseServerRunner):
         cls.config = {
             'port': cls.port,
             'debug': False,
+            'workers': 1,
             'wlcs': [
                 {'name': 'wlc1.anso.arnes.si', 'api_key': '123'},
                 {'name': 'wlc2.anso.arnes.si', 'api_key': '123'}
@@ -124,6 +126,7 @@ class TestServerRunTwice(BaseServerRunner):
         cls.config = {
             'port': cls.port,
             'debug': False,
+            'workers': 1,
             'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}]
         }
         cls.collector = FortiwlcCollector(cls.config)
