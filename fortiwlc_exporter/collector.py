@@ -72,7 +72,7 @@ class FortiwlcCollector:
             self.poll_wlcs()
             self.parse_metrics()
         except Exception:
-            if config['debug']:
+            if self.config['debug']:
                 raise
             fortiwlc_up.add_metric([], 0)
         else:
@@ -109,7 +109,7 @@ class FortiwlcCollector:
             for ap_data in wlc.managed_ap:
                 ap = parse_ap_data(ap_data, wlc.name)
                 self.ap_info[ap[1]] = ap
-                
+
                 wifi_networks = self.get_wifi_networks(ap_data, wlc)
                 for wifi_network in wifi_networks:
                     self.wifi_info[wifi_network[0]] = wifi_network

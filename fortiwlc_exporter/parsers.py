@@ -15,7 +15,6 @@ def ap_profile_string(ap):
 
 def parse_ap_data(ap_data, wlc_name):
     """ Parses AP data from WLC API into format suitable for metric export """
-    name = ap_data['name']
     model, campus, profile = ap_profile_string(ap_data)
     ap = [
         wlc_name,
