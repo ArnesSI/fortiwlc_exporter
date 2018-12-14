@@ -10644,6 +10644,7 @@ fortiwlc_wifi_info{ssid="eduroam",wifi_network="58_eduroam"} 1.0
 fortiwlc_wifi_info{ssid="eduroam",wifi_network="59_eduroam"} 1.0
 fortiwlc_wifi_info{ssid="eduroam",wifi_network="60_eduroam"} 1.0
 fortiwlc_wifi_info{ssid="eduroam",wifi_network="72_eduroam"} 1.0
-# HELP fortiwlc_up Was the last scrape of data from all FortiNET WLC instances successful.
+# HELP fortiwlc_up Was the last scrape of data from FortiNET WLC instance successful.
 # TYPE fortiwlc_up gauge
-fortiwlc_up 1.0
+fortiwlc_up{wlc="wlc1.anso.arnes.si"} 1.0
+fortiwlc_up{wlc="wlc2.anso.arnes.si"} 1.0

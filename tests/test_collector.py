@@ -9,11 +9,11 @@ from fortiwlc_exporter.fortiwlc import FortiWLC
 
 def responses_add(test_case, host, resource, method=responses.GET):
     if resource == 'vap_group':
-        url = 'https://{}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=123'.format(host)
+        url = 'https://{}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root'.format(host)
     elif resource == 'clients':
-        url = 'https://{}/api/v2/monitor/wifi/client/select/?vdom=root&access_token=123'.format(host)
+        url = 'https://{}/api/v2/monitor/wifi/client/select/?vdom=root'.format(host)
     elif resource == 'managed_ap':
-        url = 'https://{}/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=123'.format(host)
+        url = 'https://{}/api/v2/monitor/wifi/managed_ap/select/?vdom=root'.format(host)
     response_data = json.load(open('./tests/data/{}/{}-{}.json'.format(
         test_case, host, resource
     )))
@@ -245,12 +245,13 @@ class TestCollectorCollect(unittest.TestCase):
         col = FortiwlcCollector(config)
         col.poll_wlcs = MagicMock()
         col.parse_metrics = MagicMock()
+        col.wlcs[0].last_pool_ok = True
 
         for metric in col.collect():
             if metric.name == 'fortiwlc_up':
                 self.assertEqual(len(metric.samples), 1)
                 self.assertEqual(metric.samples[0].value, 1)
-                self.assertEqual(metric.samples[0].labels, {})
+                self.assertEqual(metric.samples[0].labels, {'wlc': 'wlc.ansoext.arnes.si'})
             elif metric.name == 'fortiwlc_clients':
                 self.assertEqual(len(metric.samples), 0)
             elif metric.name == 'fortiwlc_ap':

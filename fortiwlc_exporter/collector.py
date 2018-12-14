@@ -66,8 +66,9 @@ class FortiwlcCollector:
         )
         self.fortiwlc_up = GaugeMetricFamily(
             'fortiwlc_up',
-            'Was the last scrape of data from all FortiNET WLC instances '
+            'Was the last scrape of data from FortiNET WLC instance '
             'successful.',
+            labels=['wlc'],
         )
 
     def describe(self):
@@ -89,7 +90,8 @@ class FortiwlcCollector:
                 raise
             self.fortiwlc_up.add_metric([], 0)
         else:
-            self.fortiwlc_up.add_metric([], 1)
+            for wlc in self.wlcs:
+                self.fortiwlc_up.add_metric([wlc.name], int(wlc.last_pool_ok))
 
         for key, count in self.clients.items():
             self.fortiwlc_clients.add_metric(key, count)

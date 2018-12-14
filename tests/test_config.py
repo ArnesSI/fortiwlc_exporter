@@ -22,12 +22,15 @@ class TestConfigParser(unittest.TestCase):
         [main]
         port=1234
         debug=yes
+        password=abcd
         ''')
         expected_config = {}
         expected_config['wlcs'] = []
         expected_config['port'] = 1234
         expected_config['debug'] = True
         expected_config['workers'] = 2
+        expected_config['username'] = ''
+        expected_config['password'] = 'abcd'
         config = get_config(config_file)
         self.assertEqual(config, expected_config)
 
@@ -37,12 +40,12 @@ class TestConfigParser(unittest.TestCase):
         [mywlc1]
         api_key=1234
         [mywlc2]
-        user=a
-        pass=b
+        username=a
+        password=b
         ''')
         expected_config = [
-            {'name': 'mywlc1', 'api_key': '1234'},
-            {'name': 'mywlc2', 'user': 'a', 'pass': 'b'}
+            {'name': 'mywlc1', 'api_key': '1234', 'username': '', 'password': ''},
+            {'name': 'mywlc2', 'username': 'a', 'password': 'b'}
         ]
         config = get_config(config_file)
         self.assertEqual(config['wlcs'], expected_config)

@@ -9,7 +9,7 @@ class TestFortiWLC(unittest.TestCase):
     @responses.activate
     def test_managed_ap_ok(self):
         """ Test successfull API call for managed APs """
-        url = 'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=123'
+        url = 'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/managed_ap/select/?vdom=root'
         response_data = json.load(open('./tests/data/one_client/wlc.ansoext.arnes.si-managed_ap.json'))
         responses.add(
             responses.GET,
@@ -27,7 +27,7 @@ class TestFortiWLC(unittest.TestCase):
     @responses.activate
     def test_vap_group_ok(self):
         """ Test successfull API call for managed APs """
-        url = 'https://wlc.ansoext.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=123'
+        url = 'https://wlc.ansoext.arnes.si/api/v2/cmdb/wireless-controller/vap-group/?vdom=root'
         response_data = json.load(open('./tests/data/one_client/wlc.ansoext.arnes.si-vap_group.json'))
         responses.add(
             responses.GET,
@@ -45,7 +45,7 @@ class TestFortiWLC(unittest.TestCase):
     @responses.activate
     def test_clients_none_ok(self):
         """ Test successfull API call for clients """
-        url = 'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=123'
+        url = 'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root'
         response_data = json.load(open('./tests/data/no_clients/wlc.ansoext.arnes.si-clients.json'))
         responses.add(
             responses.GET,
@@ -63,7 +63,7 @@ class TestFortiWLC(unittest.TestCase):
     @responses.activate
     def test_clients_1_ok(self):
         """ Test successfull API call for clients """
-        url = 'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root&access_token=123'
+        url = 'https://wlc.ansoext.arnes.si/api/v2/monitor/wifi/client/select/?vdom=root'
         response_data = json.load(open('./tests/data/one_client/wlc.ansoext.arnes.si-clients.json'))
         responses.add(
             responses.GET,

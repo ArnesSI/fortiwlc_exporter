@@ -11,11 +11,11 @@ from fortiwlc_exporter.collector import FortiwlcCollector
 
 def responses_add(test_case, host, resource, method=responses.GET):
     if resource == 'vap_group':
-        url = 'https://{}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root&access_token=123'.format(host)
+        url = 'https://{}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root'.format(host)
     elif resource == 'clients':
-        url = 'https://{}/api/v2/monitor/wifi/client/select/?vdom=root&access_token=123'.format(host)
+        url = 'https://{}/api/v2/monitor/wifi/client/select/?vdom=root'.format(host)
     elif resource == 'managed_ap':
-        url = 'https://{}/api/v2/monitor/wifi/managed_ap/select/?vdom=root&access_token=123'.format(host)
+        url = 'https://{}/api/v2/monitor/wifi/managed_ap/select/?vdom=root'.format(host)
     response_data = json.load(open('./tests/data/{}/{}-{}.json'.format(
         test_case, host, resource
     )))
