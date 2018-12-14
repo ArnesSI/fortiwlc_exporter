@@ -15,34 +15,39 @@ class FortiWLC:
         self.api_key = api_key
         self.username = username
         self.password = password
+        self.last_pool_ok = False
         self.clear()
         self._session = None
 
     def clear(self):
-        self.managed_ap = None
-        self.vap_group = None
-        self.clients = None
+        self.last_pool_ok = False
+        self.managed_ap = []
+        self.vap_group = []
+        self.clients = []
 
     def _login(self, force=False):
         ''' Login and store session data if not using API keys '''
-        if self.api_key and (force or not self._session):
+        if self._session and not force:
+            return
+        if self.api_key:
             self._session = requests.session()
             self._session.headers['Authorization'] = 'Bearer {}'.format(self.api_key)
-        elif not self.api_key and (force or not self._session):
-            self._session = requests.session()
-            login_url = self.LOGIN_URL.format(self.name)
+        else:
+            session = requests.session()
+            login_url = self.LOGIN_URL.format(name=self.name)
             params = {
                 "username": self.username,
                 "secretkey": self.password,
                 "ajax": 1,
             }
-            response = self._session.post(login_url, params=params)
-            if not response.ok:
+            response = session.post(login_url, params=params)
+            if not response.ok or str(response.text)[0] != '1':
                 raise AttributeError("Denied access: %s" % response)
+            self._session = session
 
     def logout(self):
         if not self.api_key:
-            url = self.LOGOUT_URL.format(self.name)
+            url = self.LOGOUT_URL.format(name=self.name)
             self._session.post(url)
         self._session = None
 
@@ -68,8 +73,14 @@ class FortiWLC:
         return self._get(url)
 
     def poll(self):
-        self.clear()
-        self.managed_ap = self.get_managed_ap()
-        self.vap_group = self.get_vap_group()
-        self.clients = self.get_clients()
-        self.logout()
+        try:
+            self.clear()
+            self.managed_ap = self.get_managed_ap()
+            self.vap_group = self.get_vap_group()
+            self.clients = self.get_clients()
+            self.logout()
+        except Exception:
+            # TODO log error
+            self.last_pool_ok = False
+        else:
+            self.last_pool_ok = True
