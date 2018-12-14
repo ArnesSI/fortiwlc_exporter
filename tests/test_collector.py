@@ -245,12 +245,13 @@ class TestCollectorCollect(unittest.TestCase):
         col = FortiwlcCollector(config)
         col.poll_wlcs = MagicMock()
         col.parse_metrics = MagicMock()
+        col.wlcs[0].last_pool_ok = True
 
         for metric in col.collect():
             if metric.name == 'fortiwlc_up':
                 self.assertEqual(len(metric.samples), 1)
                 self.assertEqual(metric.samples[0].value, 1)
-                self.assertEqual(metric.samples[0].labels, {})
+                self.assertEqual(metric.samples[0].labels, {'wlc': 'wlc.ansoext.arnes.si'})
             elif metric.name == 'fortiwlc_clients':
                 self.assertEqual(len(metric.samples), 0)
             elif metric.name == 'fortiwlc_ap':

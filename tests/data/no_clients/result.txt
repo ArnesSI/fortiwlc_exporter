@@ -24,6 +24,6 @@ fortiwlc_ap_info{ap_name="w1-volantis.cpe.arnes.si",ap_state="authorized",ap_sta
 fortiwlc_wifi_info{ssid="eduroam",wifi_network="1_eduroam"} 1.0
 fortiwlc_wifi_info{ssid="tolos_psk",wifi_network="1_tolos_psk"} 1.0
 fortiwlc_wifi_info{ssid="eduroam",wifi_network="2_eduroam"} 1.0
-# HELP fortiwlc_up Was the last scrape of data from all FortiNET WLC instances successful.
+# HELP fortiwlc_up Was the last scrape of data from FortiNET WLC instance successful.
 # TYPE fortiwlc_up gauge
-fortiwlc_up 1.0
+fortiwlc_up{wlc="wlc.ansoext.arnes.si"} 1.0
