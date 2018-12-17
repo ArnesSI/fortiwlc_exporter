@@ -12,6 +12,7 @@ pytest = "*"
 pytest-flake8 = "*"
 responses = "*" 
 pylint = "*"
+pyinstaller = "*"
 
 [requires]
 python_version = "3"
