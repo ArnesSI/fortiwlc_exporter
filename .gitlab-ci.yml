@@ -26,7 +26,7 @@ test_code:
 test_rpm:
   image: zelenjak.arnes.si:5000/arnes/centos:7
   stage: test
-  depends_on:
+  dependencies:
     - build_rpm
   script:
     - yum install -y rpms/*/fortiwlc-exporter*.rpm
