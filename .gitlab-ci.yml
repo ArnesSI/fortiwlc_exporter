@@ -31,3 +31,5 @@ test_rpm:
   script:
     - yum install -y rpms/*/fortiwlc-exporter*.rpm
     - "[ -f /etc/fortiwlc_exporter.ini ]"
+    - "fortiwlc_exporter -c /etc/fortiwlc_exporter.ini &"
+    - "curl --fail 'http://localhost:9118/'"
