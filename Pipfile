@@ -13,7 +13,6 @@ pytest-flake8 = "*"
 responses = "*" 
 pylint = "*"
 pyinstaller = "*"
-setuptools-scm = "*"
 
 [requires]
 python_version = "3"

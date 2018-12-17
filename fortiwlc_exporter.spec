@@ -1,8 +1,7 @@
 %global srcname fortiwlc_exporter
-%define version _VERSION_
 
 Name: fortiwlc-exporter
-Version: %{version}
+Version: 1.0.0
 Release: 1
 Summary: FortiWLC Prometheus exporter
 License: MIT
