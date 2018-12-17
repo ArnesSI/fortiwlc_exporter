@@ -1,11 +1,33 @@
-image: zelenjak.arnes.si:5000/python:3.6
-
 stages:
+  - build
   - test
 
-test:
+build_rpm:
+  stage: build
+  image: zelenjak.arnes.si:5000/arnes/rpmbuild:7
+  artifacts:
+    paths:
+      - rpms/
+    expire_in: 1 hour
+  variables:
+    LC_ALL: en_US.utf8
+  script:
+    - yum install -y python34-pip which
+    - ./build.sh
+
+test_code:
   stage: test
+  image: zelenjak.arnes.si:5000/python:3.6
   script: 
     - pip install pipenv
     - pipenv install --dev
     - pipenv run python setup.py test
+
+test_rpm:
+  image: zelenjak.arnes.si:5000/arnes/centos:7
+  stage: test
+  depends_on:
+    - build_rpm
+  script:
+    - yum install -y rpms/*/fortiwlc-exporter*.rpm
+    - "[ -f /etc/fortiwlc_exporter.ini ]"
