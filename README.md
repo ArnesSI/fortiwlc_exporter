@@ -35,8 +35,8 @@ port = 9118
 api_key = "abc123456789"
 ```
 
-When starting FortiWLC exporter, specify path to the configuration file with 
-`-c`. By default it will try to use `fortiwlc.ini` in the current directory.
+When starting FortiWLC exporter, specify path to the configuration file with
+`-c`. By default it will try to use `fortiwlc_exporter.ini` in the current directory.
 
 
 ## Description

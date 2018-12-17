@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ROUNDS=${2:-3}
-CONFIG=${1:-fortiwlc.ini}
+CONFIG=${1:-fortiwlc_exporter.ini}
 
 if [[ "$CONFIG" == "-h" ]]; then
     echo "Usage $0 [config.ini] [rounds]"

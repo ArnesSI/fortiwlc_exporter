@@ -20,7 +20,7 @@ def main():
         '-c',
         dest='config_file',
         help='Configuration file',
-        default='fortiwlc.ini',
+        default='fortiwlc_exporter.ini',
         type=argparse.FileType('r')
     )
     parser.add_argument(
