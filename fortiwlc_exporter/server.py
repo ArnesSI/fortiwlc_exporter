@@ -5,6 +5,7 @@ import time
 from prometheus_client import start_http_server
 from prometheus_client.core import REGISTRY
 
+from fortiwlc_exporter import __version__
 from fortiwlc_exporter.collector import FortiwlcCollector
 from fortiwlc_exporter.config import get_config
 
@@ -15,7 +16,10 @@ def start_server(config):
 
 
 def main():
-    parser = argparse.ArgumentParser(description='FortiOS WLC Prometheus Collector')
+    parser = argparse.ArgumentParser(
+        prog='fortiwlc_exporter',
+        description='FortiOS WLC Prometheus Collector'
+    )
     parser.add_argument(
         '-c',
         dest='config_file',
@@ -26,6 +30,11 @@ def main():
     parser.add_argument(
         '--debug',
         action='store_true',
+    )
+    parser.add_argument(
+        '--version',
+        action='version',
+        version='%(prog)s {}'.format(__version__)
     )
     args = parser.parse_args()
     config = get_config(args.config_file, extra=args)

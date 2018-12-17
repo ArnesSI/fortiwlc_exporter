@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "88d9e66f93d240ab53dcf90021df6ea0f80f116c2398414a849713084dbb81bd"
+            "sha256": "b85aa1555619a2ed54de8951271d5e7dfb21fd17bd3366b4f94ce73405c7b15f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -267,6 +267,14 @@
             ],
             "index": "arnes_pypi",
             "version": "==0.10.4"
+        },
+        "setuptools-scm": {
+            "hashes": [
+                "sha256:1191f2a136b5e86f7ca8ab00a97ef7aef997131f1f6d4971be69a1ef387d8b40",
+                "sha256:cc6953d224a22f10e933fa2f55c95979317c55259016adcf93310ba2997febfa"
+            ],
+            "index": "arnes_pypi",
+            "version": "==3.1.0"
         },
         "six": {
             "hashes": [

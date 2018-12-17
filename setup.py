@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fortiwlc_exporter",
-    version="1.0.0",
+    use_scm_version=True,
     author="Luka Vadnjal",
     author_email="luka@vadnjal.net",
     description="FortiWLC Prometheus exporter",
@@ -17,8 +17,8 @@ setuptools.setup(
         'console_scripts': ['fortiwlc=fortiwlc_exporter.server:main'],
     },
     install_requires=['prometheus_client', 'requests'],
-    setup_requires=["pytest-runner"],
-    tests_require=["pytest"],
+    setup_requires=['pytest-runner', 'setuptools_scm'],
+    tests_require=['pytest'],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
