@@ -3,7 +3,7 @@
 
 Name: fortiwlc-exporter
 Version: %{version}
-Release: 1
+Release: 1%{?dist}
 Summary: FortiWLC Prometheus exporter
 License: MIT
 URL: https://git.arnes.si/monitoring/fortiwlc_exporter/
