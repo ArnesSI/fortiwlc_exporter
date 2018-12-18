@@ -53,10 +53,20 @@ To setup development vrtual environment:
 pipenv install --dev
 ```
 
-Running tests:
+### Tests
 
 ```
 pipenv run python setup.py test
 ```
 
 Tests include flake8 checks by default.
+
+### Releases
+
+```
+pipenv run bumpversion patch
+```
+
+Instead of patch you can give minor or major.
+
+This creates a commit and tag. Make sure to push it with `git push --tags`.
