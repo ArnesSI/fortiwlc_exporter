@@ -16,13 +16,24 @@ SPECS_PATH=$(rpm --eval %_specdir)
 # Clean build dirs (do not clean $ROOT_PATH/*RPMS)
 #rm -rf $ROOT_PATH/{BUILD,BUILDROOT,SOURCES,SPECS}/*
 
-# Guess the pkg name
-SPEC_FILE=`ls *.spec`
-PKG_NAME=$(rpmspec --srpm -q --queryformat='%{name}' $SPEC_FILE)
+# Python build requirements (from pip)
+yum install -y python34-setuptools
 
 # Python: generate tarball
-yum install -y python34-setuptools
 python3 setup.py sdist
+
+# Python: Get version number 
+VERSION=$(grep '__version__' fortiwlc_exporter/__init__.py | sed -r s,"^.*=\s*[\'\"](.+)[\'\"].*","\1",)
+
+# Find source spec file 
+SPEC_SRC=`ls *.spec` 
+SPEC_FILE="$SPECS_PATH/$SPEC_SRC" 
+ 
+# Copy spec file and write version info 
+sed "s/_VERSION_/${VERSION}/" $SPEC_SRC > $SPEC_FILE 
+ 
+# Guess the pkg name 
+PKG_NAME=$(rpmspec --srpm -q --queryformat='%{name}' $SPEC_FILE) 
 
 # Install build dependencies
 yum-builddep -y ${SPEC_FILE} || exit 1
@@ -39,7 +50,6 @@ for i in $(echo "$EVALSPEC" | grep '^Source.*:' | awk '{print $2}') \
         [ -f $j ] && cp -f $j $RPMSRC_PATH && break
     done
 done
-cp -f $SPEC_FILE $SPECS_PATH
 
 # Build RPM package (but dont build debuginfo package)
-rpmbuild -ba $SPECS_PATH/$SPEC_FILE --define "debug_package %{nil}" --define "_rpmdir $(pwd)/rpms" --define "_srcrpmdir $(pwd)/srpms"
+rpmbuild -ba $SPEC_FILE --define "debug_package %{nil}" --define "_rpmdir $(pwd)/rpms" --define "_srcrpmdir $(pwd)/srpms"

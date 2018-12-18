@@ -12,7 +12,9 @@ build_rpm:
   variables:
     LC_ALL: en_US.utf8
   script:
-    - yum install -y python34-pip which
+    - yum install -y python34-pip
+    - pip3 install --upgrade bumpversion
+    - ./dev-version.sh
     - ./build.sh
 
 test_code:
