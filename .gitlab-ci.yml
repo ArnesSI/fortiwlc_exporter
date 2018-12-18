@@ -9,6 +9,7 @@ build_rpm:
   artifacts:
     paths:
       - rpms/
+      - srpms/
     expire_in: 1 hour
   variables:
     LC_ALL: en_US.utf8
@@ -56,6 +57,6 @@ upload_to_rigljica:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
     # Copy all RPMs to rigljica 
     - scp -r rpms/*/*.rpm gitlab@rigljica.arnes.si:rpms/ 
-    - scp -r srpms/*.src.rpm gitlab@rigljica.arnes.si:rpms/ 
+    #- scp -r srpms/*.src.rpm gitlab@rigljica.arnes.si:rpms/ 
   only: 
     - tags 
