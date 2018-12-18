@@ -16,7 +16,7 @@ def start_server(config):
 
 
 def main():
-    parser = argparse.ArgumentParser( 
+    parser = argparse.ArgumentParser(
         prog='fortiwlc_exporter',
         description='FortiOS WLC Prometheus Collector'
     )
