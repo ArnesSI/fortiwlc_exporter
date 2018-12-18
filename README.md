@@ -35,8 +35,8 @@ port = 9118
 api_key = "abc123456789"
 ```
 
-When starting FortiWLC exporter, specify path to the configuration file with 
-`-c`. By default it will try to use `fortiwlc.ini` in the current directory.
+When starting FortiWLC exporter, specify path to the configuration file with
+`-c`. By default it will try to use `fortiwlc_exporter.ini` in the current directory.
 
 
 ## Description
@@ -53,10 +53,20 @@ To setup development vrtual environment:
 pipenv install --dev
 ```
 
-Running tests:
+### Tests
 
 ```
 pipenv run python setup.py test
 ```
 
 Tests include flake8 checks by default.
+
+### Releases
+
+```
+pipenv run bumpversion patch
+```
+
+Instead of patch you can give minor or major.
+
+This creates a commit and tag. Make sure to push it with `git push --tags`.

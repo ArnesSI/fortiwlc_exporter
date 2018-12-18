@@ -12,6 +12,8 @@ pytest = "*"
 pytest-flake8 = "*"
 responses = "*" 
 pylint = "*"
+pyinstaller = "*"
+bumpversion = "*"
 
 [requires]
 python_version = "3"

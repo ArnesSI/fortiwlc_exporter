@@ -1,0 +1,11 @@
+[Unit]
+Description=FortiWLC Prometheus exporter
+After=network.target
+After=syslog.target
+
+[Service]
+ExecStart=/usr/bin/fortiwlc_exporter -c /etc/fortiwlc_exporter.ini
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
