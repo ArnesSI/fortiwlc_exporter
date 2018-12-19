@@ -1,6 +1,6 @@
 from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor as PoolExecutor
-from prometheus_client.core import GaugeMetricFamily
+from prometheus_client.core import GaugeMetricFamily, InfoMetricFamily
 
 from .parsers import parse_ap_data, parse_wifi_name
 from .fortiwlc import FortiWLC
