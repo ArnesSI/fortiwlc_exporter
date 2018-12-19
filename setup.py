@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fortiwlc_exporter",
-    version="1.5.6",
+    version="1.5.7",
     author="Luka Vadnjal",
     author_email="luka@vadnjal.net",
     description="FortiWLC Prometheus exporter",
