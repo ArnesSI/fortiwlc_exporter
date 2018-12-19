@@ -147,3 +147,5 @@ fabric.properties
 # Built RPM packages
 rpms/*
 srpms/*
+
+.vagrant/*
