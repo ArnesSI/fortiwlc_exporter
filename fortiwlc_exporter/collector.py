@@ -43,7 +43,7 @@ class FortiwlcCollector:
                 'wifi_network',
             ]
         )
-        self.fortiwlc_ap_info = InfoMetricFamily(
+        self.fortiwlc_ap_info = GaugeMetricFamily(
             'fortiwlc_ap',
             'Access point information',
             labels=[
@@ -56,7 +56,7 @@ class FortiwlcCollector:
                 'campus',
             ],
         )
-        self.fortiwlc_wifi_info = InfoMetricFamily(
+        self.fortiwlc_wifi_info = GaugeMetricFamily(
             'fortiwlc_wifi',
             'Wireless network (SSID) information',
             labels=[
@@ -97,10 +97,10 @@ class FortiwlcCollector:
             self.fortiwlc_clients.add_metric(key, count)
 
         for _, labels in self.ap_info.items():
-            self.fortiwlc_ap_info.add_metric(labels, {})
+            self.fortiwlc_ap_info.add_metric(labels, 1)
 
         for _, labels in self.wifi_info.items():
-            self.fortiwlc_wifi_info.add_metric(labels, {})
+            self.fortiwlc_wifi_info.add_metric(labels, 1)
 
         yield self.fortiwlc_clients
         yield self.fortiwlc_ap_info
