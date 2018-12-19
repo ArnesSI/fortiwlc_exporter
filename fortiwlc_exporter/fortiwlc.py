@@ -1,5 +1,7 @@
 import requests
 
+from .utils import timeit
+
 
 class FortiWLC:
     """ Class that collects WIFI data from FortiNET API """
@@ -57,16 +59,19 @@ class FortiWLC:
         resp.raise_for_status()
         return resp.json()['results']
 
+    @timeit
     def get_managed_ap(self):
         """ Returns info about APs (access points) """
         url = self.MANAGED_AP_URL.format(name=self.name, api_key=self.api_key)
         return self._get(url)
 
+    @timeit
     def get_vap_group(self):
         """ Returns info about configured VAPs (SSIDs) """
         url = self.VAP_GROUP_URL.format(name=self.name, api_key=self.api_key)
         return self._get(url)
 
+    @timeit
     def get_clients(self):
         """ Returns info about connected WIFI clients """
         url = self.CLIENT_URL.format(name=self.name, api_key=self.api_key)
