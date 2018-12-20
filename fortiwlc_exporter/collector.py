@@ -117,13 +117,18 @@ class FortiwlcCollector:
         """ Polls all data from all WLCs APIs """
         futures = []
 
-        with PoolExecutor(max_workers=4) as executor:
+        if self.config['workers'] <= 1:
+            # don't fork at all
             for wlc in self.wlcs:
-                futures.append(executor.submit(_poll, wlc))
+                wlc.poll()
+        else:
+            with PoolExecutor(max_workers=self.config['workers']) as executor:
+                for wlc in self.wlcs:
+                    futures.append(executor.submit(_poll, wlc))
 
-        self.wlcs = []
-        for f in as_completed(futures):
-            self.wlcs.append(f.result())
+            self.wlcs = []
+            for f in as_completed(futures):
+                self.wlcs.append(f.result())
 
     @timeit
     def parse_metrics(self):
