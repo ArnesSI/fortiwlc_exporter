@@ -1,7 +1,7 @@
 stages:
   - build
   - test
-  - upload
+  - publish
 
 build_rpm:
   stage: build
@@ -40,23 +40,15 @@ test_rpm:
     - "sleep 2"
     - "curl --fail 'http://localhost:9118/'"
 
-# Upload package to repo 
-upload_to_rigljica: 
-  stage: upload 
-  image: zelenjak.arnes.si:5000/arnes/centos:7 
-  script: 
-    # Install ssh-agent 
-    - yum install -y openssh-clients 
-    # Run ssh-agent 
-    - eval $(ssh-agent -s) 
-    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store 
-    - ssh-add <(echo "$SSH_PRIVATE_KEY") 
-    # disable host key checking (NOTE: makes you susceptible to man-in-the-middle attacks) 
-    # WARNING: use only in docker container, if you use it with shell you will overwrite your user's ssh config 
-    - mkdir -p ~/.ssh 
-    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config 
-    # Copy all RPMs to rigljica 
-    - scp -r rpms/*/*.rpm gitlab@rigljica.arnes.si:rpms/ 
-    #- scp -r srpms/*.src.rpm gitlab@rigljica.arnes.si:rpms/ 
-  only: 
-    - tags 
+publish_rpm:
+  image: zelenjak.arnes.si:5000/arnes/centos:7
+  stage: publish
+  script:
+    - ls -lR ./rpms/
+    - >-
+      curl -f -u "${NEXUS_USERNAME}:${NEXUS_PASSWORD}"
+      --upload-file ./rpms/x86_64/fortiwlc-exporter-*.el7.x86_64.rpm
+      https://zelenjak.arnes.si/nexus/repository/ArnesYumCentos7/x86_64/
+  only:
+    - tags
+
