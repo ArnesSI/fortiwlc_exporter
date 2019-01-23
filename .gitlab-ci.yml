@@ -24,6 +24,7 @@ test_code:
   image: zelenjak.arnes.si:5000/python:3.6
   script: 
     - pip install pipenv
+    - pipenv run python -m pip install pip==18.1
     - pipenv install --dev
     - pipenv run python setup.py test
 
