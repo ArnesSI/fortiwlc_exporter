@@ -10,7 +10,7 @@
         "sources": [
             {
                 "name": "arnes_pypi",
-                "url": "https://zelenjak.arnes.si:9102/nexus/repository/ArnesGroupPyPI/simple",
+                "url": "https://zelenjak.arnes.si/nexus/repository/ArnesGroupPyPI/simple",
                 "verify_ssl": true
             }
         ]
