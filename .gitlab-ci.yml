@@ -15,7 +15,7 @@ build_rpm:
     LC_ALL: en_US.utf8
   script:
     - yum install -y python34-pip
-    - pip3 install --upgrade bumpversion
+    - pip3 install --upgrade --index=https://zelenjak.arnes.si/nexus/repository/ArnesGroupPyPI/simple bumpversion
     - ./dev-version.sh
     - ./build.sh
 
