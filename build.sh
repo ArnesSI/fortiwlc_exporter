@@ -16,9 +16,6 @@ SPECS_PATH=$(rpm --eval %_specdir)
 # Clean build dirs (do not clean $ROOT_PATH/*RPMS)
 #rm -rf $ROOT_PATH/{BUILD,BUILDROOT,SOURCES,SPECS}/*
 
-# Python build requirements (from pip)
-yum install -y python34-setuptools
-
 # Python: generate tarball
 python3 setup.py sdist
 

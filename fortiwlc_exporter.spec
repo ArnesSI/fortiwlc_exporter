@@ -22,8 +22,6 @@ for Prometheus.
 
 %prep
 %autosetup -n %{srcname}-%{version}
-pip3 install pyinstaller
-pip3 install .
 
 %build
 pyinstaller --onefile fortiwlc_exporter/server.py -n fortiwlc_exporter
