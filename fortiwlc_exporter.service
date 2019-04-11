@@ -4,7 +4,7 @@ After=network.target
 After=syslog.target
 
 [Service]
-ExecStart=/usr/bin/fortiwlc_exporter -c /etc/fortiwlc_exporter.ini
+ExecStart=/usr/bin/fortiwlc_exporter -c /etc/fortiwlc_exporter.yaml
 Restart=always
 
 [Install]

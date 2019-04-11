@@ -27,16 +27,17 @@ WLC instance section parameters:
 
 Example:
 
-```ini
-[main]
-port = 9118
-
-[mywlc]
-api_key = "abc123456789"
+```yaml
+---
+exporter_port: 9118
+wlc_api_key: "abc123456789"
+wlcs:
+  - wlc1
+  - wlc2
 ```
 
 When starting FortiWLC exporter, specify path to the configuration file with
-`-c`. By default it will try to use `fortiwlc_exporter.ini` in the current directory.
+`-c`. By default it will try to use `fortiwlc_exporter.yaml` in the current directory.
 
 
 ## Description

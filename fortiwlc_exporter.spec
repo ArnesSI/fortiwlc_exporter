@@ -9,7 +9,7 @@ License: MIT
 URL: https://git.arnes.si/monitoring/fortiwlc_exporter/
 Source0: dist/%{srcname}-%{version}.tar.gz
 Source1: %{srcname}.service
-Source2: %{srcname}.ini
+Source2: %{srcname}.yaml
 
 %{?systemd_requires}
 BuildRequires: systemd
@@ -28,7 +28,7 @@ pyinstaller --onefile fortiwlc_exporter/exporter.py -n fortiwlc_exporter
 %install
 install -p -D -m 755 dist/fortiwlc_exporter %{buildroot}%{_bindir}/fortiwlc_exporter
 install -p -D -m 644 %{_sourcedir}/fortiwlc_exporter.service %{buildroot}%{_unitdir}/fortiwlc_exporter.service
-install -p -D -m 640 %{_sourcedir}/fortiwlc_exporter.ini %{buildroot}%{_sysconfdir}/fortiwlc_exporter.ini
+install -p -D -m 640 %{_sourcedir}/fortiwlc_exporter.yaml %{buildroot}%{_sysconfdir}/fortiwlc_exporter.yaml
 
 %post
 %systemd_post fortiwlc_exporter.service
@@ -43,4 +43,4 @@ install -p -D -m 640 %{_sourcedir}/fortiwlc_exporter.ini %{buildroot}%{_sysconfd
 %defattr(-,root,root,-)
 %{_bindir}/fortiwlc_exporter
 %{_unitdir}/fortiwlc_exporter.service
-%config(noreplace) %{_sysconfdir}/fortiwlc_exporter.ini
+%config(noreplace) %{_sysconfdir}/fortiwlc_exporter.yaml

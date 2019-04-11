@@ -9,6 +9,7 @@ from prometheus_client import REGISTRY, CollectorRegistry, start_http_server
 
 from fortiwlc_exporter import __version__, settings
 from fortiwlc_exporter.collector import FortiwlcCollector
+from fortiwlc_exporter.exceptions import ExporterConfigError
 
 
 def setup_logging():
@@ -48,8 +49,7 @@ def parse_cmd_args():
     parser.add_argument(
         '-c',
         dest='config_file',
-        help='Configuration file',
-        default='fortiwlc_exporter.yaml',
+        help='Configuration file in YAML format',
         type=argparse.FileType('r'),
     )
     args = parser.parse_args()
@@ -61,9 +61,14 @@ def parse_cmd_args():
 
 
 def parse_config_file(config_file):
-    config = yaml.safe_load(config_file)
+    if not config_file:
+        return None
+    try:
+        config = yaml.safe_load(config_file)
+    except yaml.parser.ParserError:
+        raise ExporterConfigError('Could not parse configuration file.')
     if not config:
-        return
+        return None
     settings.EXPORTER_PORT = config.get('exporter_port', settings.EXPORTER_PORT)
     settings.WORKERS = config.get('workers', settings.WORKERS)
     settings.WLC_USERNAME = config.get('wlc_username', settings.WLC_USERNAME)
