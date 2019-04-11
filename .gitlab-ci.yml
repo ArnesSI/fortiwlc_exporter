@@ -1,10 +1,29 @@
 stages:
+  - test_code
   - build
-  - test
+  - test_package
   - publish
 
 variables:
   PIP_INDEX_URL: https://zelenjak.arnes.si/nexus/repository/ArnesGroupPyPI/simple
+
+lint:
+  stage: test_code
+  image: zelenjak.arnes.si:5000/python:3.6
+  script:
+    - pip install poetry
+    - poetry install
+    - poetry run flake8
+    - poetry run black --diff --check .
+    #- poetry run pydocstyle fortiwlc_exporter
+
+test_unit:
+  stage: test_code
+  image: zelenjak.arnes.si:5000/python:3.6
+  script:
+    - pip install poetry
+    - poetry install
+    - poetry run pytest --cov=fortiwlc_exporter tests
 
 build_rpm:
   stage: build
@@ -17,24 +36,18 @@ build_rpm:
   variables:
     LC_ALL: en_US.utf8
   script:
-    - yum install -y python34-pip python34-setuptools
-    - pip3 install --upgrade bumpversion pyinstaller
-    - pip3 install .
+    - yum install -y python34
+    - python3.4 -m ensurepip --default-pip
+    - pip3.4 install --upgrade bumpversion poetry pyinstaller
+    - poetry install --no-dev
+    - poetry run pip freeze | grep -v egg=fortiwlc_exporter > requirements.txt
+    - pip3.4 install -r requirements.txt
     - ./dev-version.sh
     - ./build.sh
 
-test_code:
-  stage: test
-  image: zelenjak.arnes.si:5000/python:3.6
-  script: 
-    - pip install pipenv
-    - pipenv run python -m pip install pip==18.1
-    - pipenv install --dev
-    - pipenv run python setup.py test
-
 test_rpm:
   image: zelenjak.arnes.si:5000/arnes/centos:7
-  stage: test
+  stage: test_package
   dependencies:
     - build_rpm
   script:
@@ -56,4 +69,3 @@ publish_rpm:
       https://zelenjak.arnes.si/nexus/repository/ArnesYumCentos7/x86_64/
   only:
     - tags
-

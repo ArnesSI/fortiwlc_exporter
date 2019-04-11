@@ -45,28 +45,54 @@ TODO
 
 ## Developing
 
-The project uses `pipenv` for managing python virtual environments.
+We use [poetry](https://poetry.eustace.io/) to manage Python dependencies and virtual environments.
 
-To setup development vrtual environment:
+To setup development virtual environment:
 
 ```
-pipenv install --dev
+poetry install
+```
+
+There are also flake8 for linting, black for code formatting, pytest as a
+test runner and coverage for unit test coverage. Write docstrings in google
+style and check them via pydocstyle.
+
+See documentation of your IDE on how to integrate these tools into your workflow. Here is how to run them manually via CLI:
+
+```
+poetry run flake8
+poetry run black --diff --check .
+poetry run pydocstyle fortiwlc_exporter
+poetry run pytest --cov=fortiwlc_exporter tests
+```
+
+See Tests chapter below for more on running tests and code coverage.
+
+Start exporter:
+
+```
+poetry run fortiwlc_exporter/exporter.py
 ```
 
 ### Tests
 
+Unit tests with coverage in HTML:
+
 ```
-pipenv run python setup.py test
+poetry run pytest --cov=fortiwlc_exporter tests/unit
+poetry run coverage html
 ```
 
-Tests include flake8 checks by default.
+Open [htmlcov/index.html](htmlcov/index.html) in your web browser.
 
 ### Releases
 
 ```
-pipenv run bumpversion patch
+poetry run bumpversion patch
 ```
 
-Instead of patch you can give minor or major.
-
+Instead of patch you can give `minor` or `major`.
 This creates a commit and tag. Make sure to push it with `git push --tags`.
+
+The `dev-version.sh` script will bump the version for development or release as
+needed (based on whether we are on a git tag or not) and is called in CI jobs.

@@ -1,13 +1,7 @@
 import configparser
 
 
-DEFAULTS = {
-    'port': 9118,
-    'debug': False,
-    'workers': 2,
-    'username': '',
-    'password': '',
-}
+DEFAULTS = {'port': 9118, 'debug': False, 'workers': 2, 'username': '', 'password': ''}
 
 CONFIG = {}
 

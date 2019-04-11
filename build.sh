@@ -17,20 +17,20 @@ SPECS_PATH=$(rpm --eval %_specdir)
 #rm -rf $ROOT_PATH/{BUILD,BUILDROOT,SOURCES,SPECS}/*
 
 # Python: generate tarball
-python3 setup.py sdist
+poetry build --format=sdist
 
-# Python: Get version number 
-VERSION=$(grep '__version__' fortiwlc_exporter/__init__.py | sed -r s,"^.*=\s*[\'\"](.+)[\'\"].*","\1",)
+# Python: Get version number
+VERSION=$(grep '__version__ =' fortiwlc_exporter/__init__.py | sed -r s,"^.*=\s*[\'\"](.+)[\'\"].*","\1",)
 
-# Find source spec file 
-SPEC_SRC=`ls *.spec` 
-SPEC_FILE="$SPECS_PATH/$SPEC_SRC" 
- 
-# Copy spec file and write version info 
-sed "s/_VERSION_/${VERSION}/" $SPEC_SRC > $SPEC_FILE 
- 
-# Guess the pkg name 
-PKG_NAME=$(rpmspec --srpm -q --queryformat='%{name}' $SPEC_FILE) 
+# Find source spec file
+SPEC_SRC=`ls *.spec`
+SPEC_FILE="$SPECS_PATH/$SPEC_SRC"
+
+# Copy spec file and write version info
+sed "s/_VERSION_/${VERSION}/" $SPEC_SRC > $SPEC_FILE
+
+# Guess the pkg name
+PKG_NAME=$(rpmspec --srpm -q --queryformat='%{name}' $SPEC_FILE)
 
 # Install build dependencies
 yum-builddep -y ${SPEC_FILE} || exit 1

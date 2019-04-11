@@ -1,0 +1,62 @@
+[tool.poetry]
+name = "fortiwlc_exporter"
+version = "1.5.11"
+description = "Prometheus exporter for FortiOS WLC"
+readme = "README.md"
+authors = [
+    "Luka Vadnjal <luka@vadnjal.net>",
+    "Matej Vadnjal <matej.vadnjal@arnes.si>",
+]
+license = "MIT"
+repository = "https://git.arnes.si/monitoring/fortiwlc_exporter"
+classifiers = [
+    "Topic :: System :: Monitoring"
+]
+
+[tool.poetry.scripts]
+fortiwlc_exporter = 'fortiwlc_exporter.exporter:main'
+
+[[tool.poetry.source]]
+name = "arnes_pypi"
+url = "https://zelenjak.arnes.si/nexus/repository/ArnesGroupPyPI/simple"
+
+[tool.poetry.dependencies]
+python = "^3.4"
+prometheus-client = "^0.6.0"
+requests = "^2.21"
+
+[tool.poetry.dev-dependencies]
+pytest = "^3.0"
+pytest-cov = "^2.6"
+flake8 = "*"
+black = {version = "*", python = "^3.6", allows-prereleases = true}
+responses = "^0.10.6"
+pylint = "^2.3"
+pyinstaller = "^3.4"
+bumpversion = "^0.5.3"
+coverage = "^4.5"
+pydocstyle = "^3.0"
+
+[tool.black]
+line-length = 88
+skip-string-normalization = true
+py36 = true
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.eggs
+  | \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"

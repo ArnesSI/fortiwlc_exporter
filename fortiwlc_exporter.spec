@@ -4,7 +4,7 @@
 Name: fortiwlc-exporter
 Version: %{version}
 Release: 1%{?dist}
-Summary: FortiWLC Prometheus exporter
+Summary: Prometheus exporter for FortiOS WLC
 License: MIT
 URL: https://git.arnes.si/monitoring/fortiwlc_exporter/
 Source0: dist/%{srcname}-%{version}.tar.gz
@@ -14,7 +14,6 @@ Source2: %{srcname}.ini
 %{?systemd_requires}
 BuildRequires: systemd
 BuildRequires: python34-devel
-BuildRequires: python34-pip
 
 %description
 This project collects data from FortiNET WLC systems and generates export data

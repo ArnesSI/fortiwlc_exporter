@@ -11,4 +11,5 @@ def timeit(method):
         if CONFIG.get('debug'):
             print('{}: {:0.6f} s'.format(method.__name__, (te - ts)))
         return result
+
     return timed

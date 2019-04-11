@@ -8,9 +8,11 @@ class FortiWLC:
 
     LOGIN_URL = 'https://{name}/logincheck'
     LOGOUT_URL = 'https://{name}/logout'
-    MANAGED_AP_URL = 'https://{name}/api/v2/monitor/wifi/managed_ap/select/?vdom=root'  # noqa
-    VAP_GROUP_URL = 'https://{name}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root'  # noqa
-    CLIENT_URL = 'https://{name}/api/v2/monitor/wifi/client/select/?vdom=root'  # noqa
+    MANAGED_AP_URL = 'https://{name}/api/v2/monitor/wifi/managed_ap/select/?vdom=root'
+    VAP_GROUP_URL = (
+        'https://{name}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root'
+    )
+    CLIENT_URL = 'https://{name}/api/v2/monitor/wifi/client/select/?vdom=root'
 
     def __init__(self, name, api_key=None, username=None, password=None):
         self.name = name
@@ -37,11 +39,7 @@ class FortiWLC:
         else:
             session = requests.session()
             login_url = self.LOGIN_URL.format(name=self.name)
-            params = {
-                "username": self.username,
-                "secretkey": self.password,
-                "ajax": 1,
-            }
+            params = {"username": self.username, "secretkey": self.password, "ajax": 1}
             response = session.post(login_url, params=params)
             if not response.ok or str(response.text)[0] != '1':
                 raise AttributeError("Denied access: %s" % response)
