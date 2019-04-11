@@ -21,13 +21,9 @@ class FortiwlcCollector:
     def init_data(self):
         self.ap_info = {}
         self.clients = defaultdict(int)
-        self.radio_types = set([
-            '802.11ac',
-            '802.11g',
-            '802.11n',
-            '802.11n-5G',
-            'unknown',
-        ])
+        self.radio_types = set(
+            ['802.11ac', '802.11g', '802.11n', '802.11n-5G', 'unknown']
+        )
         self.wifi_info = {}
 
     def init_wlcs(self):
@@ -42,11 +38,7 @@ class FortiwlcCollector:
             'fortiwlc_clients',
             'Number of clients connected to a specific combination of access '
             'point, radio and wifi network.',
-            labels=[
-                'ap_name',
-                'radio_type',
-                'wifi_network',
-            ]
+            labels=['ap_name', 'radio_type', 'wifi_network'],
         )
         self.fortiwlc_ap_info = InfoMetricFamily(
             'fortiwlc_ap',
@@ -64,15 +56,11 @@ class FortiwlcCollector:
         self.fortiwlc_wifi_info = InfoMetricFamily(
             'fortiwlc_wifi',
             'Wireless network (SSID) information',
-            labels=[
-                'wifi_network',
-                'ssid',
-            ],
+            labels=['wifi_network', 'ssid'],
         )
         self.fortiwlc_up = GaugeMetricFamily(
             'fortiwlc_up',
-            'Was the last scrape of data from FortiNET WLC instance '
-            'successful.',
+            'Was the last scrape of data from FortiNET WLC instance successful.',
             labels=['wlc'],
         )
 
@@ -148,21 +136,15 @@ class FortiwlcCollector:
                 for wifi_network in wifi_networks:
                     self.wifi_info[wifi_network[0]] = wifi_network
                     for radio_type in self.radio_types:
-                        self.clients[(
-                            ap_data['name'],
-                            radio_type,
-                            wifi_network[0]
-                        )] += 0
+                        self.clients[
+                            (ap_data['name'], radio_type, wifi_network[0])
+                        ] += 0
 
     def parse_by_ssid(self):
         """ Counts clients on each AP/radio type/SSID combo """
         for wlc in self.wlcs:
             for client in wlc.clients:
-                key = (
-                    client['wtp_name'],
-                    client['radio_type'],
-                    client['vap_name'],
-                )
+                key = (client['wtp_name'], client['radio_type'], client['vap_name'])
                 self.clients[key] += 1
                 self.radio_types.add(client['radio_type'])
                 self.wifi_info[client['vap_name']] = (
@@ -175,15 +157,10 @@ class FortiwlcCollector:
         for radio_data in ap['radio']:
             for ssid_key in radio_data.get('ssid', {}).keys():
                 try:
-                    group = next(filter(
-                        lambda g: g['name'] == ssid_key,
-                        wlc.vap_group
-                    ))
+                    group = next(filter(lambda g: g['name'] == ssid_key, wlc.vap_group))
                 except StopIteration:
                     wifi_networks.append(parse_wifi_name(ssid_key))
                 else:
                     for vap_data in group['vaps']:
-                        wifi_networks.append(
-                            parse_wifi_name(vap_data['name'])
-                        )
+                        wifi_networks.append(parse_wifi_name(vap_data['name']))
         return wifi_networks

@@ -11,14 +11,16 @@ from fortiwlc_exporter.collector import FortiwlcCollector
 
 def responses_add(test_case, host, resource, method=responses.GET):
     if resource == 'vap_group':
-        url = 'https://{}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root'.format(host)
+        url = 'https://{}/api/v2/cmdb/wireless-controller/vap-group/?vdom=root'.format(
+            host
+        )
     elif resource == 'clients':
         url = 'https://{}/api/v2/monitor/wifi/client/select/?vdom=root'.format(host)
     elif resource == 'managed_ap':
         url = 'https://{}/api/v2/monitor/wifi/managed_ap/select/?vdom=root'.format(host)
-    response_data = json.load(open('./tests/data/{}/{}-{}.json'.format(
-        test_case, host, resource
-    )))
+    response_data = json.load(
+        open('./tests/data/{}/{}-{}.json'.format(test_case, host, resource))
+    )
     responses.add(method, url, json=response_data, status=200)
 
 
@@ -32,14 +34,18 @@ class BaseServerRunner(unittest.TestCase):
             responses_add(self.test_case, host, 'vap_group')
             responses_add(self.test_case, host, 'managed_ap')
         responses.add_passthru('http://localhost:{}'.format(self.port))
-        expected_lines = open(
-            './tests/data/{}/result.txt'.format(self.test_case)
-        ).read().splitlines()
+        expected_lines = (
+            open('./tests/data/{}/result.txt'.format(self.test_case))
+            .read()
+            .splitlines()
+        )
 
-        self.assertEqual(len(responses.calls), 0+self._responses_calls)
+        self.assertEqual(len(responses.calls), 0 + self._responses_calls)
         r = requests.get('http://localhost:{}'.format(self.port))
         r.raise_for_status()
-        self.assertEqual(len(responses.calls), 3*len(self.hosts)+self._responses_calls)
+        self.assertEqual(
+            len(responses.calls), 3 * len(self.hosts) + self._responses_calls
+        )
         resp_lines = [l for l in r.text.split('\n') if 'fortiwlc' in l]
 
         print('\n'.join(resp_lines))
@@ -54,6 +60,7 @@ class BaseServerRunner(unittest.TestCase):
 
 class TestServerOneWLC(BaseServerRunner):
     ''' Test full code stack: starts server and grabs response '''
+
     @classmethod
     def setUpClass(cls):
         cls.port = 23344
@@ -62,7 +69,7 @@ class TestServerOneWLC(BaseServerRunner):
             'port': cls.port,
             'debug': False,
             'workers': 1,
-            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}]
+            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}],
         }
         cls.collector = FortiwlcCollector(cls.config)
         REGISTRY.register(cls.collector)
@@ -87,6 +94,7 @@ class TestServerOneWLC(BaseServerRunner):
 
 class TestServerTwoWLC(BaseServerRunner):
     ''' Test full code stack: starts server and grabs response '''
+
     @classmethod
     def setUpClass(cls):
         # can't kill server from above test class. Just start new one on new port
@@ -98,8 +106,8 @@ class TestServerTwoWLC(BaseServerRunner):
             'workers': 1,
             'wlcs': [
                 {'name': 'wlc1.anso.arnes.si', 'api_key': '123'},
-                {'name': 'wlc2.anso.arnes.si', 'api_key': '123'}
-            ]
+                {'name': 'wlc2.anso.arnes.si', 'api_key': '123'},
+            ],
         }
         cls.collector = FortiwlcCollector(cls.config)
         REGISTRY.register(cls.collector)
@@ -118,6 +126,7 @@ class TestServerTwoWLC(BaseServerRunner):
 
 class TestServerRunTwice(BaseServerRunner):
     ''' Test full code stack: starts server and grabs response '''
+
     @classmethod
     def setUpClass(cls):
         # can't kill server from above test class. Just start new one on new port
@@ -127,7 +136,7 @@ class TestServerRunTwice(BaseServerRunner):
             'port': cls.port,
             'debug': False,
             'workers': 1,
-            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}]
+            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}],
         }
         cls.collector = FortiwlcCollector(cls.config)
         REGISTRY.register(cls.collector)

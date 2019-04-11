@@ -17,24 +17,18 @@ def start_server(config):
 
 def main():
     parser = argparse.ArgumentParser(
-        prog='fortiwlc_exporter',
-        description='FortiOS WLC Prometheus Collector'
+        prog='fortiwlc_exporter', description='FortiOS WLC Prometheus Collector'
     )
     parser.add_argument(
         '-c',
         dest='config_file',
         help='Configuration file',
         default='fortiwlc_exporter.ini',
-        type=argparse.FileType('r')
+        type=argparse.FileType('r'),
     )
+    parser.add_argument('--debug', action='store_true')
     parser.add_argument(
-        '--debug',
-        action='store_true',
-    )
-    parser.add_argument(
-        '--version',
-        action='version',
-        version='%(prog)s {}'.format(__version__)
+        '--version', action='version', version='%(prog)s {}'.format(__version__)
     )
     args = parser.parse_args()
     config = get_config(args.config_file, extra=args)
