@@ -1,6 +1,6 @@
 import time
 
-from .config import CONFIG
+from fortiwlc_exporter import settings
 
 
 def timeit(method):
@@ -8,7 +8,7 @@ def timeit(method):
         ts = time.time()
         result = method(*args, **kw)
         te = time.time()
-        if CONFIG.get('debug'):
+        if settings.DEBUG:
             print('{}: {:0.6f} s'.format(method.__name__, (te - ts)))
         return result
 

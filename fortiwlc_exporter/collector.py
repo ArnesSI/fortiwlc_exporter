@@ -1,10 +1,14 @@
 from collections import defaultdict
-from concurrent.futures import as_completed, ProcessPoolExecutor as PoolExecutor
+from concurrent.futures import ProcessPoolExecutor as PoolExecutor
+from concurrent.futures import as_completed
+
 from prometheus_client.core import GaugeMetricFamily, InfoMetricFamily
 
-from .parsers import parse_ap_data, parse_wifi_name
-from .fortiwlc import FortiWLC
-from .utils import timeit
+from fortiwlc_exporter import settings
+from fortiwlc_exporter.exceptions import ExporterConfigError
+from fortiwlc_exporter.fortiwlc import FortiWLC
+from fortiwlc_exporter.parsers import parse_ap_data, parse_wifi_name
+from fortiwlc_exporter.utils import timeit
 
 
 def _poll(wlc):
@@ -13,9 +17,8 @@ def _poll(wlc):
 
 
 class FortiwlcCollector:
-    def __init__(self, config):
-        self.config = config
-        self.wlcs = self.init_wlcs()
+    def __init__(self, hosts):
+        self.wlcs = self.init_wlcs(hosts)
         self.init_data()
 
     def init_data(self):
@@ -26,11 +29,24 @@ class FortiwlcCollector:
         )
         self.wifi_info = {}
 
-    def init_wlcs(self):
+    def init_wlcs(self, names):
         """ Initializes FortiWLC instances """
         wlcs = []
-        for wlc_params in self.config.get('wlcs', []):
-            wlcs.append(FortiWLC(**wlc_params))
+        for name in names:
+            if settings.WLC_API_KEY:
+                wlcs.append(FortiWLC(name=name, api_key=settings.WLC_API_KEY))
+            elif settings.WLC_USERNAME:
+                wlcs.append(
+                    FortiWLC(
+                        name=name,
+                        username=settings.WLC_USERNAME,
+                        password=settings.WLC_PASSWORD,
+                    )
+                )
+            else:
+                raise ExporterConfigError(
+                    'Missing WLC_USERNAME and WLC_PASSWORD or WLC_API_KEY in configuration'
+                )
         return wlcs
 
     def init_metrics(self):
@@ -79,7 +95,7 @@ class FortiwlcCollector:
             self.poll_wlcs()
             self.parse_metrics()
         except Exception:
-            if self.config['debug']:
+            if settings.DEBUG:
                 raise
             self.fortiwlc_up.add_metric([], 0)
         else:
@@ -105,12 +121,12 @@ class FortiwlcCollector:
         """ Polls all data from all WLCs APIs """
         futures = []
 
-        if self.config['workers'] <= 1:
+        if settings.WORKERS <= 1:
             # don't fork at all
             for wlc in self.wlcs:
                 wlc.poll()
         else:
-            with PoolExecutor(max_workers=self.config['workers']) as executor:
+            with PoolExecutor(max_workers=settings.WORKERS) as executor:
                 for wlc in self.wlcs:
                     futures.append(executor.submit(_poll, wlc))
 

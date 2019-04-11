@@ -23,7 +23,7 @@ for Prometheus.
 %autosetup -n %{srcname}-%{version}
 
 %build
-pyinstaller --onefile fortiwlc_exporter/server.py -n fortiwlc_exporter
+pyinstaller --onefile fortiwlc_exporter/exporter.py -n fortiwlc_exporter
 
 %install
 install -p -D -m 755 dist/fortiwlc_exporter %{buildroot}%{_bindir}/fortiwlc_exporter
