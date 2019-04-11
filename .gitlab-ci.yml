@@ -16,6 +16,8 @@ lint:
     - poetry run flake8
     - poetry run black --diff --check .
     #- poetry run pydocstyle fortiwlc_exporter
+  tags:
+    - generic
 
 test_unit:
   stage: test_code
@@ -24,6 +26,8 @@ test_unit:
     - pip install poetry
     - poetry install
     - poetry run pytest --cov=fortiwlc_exporter tests
+  tags:
+    - generic
 
 build_rpm:
   stage: build
@@ -44,6 +48,8 @@ build_rpm:
     - pip3.4 install -r requirements.txt
     - ./dev-version.sh
     - ./build.sh
+  tags:
+    - generic
 
 test_rpm:
   image: zelenjak.arnes.si:5000/arnes/centos:7
@@ -57,6 +63,8 @@ test_rpm:
     - "fortiwlc_exporter -c /etc/fortiwlc_exporter.ini &"
     - "sleep 2"
     - "curl --fail 'http://localhost:9118/'"
+  tags:
+    - generic
 
 publish_rpm:
   image: zelenjak.arnes.si:5000/arnes/centos:7
@@ -69,3 +77,5 @@ publish_rpm:
       https://zelenjak.arnes.si/nexus/repository/ArnesYumCentos7/x86_64/
   only:
     - tags
+  tags:
+    - generic
