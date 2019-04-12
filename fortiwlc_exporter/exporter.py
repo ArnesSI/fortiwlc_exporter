@@ -107,8 +107,6 @@ def parse_config_file(config_file):
 
     settings.WLC_API_KEY = config.get('wlc_api_key', settings.WLC_API_KEY)
 
-    settings.WLCS = config.get('wlcs', settings.WLCS)
-
 
 def stop_exporter(signum, frame):
     logging.info('fortiwlc_exporter shutting down')
@@ -131,7 +129,7 @@ def main():
     if settings.ONE_OFF:
         import json
 
-        a = FortiwlcCollector(hosts=settings.WLCS).get_metrics()
+        a = FortiwlcCollector(hosts=settings.ONE_OFF).get_metrics()
         print(json.dumps(a, indent=4))
         sys.exit(0)
     else:

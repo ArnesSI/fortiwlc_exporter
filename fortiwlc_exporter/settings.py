@@ -12,5 +12,3 @@ WLC_USERNAME = None
 WLC_PASSWORD = None
 
 WLC_API_KEY = None
-
-WLCS = []
