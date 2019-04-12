@@ -5,22 +5,24 @@ import sys
 import time
 
 import yaml
-from prometheus_client import REGISTRY, CollectorRegistry, start_http_server
 
 from fortiwlc_exporter import __version__, settings
-from fortiwlc_exporter.collector import FortiwlcCollector
 from fortiwlc_exporter.exceptions import ExporterConfigError
+from fortiwlc_exporter.server import start_server
 
 
 def setup_logging():
     """Setup logging to console"""
-    logging.basicConfig(
-        level=logging.DEBUG if settings.DEBUG else logging.INFO,
-        format='%(levelname)s - %(message)s',
-    )
-    handler = logging.StreamHandler(sys.stderr)
-    logging.getLogger().addHandler(handler)
-
+    if settings.DEBUG:
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format='%(asctime)s %(levelname)-8s %(name)s - %(message)s',
+        )
+    else:
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(levelname)-8s - %(message)s',
+        )
 
 def parse_settings(cmd_args):
     """Parse config file and command line arguments"""
@@ -122,15 +124,8 @@ def start_exporter():
     signal.signal(signal.SIGINT, stop_exporter)
     signal.signal(signal.SIGTERM, stop_exporter)
 
-    if settings.NO_DEFAULT_COLLECTORS:
-        registry = CollectorRegistry()
-    else:
-        registry = REGISTRY
-    registry.register(FortiwlcCollector(hosts=settings.WLCS))
-    logging.info('fortiwlc_exporter starting on port {}'.format(settings.EXPORTER_PORT))
-    start_http_server(settings.EXPORTER_PORT, registry=registry)
-    while True:
-        time.sleep(1)
+    logging.info('fortiwlc_exporter starting...')
+    start_server()
 
 
 def main():
