@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ROUNDS=${2:-3}
-CONFIG=${1:-fortiwlc_exporter.ini}
+CONFIG=${1:-fortiwlc_exporter.yaml}
 
 if [[ "$CONFIG" == "-h" ]]; then
-    echo "Usage $0 [config.ini] [rounds]"
+    echo "Usage $0 [config.yaml] [rounds]"
     echo
     echo "Run benchmark on foritwlc_exporter"
     exit 0

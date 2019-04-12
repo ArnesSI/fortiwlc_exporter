@@ -1,11 +1,12 @@
 import json
 import unittest
-import responses
-import requests
 
+import requests
+import responses
 from prometheus_client import start_http_server
 from prometheus_client.core import REGISTRY
 
+from fortiwlc_exporter import settings
 from fortiwlc_exporter.collector import FortiwlcCollector
 
 
@@ -65,19 +66,17 @@ class TestServerOneWLC(BaseServerRunner):
     def setUpClass(cls):
         cls.port = 23344
         cls.hosts = ['wlc.ansoext.arnes.si']
-        cls.config = {
-            'port': cls.port,
-            'debug': False,
-            'workers': 1,
-            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}],
-        }
-        cls.collector = FortiwlcCollector(cls.config)
+        settings.EXPORTER_PORT = cls.port
+        settings.WLC_API_KEY = '123'
+        cls.collector = FortiwlcCollector(cls.hosts)
         REGISTRY.register(cls.collector)
-        start_http_server(cls.config['port'])
+        start_http_server(cls.port)
 
     @classmethod
     def tearDownClass(cls):
         REGISTRY.unregister(cls.collector)
+        settings.EXPORTER_PORT = 9118
+        settings.WLC_API_KEY = None
 
     @responses.activate
     def test_output_no_clients(self):
@@ -100,22 +99,17 @@ class TestServerTwoWLC(BaseServerRunner):
         # can't kill server from above test class. Just start new one on new port
         cls.port = 23345
         cls.hosts = ['wlc1.anso.arnes.si', 'wlc2.anso.arnes.si']
-        cls.config = {
-            'port': cls.port,
-            'debug': False,
-            'workers': 1,
-            'wlcs': [
-                {'name': 'wlc1.anso.arnes.si', 'api_key': '123'},
-                {'name': 'wlc2.anso.arnes.si', 'api_key': '123'},
-            ],
-        }
-        cls.collector = FortiwlcCollector(cls.config)
+        settings.EXPORTER_PORT = cls.port
+        settings.WLC_API_KEY = '123'
+        cls.collector = FortiwlcCollector(cls.hosts)
         REGISTRY.register(cls.collector)
-        start_http_server(cls.config['port'])
+        start_http_server(cls.port)
 
     @classmethod
     def tearDownClass(cls):
         REGISTRY.unregister(cls.collector)
+        settings.EXPORTER_PORT = 9118
+        settings.WLC_API_KEY = None
 
     @responses.activate
     def test_output_many_clients(self):
@@ -132,19 +126,17 @@ class TestServerRunTwice(BaseServerRunner):
         # can't kill server from above test class. Just start new one on new port
         cls.port = 23346
         cls.hosts = ['wlc.ansoext.arnes.si']
-        cls.config = {
-            'port': cls.port,
-            'debug': False,
-            'workers': 1,
-            'wlcs': [{'name': cls.hosts[0], 'api_key': '123'}],
-        }
-        cls.collector = FortiwlcCollector(cls.config)
+        settings.EXPORTER_PORT = cls.port
+        settings.WLC_API_KEY = '123'
+        cls.collector = FortiwlcCollector(cls.hosts)
         REGISTRY.register(cls.collector)
-        start_http_server(cls.config['port'])
+        start_http_server(cls.port)
 
     @classmethod
     def tearDownClass(cls):
         REGISTRY.unregister(cls.collector)
+        settings.EXPORTER_PORT = 9118
+        settings.WLC_API_KEY = None
 
     @responses.activate
     def test_output_many_clients(self):

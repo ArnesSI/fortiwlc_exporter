@@ -1,0 +1,2 @@
+class ExporterConfigError(Exception):
+    pass
