@@ -7,6 +7,7 @@ import time
 import yaml
 
 from fortiwlc_exporter import __version__, settings
+from fortiwlc_exporter.collector import FortiwlcCollector
 from fortiwlc_exporter.exceptions import ExporterConfigError
 from fortiwlc_exporter.server import start_server
 
@@ -50,12 +51,12 @@ def parse_settings(cmd_args):
     parser.add_argument(
         '-d', '--debug', dest='debug', action='store_true', help='debug mode'
     )
-    # parser.add_argument(
-    #     '-1',
-    #     dest='one_off',
-    #     action='store_true',
-    #     help='collect and parse metrics once, print them and exit',
-    # )
+    parser.add_argument(
+        '-1',
+        dest='one_off',
+        action='append',
+        help='collect and parse metrics from given WLCs once, print them and exit',
+    )
     parser.add_argument(
         '--no-default-collectors',
         dest='no_default_collectors',
@@ -77,7 +78,7 @@ def parse_settings(cmd_args):
     args = parser.parse_args(remaining_argv)
 
     settings.DEBUG = args.debug
-    # settings.ONE_OFF = args.one_off
+    settings.ONE_OFF = args.one_off
     settings.NO_DEFAULT_COLLECTORS = args.no_default_collectors
     settings.TIMEOUT = args.timeout
     settings.EXPORTER_PORT = args.exporter_port
@@ -129,8 +130,11 @@ def main():
     if settings.ONE_OFF:
         import json
 
-        a = FortiwlcCollector(hosts=settings.ONE_OFF).get_metrics()
-        print(json.dumps(a, indent=4))
+        c = FortiwlcCollector(hosts=settings.ONE_OFF)
+        for f in c.collect():
+            for s in f.samples:
+                print(s)
+
         sys.exit(0)
     else:
         start_exporter()

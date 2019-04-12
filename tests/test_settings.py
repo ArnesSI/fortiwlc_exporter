@@ -30,7 +30,7 @@ class TestConfigParser(unittest.TestCase):
         expected_settings['WLC_PASSWORD'] = None
         expected_settings['WLC_API_KEY'] = None
         expected_settings['NO_DEFAULT_COLLECTORS'] = True
-        expected_settings['ONE_OFF'] = False
+        expected_settings['ONE_OFF'] = []
         expected_settings['TIMEOUT'] = 60
         parse_config_file(config_file)
         new_settings = {
@@ -54,7 +54,7 @@ class TestConfigParser(unittest.TestCase):
         expected_settings['WLC_PASSWORD'] = 'abcd'
         expected_settings['WLC_API_KEY'] = None
         expected_settings['NO_DEFAULT_COLLECTORS'] = True
-        expected_settings['ONE_OFF'] = False
+        expected_settings['ONE_OFF'] = []
         expected_settings['TIMEOUT'] = 60
         parse_config_file(config_file)
         new_settings = {
