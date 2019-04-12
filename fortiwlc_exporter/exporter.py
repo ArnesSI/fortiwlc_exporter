@@ -19,10 +19,8 @@ def setup_logging():
             format='%(asctime)s %(levelname)-8s %(name)s - %(message)s',
         )
     else:
-        logging.basicConfig(
-            level=logging.INFO,
-            format='%(levelname)-8s - %(message)s',
-        )
+        logging.basicConfig(level=logging.INFO, format='%(levelname)-8s - %(message)s')
+
 
 def parse_settings(cmd_args):
     """Parse config file and command line arguments"""

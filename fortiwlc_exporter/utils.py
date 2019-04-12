@@ -11,9 +11,15 @@ def timeit(method):
         result = method(*args, **kw)
         te = time.time()
         if hasattr(args[0], 'name'):
-            logging.debug('{}[{}].{}: {:0.6f} s'.format(type(args[0]).__name__, args[0].name, method.__name__, (te - ts)))
+            logging.debug(
+                '{}[{}].{}: {:0.6f} s'.format(
+                    type(args[0]).__name__, args[0].name, method.__name__, (te - ts)
+                )
+            )
         else:
-            logging.debug('{}.{}: {:0.6f} s'.format(method.__module__, method.__name__, (te - ts)))
+            logging.debug(
+                '{}.{}: {:0.6f} s'.format(method.__module__, method.__name__, (te - ts))
+            )
         return result
 
     return timed
