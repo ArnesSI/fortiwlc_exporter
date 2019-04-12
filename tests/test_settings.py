@@ -27,7 +27,6 @@ class TestConfigParser(unittest.TestCase):
         expected_settings['WLCS'] = []
         expected_settings['EXPORTER_PORT'] = 9118
         expected_settings['DEBUG'] = False
-        expected_settings['WORKERS'] = 1
         expected_settings['WLC_USERNAME'] = None
         expected_settings['WLC_PASSWORD'] = None
         expected_settings['WLC_API_KEY'] = None
@@ -53,7 +52,6 @@ class TestConfigParser(unittest.TestCase):
         expected_settings['WLCS'] = []
         expected_settings['EXPORTER_PORT'] = 1234
         expected_settings['DEBUG'] = False
-        expected_settings['WORKERS'] = 1
         expected_settings['WLC_USERNAME'] = None
         expected_settings['WLC_PASSWORD'] = 'abcd'
         expected_settings['WLC_API_KEY'] = None
@@ -81,7 +79,6 @@ class TestConfigParser(unittest.TestCase):
         expected_settings['WLCS'] = ['wlc1', 'wlc2']
         expected_settings['EXPORTER_PORT'] = 9118
         expected_settings['DEBUG'] = False
-        expected_settings['WORKERS'] = 1
         expected_settings['WLC_USERNAME'] = None
         expected_settings['WLC_PASSWORD'] = None
         expected_settings['WLC_API_KEY'] = None

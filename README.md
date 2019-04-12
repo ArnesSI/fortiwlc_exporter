@@ -23,7 +23,6 @@ FortiWLC exporter can use a YAML configuration file to set some parameters:
 * `wlc_username` & `wlc_password`: If not using API keys specify username and password to login with
 * `wlc_api_key`: REST API key to use when gathering data from this WLC
 * `wlcs`: List of WLC names to gather statistics from
-* `workers`: Number of WLC instances to poll at the same time (default: `1`)
 
 Example:
 

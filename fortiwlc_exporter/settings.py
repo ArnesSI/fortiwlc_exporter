@@ -14,4 +14,3 @@ WLC_PASSWORD = None
 WLC_API_KEY = None
 
 WLCS = []
-WORKERS = 1

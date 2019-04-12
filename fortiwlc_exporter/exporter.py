@@ -110,7 +110,6 @@ def parse_config_file(config_file):
     settings.WLC_API_KEY = config.get('wlc_api_key', settings.WLC_API_KEY)
 
     settings.WLCS = config.get('wlcs', settings.WLCS)
-    settings.WORKERS = config.get('workers', settings.WORKERS)
 
 
 def stop_exporter(signum, frame):

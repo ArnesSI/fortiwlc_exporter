@@ -1,6 +1,4 @@
 from collections import defaultdict
-from concurrent.futures import ProcessPoolExecutor as PoolExecutor
-from concurrent.futures import as_completed
 
 from prometheus_client.core import GaugeMetricFamily, InfoMetricFamily
 
@@ -9,11 +7,6 @@ from fortiwlc_exporter.exceptions import ExporterConfigError
 from fortiwlc_exporter.fortiwlc import FortiWLC
 from fortiwlc_exporter.parsers import parse_ap_data, parse_wifi_name
 from fortiwlc_exporter.utils import timeit
-
-
-def _poll(wlc):
-    wlc.poll()
-    return wlc
 
 
 class FortiwlcCollector:
@@ -119,20 +112,8 @@ class FortiwlcCollector:
     @timeit
     def poll_wlcs(self):
         """ Polls all data from all WLCs APIs """
-        futures = []
-
-        if settings.WORKERS <= 1:
-            # don't fork at all
-            for wlc in self.wlcs:
-                wlc.poll()
-        else:
-            with PoolExecutor(max_workers=settings.WORKERS) as executor:
-                for wlc in self.wlcs:
-                    futures.append(executor.submit(_poll, wlc))
-
-            self.wlcs = []
-            for f in as_completed(futures):
-                self.wlcs.append(f.result())
+        for wlc in self.wlcs:
+            wlc.poll()
 
     @timeit
     def parse_metrics(self):
