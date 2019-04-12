@@ -2,13 +2,20 @@
 # Settings for fortiwlc_exporter.
 # Default values are commented out. Adjust as needed.
 
+# debug: false
+# no_default_collectors: true
+
+# timeout: 60
+
 # exporter_port: 9118
-# workers: 4
 
 # wlc_username: 
 # wlc_password: 
+
 # wlc_api_key:
 
 # wlcs:
 #   - wlc1
 #   - wlc2
+
+# workers: 4

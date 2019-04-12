@@ -5,25 +5,25 @@ for Prometheus.
 
 ## Installing
 
-TODO
+The exporter is compiled with pyinstaller, packaged as RPM and published in Arnes
+internal YUM repo. The package is called `fortiwlc-exporter`.
+
+```
+yum install fortiwlc-exporter
+```
 
 ## Running
 
-FortiWLC exporter needs a configuration file to run. The format is an ini file
-with a `main` section and a section for each WLC instance to monitor. The name
-of those sections should match the name of the WLC instance.
+FortiWLC exporter can use a YAML configuration file to set some parameters:
 
-Parameters for `main` section:
-
-* `port` - TCP port for collector to listen on (default: 9118)
-* `workers` - Number of WLC instances to poll at the same time (default: 2)
-* `debug` - Run server in debug mode (default: "no")
-* `username` & `password` - If you want to use the same username for all WLC instances, specify them in `main` section. Specifying `api_key` or `username` and `password` on WLC instance will override global setting for that instance.
-
-WLC instance section parameters:
-
-* `api_key` - REST API key to use when gathering data from this WLC
-* `username` & `password` - If not using API keys specify username and password to login with
+* `debug`: debug mode (default `false`)
+* `no_default_collectors`: disable process, gc and other default collectors (default `true`)
+* `timeout`: Timeout in seconds to generate a reply (default `60`)
+* `exporter_port`: TCP port exporter should listen on (default `9118`)
+* `wlc_username` & `wlc_password`: If not using API keys specify username and password to login with
+* `wlc_api_key`: REST API key to use when gathering data from this WLC
+* `wlcs`: List of WLC names to gather statistics from
+* `workers`: Number of WLC instances to poll at the same time (default: `1`)
 
 Example:
 
@@ -37,8 +37,9 @@ wlcs:
 ```
 
 When starting FortiWLC exporter, specify path to the configuration file with
-`-c`. By default it will try to use `fortiwlc_exporter.yaml` in the current directory.
+`-c`.
 
+You can override some settings from via command line arguments. Run `fortiwlc_exporter -h` for details.
 
 ## Description
 
