@@ -22,8 +22,6 @@ FortiWLC exporter can use a YAML configuration file to set some parameters:
 * `exporter_port`: TCP port exporter should listen on (default `9118`)
 * `wlc_username` & `wlc_password`: If not using API keys specify username and password to login with
 * `wlc_api_key`: REST API key to use when gathering data from this WLC
-* `wlcs`: List of WLC names to gather statistics from
-* `workers`: Number of WLC instances to poll at the same time (default: `1`)
 
 Example:
 
@@ -31,9 +29,6 @@ Example:
 ---
 exporter_port: 9118
 wlc_api_key: "abc123456789"
-wlcs:
-  - wlc1
-  - wlc2
 ```
 
 When starting FortiWLC exporter, specify path to the configuration file with
@@ -43,7 +38,7 @@ You can override some settings from via command line arguments. Run `fortiwlc_ex
 
 ## Description
 
-TODO
+To scrape stats for a given WLC open URL: [http://[exporter]:[port]/probe?target=[wlc_name]](http://[exporter]:[port]/probe?target=[wlc_name])
 
 ## Developing
 

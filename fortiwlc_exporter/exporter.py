@@ -5,21 +5,22 @@ import sys
 import time
 
 import yaml
-from prometheus_client import REGISTRY, CollectorRegistry, start_http_server
 
 from fortiwlc_exporter import __version__, settings
 from fortiwlc_exporter.collector import FortiwlcCollector
 from fortiwlc_exporter.exceptions import ExporterConfigError
+from fortiwlc_exporter.server import start_server
 
 
 def setup_logging():
     """Setup logging to console"""
-    logging.basicConfig(
-        level=logging.DEBUG if settings.DEBUG else logging.INFO,
-        format='%(levelname)s - %(message)s',
-    )
-    handler = logging.StreamHandler(sys.stderr)
-    logging.getLogger().addHandler(handler)
+    if settings.DEBUG:
+        logging.basicConfig(
+            level=logging.DEBUG,
+            format='%(asctime)s %(levelname)-8s %(name)s - %(message)s',
+        )
+    else:
+        logging.basicConfig(level=logging.INFO, format='%(levelname)-8s - %(message)s')
 
 
 def parse_settings(cmd_args):
@@ -50,12 +51,12 @@ def parse_settings(cmd_args):
     parser.add_argument(
         '-d', '--debug', dest='debug', action='store_true', help='debug mode'
     )
-    # parser.add_argument(
-    #     '-1',
-    #     dest='one_off',
-    #     action='store_true',
-    #     help='collect and parse metrics once, print them and exit',
-    # )
+    parser.add_argument(
+        '-1',
+        dest='one_off',
+        action='append',
+        help='collect and parse metrics from given WLCs once, print them and exit',
+    )
     parser.add_argument(
         '--no-default-collectors',
         dest='no_default_collectors',
@@ -77,7 +78,7 @@ def parse_settings(cmd_args):
     args = parser.parse_args(remaining_argv)
 
     settings.DEBUG = args.debug
-    # settings.ONE_OFF = args.one_off
+    settings.ONE_OFF = args.one_off
     settings.NO_DEFAULT_COLLECTORS = args.no_default_collectors
     settings.TIMEOUT = args.timeout
     settings.EXPORTER_PORT = args.exporter_port
@@ -107,9 +108,6 @@ def parse_config_file(config_file):
 
     settings.WLC_API_KEY = config.get('wlc_api_key', settings.WLC_API_KEY)
 
-    settings.WLCS = config.get('wlcs', settings.WLCS)
-    settings.WORKERS = config.get('workers', settings.WORKERS)
-
 
 def stop_exporter(signum, frame):
     logging.info('fortiwlc_exporter shutting down')
@@ -122,15 +120,8 @@ def start_exporter():
     signal.signal(signal.SIGINT, stop_exporter)
     signal.signal(signal.SIGTERM, stop_exporter)
 
-    if settings.NO_DEFAULT_COLLECTORS:
-        registry = CollectorRegistry()
-    else:
-        registry = REGISTRY
-    registry.register(FortiwlcCollector(hosts=settings.WLCS))
-    logging.info('fortiwlc_exporter starting on port {}'.format(settings.EXPORTER_PORT))
-    start_http_server(settings.EXPORTER_PORT, registry=registry)
-    while True:
-        time.sleep(1)
+    logging.info('fortiwlc_exporter starting...')
+    start_server()
 
 
 def main():
@@ -139,8 +130,11 @@ def main():
     if settings.ONE_OFF:
         import json
 
-        a = FortiwlcCollector(hosts=settings.WLCS).get_metrics()
-        print(json.dumps(a, indent=4))
+        c = FortiwlcCollector(hosts=settings.ONE_OFF)
+        for f in c.collect():
+            for s in f.samples:
+                print(s)
+
         sys.exit(0)
     else:
         start_exporter()
