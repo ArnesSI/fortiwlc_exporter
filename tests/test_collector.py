@@ -237,9 +237,9 @@ class TestCollectorParse(unittest.TestCase):
         col.poll_wlcs()
         self.assertEqual(len(responses.calls), 6)
         col.parse_metrics()
-        self.assertEqual(len(col.clients), 8910)
+        self.assertEqual(len(col.clients), 9400)
         self.assertEqual(len(col.ap_info), 1640)
-        self.assertEqual(len(col.wifi_info), 90)
+        self.assertEqual(len(col.wifi_info), 95)
         self.assertEqual(len(col.radio_types), 5)
 
     @responses.activate

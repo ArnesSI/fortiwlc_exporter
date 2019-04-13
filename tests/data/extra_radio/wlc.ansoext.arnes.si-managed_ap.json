@@ -1,301 +1,314 @@
 {
+    "action": "select",
+    "build": 231,
     "http_method": "GET",
+    "name": "managed_ap",
+    "path": "wifi",
     "results": [
-    {
-        "ap_profile": "tolos_FAP221E",
-        "board_mac": "70:4c:a5:61:00:50",
-        "cli_enabled": false,
-        "clients": 1,
-        "comment": "",
-        "connecting_from": "100.64.4.3",
-        "connecting_interface": "port1",
-        "connection_state": "Connected",
-        "country_code_conflict": 0,
-        "data_chan_sec": "clear-text",
-        "image_download_progress": 0,
-        "join_time": "11/21/18 14:04",
-        "join_time_raw": 1542805477,
-        "last_failure": "0 -- N/A",
-        "last_reboot_time": "11/21/18 14:03",
-        "lldp": [
-            {
-                "capability": "Bridge Router ",
-                "chassis_id": "mac f0:4b:3a:f1:0b:b0",
-                "ip": "",
-                "local_port": "eth0",
-                "mau_operating_mode": "unknown",
-                "port_description": "ge-0/0/1",
-                "port_id": "514",
-                "system_description": "Juniper Networks, Inc. ex2300-24p Ethernet Switch, kernel JUNOS",
-                "system_name": "Switch",
-                "vlan": 1
-            }
-        ],
-        "lldp_enable": true,
-        "local_ipv4_addr": "100.64.4.3",
-        "mesh_hop_count": 0,
-        "mesh_uplink": "ethernet",
-        "mesh_uplink_intf": "port1",
-        "mgmt_vlanid": 0,
-        "name": "w1-tolos.cpe.arnes.si",
-        "os_version": "FP221E-v5.6-build6508",
-        "override_profile": false,
-        "radio": [
-            {
-                "all_ssids": false,
-                "bandwidth_rx": 0,
-                "bandwidth_tx": 0,
-                "base_bssid": "70:4c:a5:61:00:58",
-                "bytes_rx": 10280,
-                "bytes_tx": 6424,
-                "client_count": 0,
-                "country_code": 705,
-                "country_name": "SI",
-                "detect_interfering": true,
-                "interfering_aps": 17,
-                "mac_errors_rx": 0,
-                "mac_errors_tx": 1,
-                "max_vaps": 8,
-                "mode": "AP",
-                "oper_chan": 1,
-                "oper_txpower": 15,
-                "override_band": false,
-                "override_channel": false,
-                "override_sa": false,
-                "override_txpower": false,
-                "override_vaps": false,
-                "radio_id": 1,
-                "radio_type": "802.11n,g-only",
-                "spectrum-analysis": false,
-                "ssid": {
-                    "SGR_tolos": "SGR_tolos"
+        {
+            "ap_profile": "tolos_FAP221E",
+            "board_mac": "70:4c:a5:61:00:50",
+            "cli_enabled": true,
+            "clients": 0,
+            "comment": "",
+            "connecting_from": "100.64.4.3",
+            "connecting_interface": "port1",
+            "connection_state": "Connected",
+            "country_code_conflict": 0,
+            "data_chan_sec": "clear-text",
+            "image_download_progress": 0,
+            "join_time": "04/11/19 21:10",
+            "join_time_raw": 1555009811,
+            "last_failure": "8 -- Control message maximal retransmission limit reached",
+            "last_failure_param": "N/A",
+            "last_failure_time": "04/11/19 21:08",
+            "last_reboot_time": "04/05/19 14:04",
+            "led_blink": false,
+            "lldp": [
+                {
+                    "capability": "Bridge Router ",
+                    "chassis_id": "mac f0:4b:3a:f1:0b:b0",
+                    "ip": "",
+                    "local_port": "eth0",
+                    "mau_operating_mode": "unknown",
+                    "port_description": "w1-tolos",
+                    "port_id": "515",
+                    "system_description": "Juniper Networks, Inc. ex2300-24p Ethernet Switch, kernel JUNOS",
+                    "system_name": "stolos",
+                    "vlan": 34
+                }
+            ],
+            "lldp_enable": true,
+            "local_ipv4_addr": "100.64.4.3",
+            "mesh_hop_count": 0,
+            "mesh_uplink": "ethernet",
+            "mesh_uplink_intf": "port1",
+            "mgmt_vlanid": 0,
+            "name": "w1-tolos.cpe.arnes.si",
+            "os_version": "FP221E-v5.6-build6508",
+            "override_profile": false,
+            "radio": [
+                {
+                    "all_ssids": false,
+                    "auto_txpower": false,
+                    "bandwidth_rx": 0,
+                    "bandwidth_tx": 0,
+                    "base_bssid": "70:4c:a5:61:00:58",
+                    "bytes_rx": 0,
+                    "bytes_tx": 0,
+                    "channel_utilization_percent": 0,
+                    "channel_utilization_timestamp": 0,
+                    "channels": [],
+                    "client_count": 0,
+                    "country_code": 705,
+                    "country_name": "SI",
+                    "detect_interfering": true,
+                    "interfering_aps": 1,
+                    "mac_errors_rx": 0,
+                    "mac_errors_tx": 0,
+                    "max_vaps": 8,
+                    "mode": "AP",
+                    "oper_chan": 6,
+                    "oper_txpower": 15,
+                    "override_band": false,
+                    "override_channel": false,
+                    "override_sa": false,
+                    "override_txpower": false,
+                    "override_vaps": false,
+                    "radio_id": 1,
+                    "radio_type": "802.11n,g-only",
+                    "spectrum-analysis": false,
+                    "spectrum_analysis": false,
+                    "ssid": {
+                        "SGR_tolos": "SGR_tolos"
+                    },
+                    "sta_locate": false,
+                    "txpower": 100
                 },
-                "sta_locate": false
-            },
-            {
-                "all_ssids": false,
-                "bandwidth_rx": 1017,
-                "bandwidth_tx": 319,
-                "base_bssid": "70:4c:a5:61:00:60",
-                "bytes_rx": 27276,
-                "bytes_tx": 17876,
-                "client_count": 1,
-                "country_code": 705,
-                "country_name": "SI",
-                "detect_interfering": true,
-                "interfering_aps": 0,
-                "mac_errors_rx": 0,
-                "mac_errors_tx": 1,
-                "max_vaps": 8,
-                "mode": "AP",
-                "oper_chan": 52,
-                "oper_txpower": 18,
-                "override_band": false,
-                "override_channel": false,
-                "override_sa": false,
-                "override_txpower": false,
-                "override_vaps": false,
-                "radio_id": 2,
-                "radio_type": "802.11ac,n-only",
-                "spectrum-analysis": false,
-                "ssid": {
-                    "SGR_tolos": "SGR_tolos"
+                {
+                    "all_ssids": false,
+                    "auto_txpower": false,
+                    "bandwidth_rx": 0,
+                    "bandwidth_tx": 0,
+                    "base_bssid": "70:4c:a5:61:00:60",
+                    "bytes_rx": 0,
+                    "bytes_tx": 0,
+                    "channel_utilization_percent": 0,
+                    "channel_utilization_timestamp": 0,
+                    "channels": [],
+                    "client_count": 0,
+                    "country_code": 705,
+                    "country_name": "SI",
+                    "detect_interfering": true,
+                    "interfering_aps": 1,
+                    "mac_errors_rx": 0,
+                    "mac_errors_tx": 0,
+                    "max_vaps": 8,
+                    "mode": "AP",
+                    "oper_chan": 60,
+                    "oper_txpower": 18,
+                    "override_band": false,
+                    "override_channel": false,
+                    "override_sa": false,
+                    "override_txpower": false,
+                    "override_vaps": false,
+                    "radio_id": 2,
+                    "radio_type": "802.11ac,n-only",
+                    "spectrum-analysis": false,
+                    "spectrum_analysis": false,
+                    "ssid": {
+                        "SGR_tolos": "SGR_tolos"
+                    },
+                    "sta_locate": false,
+                    "txpower": 100
                 },
-                "sta_locate": false
-            },
-            {
-                "mode": "Not Exist",
-                "radio_id": 3
-            }
-        ],
-        "reboot_last_day": false,
-        "region_code": "E ",
-        "serial": "FP221E3X17002259",
-        "ssid": [
-            {
-                "list": [
-                    "SGR_tolos"
-                ],
-                "radio": 1
-            },
-            {
-                "list": [
-                    "SGR_tolos"
-                ],
-                "radio": 2
-            }
-        ],
-        "state": "authorized",
-        "status": "connected",
-        "wired": [
-            {
-                "bytes_rx": 94803571,
-                "bytes_tx": 65736422,
-                "collisions": 0,
-                "dropped_rx": 24878,
-                "dropped_tx": 0,
-                "errors_rx": 0,
-                "errors_tx": 0,
-                "interface": "eth0",
-                "packets_rx": 863587,
-                "packets_tx": 428555
-            }
-        ],
-        "wtp_id": "FP221E3X17002259",
-        "wtp_mode": "normal"
-    },
-    {
-        "ap_profile": "volantis_FAP221E",
-        "board_mac": "70:4c:a5:61:02:78",
-        "cli_enabled": false,
-        "clients": 0,
-        "comment": "",
-        "connecting_from": "100.64.2.4",
-        "connecting_interface": "port1",
-        "connection_state": "Connected",
-        "country_code_conflict": 0,
-        "data_chan_sec": "clear-text",
-        "image_download_progress": 0,
-        "join_time": "11/21/18 14:05",
-        "join_time_raw": 1542805512,
-        "last_failure": "12 -- AC daemon reset timer expired",
-        "last_failure_param": "N/A",
-        "last_failure_time": "11/21/18 14:04",
-        "last_reboot_time": "11/21/18 13:16",
-        "lldp": [
-            {
-                "capability": "Bridge Router ",
-                "chassis_id": "mac e4:fc:82:62:a0:c8",
-                "ip": "",
-                "local_port": "eth0",
-                "mau_operating_mode": "unknown",
-                "port_description": "ap",
-                "port_id": "514",
-                "system_description": "Juniper Networks, Inc. ex2300-24p Ethernet Switch, kernel JUNOS",
-                "system_name": "svolantis2",
-                "vlan": 1
-            }
-        ],
-        "lldp_enable": true,
-        "local_ipv4_addr": "100.64.2.4",
-        "mesh_hop_count": 0,
-        "mesh_uplink": "ethernet",
-        "mesh_uplink_intf": "port1",
-        "mgmt_vlanid": 0,
-        "name": "w1-volantis.cpe.arnes.si",
-        "os_version": "FP221E-v5.6-build6510",
-        "override_profile": false,
-        "radio": [
-            {
-                "all_ssids": false,
-                "bandwidth_rx": 0,
-                "bandwidth_tx": 0,
-                "base_bssid": "70:4c:a5:61:02:80",
-                "bytes_rx": 0,
-                "bytes_tx": 0,
-                "client_count": 0,
-                "country_code": 705,
-                "country_name": "SI",
-                "detect_interfering": true,
-                "interfering_aps": 2,
-                "mac_errors_rx": 0,
-                "mac_errors_tx": 0,
-                "max_vaps": 8,
-                "mode": "AP",
-                "oper_chan": 0,
-                "oper_txpower": 0,
-                "override_band": false,
-                "override_channel": false,
-                "override_sa": false,
-                "override_txpower": false,
-                "override_vaps": false,
-                "radio_id": 1,
-                "radio_type": "802.11n,g-only",
-                "spectrum-analysis": false,
-                "ssid": {
-                    "SGR_volantis": "SGR_volantis"
+                {
+                    "mode": "Not Exist",
+                    "radio_id": 3
+                }
+            ],
+            "reboot_last_day": false,
+            "region_code": "E ",
+            "serial": "FP221E3X17002259",
+            "ssid": [
+                {
+                    "list": [
+                        "SGR_tolos"
+                    ],
+                    "radio": 1
                 },
-                "sta_locate": false
-            },
-            {
-                "all_ssids": false,
-                "bandwidth_rx": 0,
-                "bandwidth_tx": 0,
-                "base_bssid": "70:4c:a5:61:02:88",
-                "bytes_rx": 0,
-                "bytes_tx": 0,
-                "client_count": 0,
-                "country_code": 705,
-                "country_name": "SI",
-                "detect_interfering": true,
-                "interfering_aps": 0,
-                "mac_errors_rx": 0,
-                "mac_errors_tx": 0,
-                "max_vaps": 8,
-                "mode": "AP",
-                "oper_chan": 0,
-                "oper_txpower": 50,
-                "override_band": false,
-                "override_channel": false,
-                "override_sa": false,
-                "override_txpower": false,
-                "override_vaps": false,
-                "radio_id": 2,
-                "radio_type": "802.11ac,n-only",
-                "spectrum-analysis": false,
-                "ssid": {
-                    "SGR_volantis": "SGR_volantis"
+                {
+                    "list": [
+                        "SGR_tolos"
+                    ],
+                    "radio": 2
+                }
+            ],
+            "state": "authorized",
+            "status": "connected",
+            "wired": [
+                {
+                    "bytes_rx": 104509570,
+                    "bytes_tx": 51826849,
+                    "collisions": 0,
+                    "dropped_rx": 24441,
+                    "dropped_tx": 0,
+                    "errors_rx": 0,
+                    "errors_tx": 0,
+                    "interface": "eth0",
+                    "packets_rx": 1163302,
+                    "packets_tx": 311406
+                }
+            ],
+            "wtp_id": "FP221E3X17002259",
+            "wtp_mode": "normal"
+        },
+        {
+            "ap_profile": "volantis_FAP221E",
+            "board_mac": "70:4c:a5:61:02:78",
+            "cli_enabled": true,
+            "clients": 0,
+            "comment": "",
+            "connecting_from": "100.64.2.4",
+            "connecting_interface": "port1",
+            "connection_state": "Connected",
+            "country_code_conflict": 0,
+            "data_chan_sec": "clear-text",
+            "image_download_progress": 0,
+            "join_time": "04/03/19 13:46",
+            "join_time_raw": 1554291978,
+            "last_failure": "20 -- ECHO REQ is missing",
+            "last_failure_param": "N/A",
+            "last_failure_time": "04/05/19 14:01",
+            "led_blink": false,
+            "lldp": [],
+            "lldp_enable": true,
+            "local_ipv4_addr": "100.64.2.4",
+            "mesh_hop_count": 0,
+            "mesh_uplink": "ethernet",
+            "mesh_uplink_intf": "port1",
+            "mgmt_vlanid": 0,
+            "name": "w1-volantis.cpe.arnes.si",
+            "os_version": "FP221E-v6.0-build0057",
+            "override_profile": false,
+            "radio": [
+                {
+                    "all_ssids": false,
+                    "auto_txpower": false,
+                    "bandwidth_rx": 0,
+                    "bandwidth_tx": 0,
+                    "base_bssid": "70:4c:a5:61:02:80",
+                    "bytes_rx": 0,
+                    "bytes_tx": 0,
+                    "channel_utilization_percent": 0,
+                    "channel_utilization_timestamp": 0,
+                    "channels": [],
+                    "client_count": 0,
+                    "country_code": 705,
+                    "country_name": "SI",
+                    "detect_interfering": true,
+                    "interfering_aps": 0,
+                    "mac_errors_rx": 0,
+                    "mac_errors_tx": 0,
+                    "max_vaps": 8,
+                    "mode": "AP",
+                    "oper_chan": 0,
+                    "oper_txpower": 0,
+                    "override_band": false,
+                    "override_channel": false,
+                    "override_sa": false,
+                    "override_txpower": false,
+                    "override_vaps": false,
+                    "radio_id": 1,
+                    "radio_type": "802.11n,g-only",
+                    "spectrum-analysis": false,
+                    "spectrum_analysis": false,
+                    "ssid": {
+                        "SGR_volantis": "SGR_volantis"
+                    },
+                    "sta_locate": false,
+                    "txpower": 100
                 },
-                "sta_locate": false
-            },
-            {
-                "mode": "Not Exist",
-                "radio_id": 3
-            }
-        ],
-        "reboot_last_day": false,
-        "region_code": "E ",
-        "serial": "FP221E3X17002282",
-        "ssid": [
-            {
-                "list": [
-                    "SGR_volantis"
-                ],
-                "radio": 1
-            },
-            {
-                "list": [
-                    "SGR_volantis"
-                ],
-                "radio": 2
-            }
-        ],
-        "state": "authorized",
-        "status": "connected",
-        "wired": [
-            {
-                "bytes_rx": 80210600,
-                "bytes_tx": 36236574,
-                "collisions": 0,
-                "dropped_rx": 24964,
-                "dropped_tx": 0,
-                "errors_rx": 0,
-                "errors_tx": 0,
-                "interface": "eth0",
-                "packets_rx": 936441,
-                "packets_tx": 247223
-            }
-        ],
-        "wtp_id": "FP221E3X17002282",
-        "wtp_mode": "normal"
-    }
-],
-"vdom": "root",
-"path": "wifi",
-"name": "client",
-"action": "select",
-"status": "success",
-"serial": "FGVM000000151466",
-"version": "v5.6.3",
-"build": 7874
+                {
+                    "all_ssids": false,
+                    "auto_txpower": false,
+                    "bandwidth_rx": 0,
+                    "bandwidth_tx": 0,
+                    "base_bssid": "70:4c:a5:61:02:88",
+                    "bytes_rx": 0,
+                    "bytes_tx": 0,
+                    "channel_utilization_percent": 0,
+                    "channel_utilization_timestamp": 0,
+                    "channels": [],
+                    "client_count": 0,
+                    "country_code": 705,
+                    "country_name": "SI",
+                    "detect_interfering": true,
+                    "interfering_aps": 0,
+                    "mac_errors_rx": 0,
+                    "mac_errors_tx": 0,
+                    "max_vaps": 8,
+                    "mode": "AP",
+                    "oper_chan": 0,
+                    "oper_txpower": 50,
+                    "override_band": false,
+                    "override_channel": false,
+                    "override_sa": false,
+                    "override_txpower": false,
+                    "override_vaps": false,
+                    "radio_id": 2,
+                    "radio_type": "802.11ac,n-only",
+                    "spectrum-analysis": false,
+                    "spectrum_analysis": false,
+                    "ssid": {
+                        "SGR_volantis": "SGR_volantis"
+                    },
+                    "sta_locate": false,
+                    "txpower": 100
+                },
+                {
+                    "mode": "Not Exist",
+                    "radio_id": 3
+                }
+            ],
+            "region_code": "E ",
+            "serial": "FP221E3X17002282",
+            "ssid": [
+                {
+                    "list": [
+                        "SGR_volantis"
+                    ],
+                    "radio": 1
+                },
+                {
+                    "list": [
+                        "SGR_volantis"
+                    ],
+                    "radio": 2
+                }
+            ],
+            "state": "authorized",
+            "status": "connected",
+            "wired": [
+                {
+                    "bytes_rx": 17456277,
+                    "bytes_tx": 9097698,
+                    "collisions": 0,
+                    "dropped_rx": 6217,
+                    "dropped_tx": 0,
+                    "errors_rx": 0,
+                    "errors_tx": 0,
+                    "interface": "eth0",
+                    "packets_rx": 193445,
+                    "packets_tx": 68157
+                }
+            ],
+            "wtp_id": "FP221E3X17002282",
+            "wtp_mode": "normal"
+        }
+    ],
+    "serial": "FGVM000000151466",
+    "status": "success",
+    "vdom": "root",
+    "version": "v6.0.4"
 }

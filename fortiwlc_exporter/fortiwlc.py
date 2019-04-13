@@ -55,7 +55,7 @@ class FortiWLC:
         self._login()
         resp = self._session.get(url)
         resp.raise_for_status()
-        return resp.json()['results']
+        return resp.json()
 
     @timeit
     def get_managed_ap(self):
@@ -78,9 +78,9 @@ class FortiWLC:
     def poll(self):
         try:
             self.clear()
-            self.managed_ap = self.get_managed_ap()
-            self.vap_group = self.get_vap_group()
-            self.clients = self.get_clients()
+            self.managed_ap = self.get_managed_ap()['results']
+            self.vap_group = self.get_vap_group()['results']
+            self.clients = self.get_clients()['results']
             self.logout()
         except Exception:
             # TODO log error

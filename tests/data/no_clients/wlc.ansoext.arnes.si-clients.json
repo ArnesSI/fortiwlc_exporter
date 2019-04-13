@@ -1,12 +1,12 @@
 {
-    "http_method": "GET",
-    "results": [],
-    "vdom": "root",
-    "path": "wifi",
-    "name": "client",
     "action": "select",
-    "status": "success",
+    "build": 231,
+    "http_method": "GET",
+    "name": "client",
+    "path": "wifi",
+    "results": [],
     "serial": "FGVM000000151466",
-    "version": "v5.6.3",
-    "build": 7874
-  }
+    "status": "success",
+    "vdom": "root",
+    "version": "v6.0.4"
+}

@@ -1,5 +1,9 @@
 {
+    "build": 231,
     "http_method": "GET",
+    "http_status": 200,
+    "name": "vap-group",
+    "path": "wireless-controller",
     "results": [
         {
             "comment": "SSID group for braavos",
@@ -40,12 +44,9 @@
             ]
         }
     ],
+    "revision": "50.0.29.9536802507054600844.1552917218",
+    "serial": "FGVM000000151466",
+    "status": "success",
     "vdom": "root",
-  "path": "wifi",
-  "name": "client",
-  "action": "select",
-  "status": "success",
-  "serial": "FGVM000000151466",
-  "version": "v5.6.3",
-  "build": 7874
+    "version": "v6.0.4"
 }
