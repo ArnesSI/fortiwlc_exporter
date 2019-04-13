@@ -1,9 +1,9 @@
 {
-    "action": "select", 
-    "build": 7874, 
-    "http_method": "GET", 
-    "name": "client", 
-    "path": "wifi", 
+    "action": "select",
+    "build": 231,
+    "http_method": "GET",
+    "name": "client",
+    "path": "wifi",
     "results": [
         {
             "association_time": 1543495533, 
@@ -42,9 +42,9 @@
             "wtp_name": "w1-tolos.cpe.arnes.si", 
             "wtp_radio": 2
         }
-    ], 
-    "serial": "FGVM000000151466", 
-    "status": "success", 
-    "vdom": "root", 
-    "version": "v5.6.3"
+    ],
+    "serial": "FGVM000000151466",
+    "status": "success",
+    "vdom": "root",
+    "version": "v6.0.4"
 }
