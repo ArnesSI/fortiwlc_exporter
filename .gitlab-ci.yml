@@ -29,6 +29,16 @@ test_unit:
   tags:
     - generic
 
+test_promtool:
+  stage: test_code
+  image: zelenjak.arnes.si:5000/arnes/promtool:latest
+  script:
+    - promtool check metrics < tests/data/many_clients/result.txt
+    - promtool check metrics < tests/data/no_clients/result.txt
+    - promtool check metrics < tests/data/one_client/result.txt
+  tags:
+    - generic
+
 build_rpm:
   stage: build
   image: zelenjak.arnes.si:5000/arnes/rpmbuild:7
