@@ -40,6 +40,65 @@ You can override some settings from via command line arguments. Run `fortiwlc_ex
 
 To scrape stats for a given WLC open URL: [http://[exporter]:[port]/probe?target=[wlc_name]](http://[exporter]:[port]/probe?target=[wlc_name])
 
+Exporter returns these metrics:
+
+1. **`fortiwlc_client_count`**  
+   Number of clients connected to a specific combination of access point, radio and wifi network. Labels:
+   * `ap_name`: Name of access point
+   * `radio_type`: Radio standard. Common values are: `802.11ac`, `802.11g`, `802.11n`, `802.11n-5G`, `unknown` It is unlikely, but additional values could occur
+   * `wifi_network`: Name of wireless network. Commonly build from campus_id and SSID
+2. **`fortiwlc_wifi_info`**  
+   Wireless network (SSID) information. This is an info metric, so tis values is always 1. Labels:
+   * `wifi_network`: Name of wireless network. Commonly build from campus_id and SSID. Guarantied to be unique
+   * `ssid`: Advertised SSID of wireless network
+3. **`fortiwlc_ap_info`**  
+   Access point information. This is an info metric, so tis values is always 1. Labels:
+   * `ap_name`: Name of access point
+   * `wlc`: Hostname of wireless controller managing this access point
+   * `ap_status`: Connection status. Common values: `connected`, `disconnected`, `connecting`
+   * `ap_state`: Authorization state. Common values: `authorized`, `discovered`
+   * `os_version`: Version of firmware running on access point. Can be `unknown`
+   * `profile`: Name of AP profile.
+   * `model`: Model of AP.
+   * `campus`: Campus slug. Derived from `profile`. Can be missing.
+4. **`fortiwlc_up`**  
+   Was the last scrape of data from FortiNET WLC instance successful. Labels:
+   * `wlc`: Hostname of wireless controller queried
+
+Sample response:
+
+```
+# HELP fortiwlc_clients Number of clients connected to a specific combination of access point, radio and wifi network.
+# TYPE fortiwlc_clients gauge
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11ac",wifi_network="1_tolos_psk"} 1.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11ac",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="unknown",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11g",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="unknown",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11g",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11ac",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="unknown",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11n",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11g",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="2_eduroam"} 0.0
+# HELP fortiwlc_ap_info Access point information
+# TYPE fortiwlc_ap_info gauge
+fortiwlc_ap_info{ap_name="w1-tolos.cpe.arnes.si",ap_state="authorized",ap_status="connected",campus="tolos",model="FAP221E",os_version="v5.6-build6508",profile="tolos_FAP221E",wlc="wlc.ansoext.arnes.si"} 1.0
+fortiwlc_ap_info{ap_name="w1-volantis.cpe.arnes.si",ap_state="authorized",ap_status="connected",campus="volantis",model="FAP221E",os_version="v6.0-build0057",profile="volantis_FAP221E",wlc="wlc.ansoext.arnes.si"} 1.0
+# HELP fortiwlc_wifi_info Wireless network (SSID) information
+# TYPE fortiwlc_wifi_info gauge
+fortiwlc_wifi_info{ssid="tolos_psk",wifi_network="1_tolos_psk"} 1.0
+fortiwlc_wifi_info{ssid="eduroam",wifi_network="1_eduroam"} 1.0
+fortiwlc_wifi_info{ssid="eduroam",wifi_network="2_eduroam"} 1.0
+# HELP fortiwlc_up Was the last scrape of data from FortiNET WLC instance successful.
+# TYPE fortiwlc_up gauge
+fortiwlc_up{wlc="wlc.ansoext.arnes.si"} 1.0
+```
+
 ## Developing
 
 We use [poetry](https://poetry.eustace.io/) to manage Python dependencies and virtual environments.
