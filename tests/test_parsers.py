@@ -1,7 +1,7 @@
 import json
 import unittest
 
-from fortiwlc_exporter.parsers import parse_ap_data, parse_wifi_name
+from fortiwlc_exporter.parsers import get_ap_os_version, parse_ap_data, parse_wifi_name
 
 
 class TestApParser(unittest.TestCase):
@@ -14,6 +14,7 @@ class TestApParser(unittest.TestCase):
             "w1-tolos.cpe.arnes.si",
             "connected",
             "authorized",
+            'v5.6-build6508',
             "tolos_FAP221E",
             "FAP221E",
             "tolos",
@@ -25,3 +26,16 @@ class TestApParser(unittest.TestCase):
         self.assertEqual(parse_wifi_name('1_wifi'), ('1_wifi', 'wifi'))
         self.assertEqual(parse_wifi_name('1_wifi_new'), ('1_wifi_new', 'wifi_new'))
         self.assertEqual(parse_wifi_name('wifi'), ('wifi', 'wifi'))
+
+
+class TestApOsVersion(unittest.TestCase):
+    def test_has_version_unparsable(self):
+        self.assertEqual(get_ap_os_version({'os_version': 'abc'}), 'abc')
+
+    def test_has_version_parsable(self):
+        self.assertEqual(
+            get_ap_os_version({'os_version': 'FP221E-v6.0-build0033'}), 'v6.0-build0033'
+        )
+
+    def test_no_version(self):
+        self.assertEqual(get_ap_os_version({}), 'unknown')
