@@ -95,7 +95,7 @@ class TestCollectorParse(unittest.TestCase):
         self.assertEqual(len(responses.calls), 3)
         col.parse_metrics()
         print(col.clients)
-        self.assertEqual(
+        self.assertDictEqual(
             col.clients,
             {
                 ('w1-tolos.cpe.arnes.si', '802.11g', '1_eduroam'): 0,
@@ -115,7 +115,7 @@ class TestCollectorParse(unittest.TestCase):
                 ('w1-volantis.cpe.arnes.si', 'unknown', '2_eduroam'): 0,
             },
         )
-        self.assertEqual(
+        self.assertDictEqual(
             col.ap_info,
             {
                 'w1-tolos.cpe.arnes.si': [
@@ -123,6 +123,7 @@ class TestCollectorParse(unittest.TestCase):
                     'w1-tolos.cpe.arnes.si',
                     'connected',
                     'authorized',
+                    'v5.6-build6508',
                     'tolos_FAP221E',
                     'FAP221E',
                     'tolos',
@@ -132,13 +133,14 @@ class TestCollectorParse(unittest.TestCase):
                     'w1-volantis.cpe.arnes.si',
                     'connected',
                     'authorized',
+                    'v6.0-build0057',
                     'volantis_FAP221E',
                     'FAP221E',
                     'volantis',
                 ],
             },
         )
-        self.assertEqual(
+        self.assertDictEqual(
             col.wifi_info,
             {
                 '1_eduroam': ('1_eduroam', 'eduroam'),
@@ -146,7 +148,7 @@ class TestCollectorParse(unittest.TestCase):
                 '2_eduroam': ('2_eduroam', 'eduroam'),
             },
         )
-        self.assertEqual(
+        self.assertSetEqual(
             col.radio_types,
             set(['802.11ac', '802.11g', '802.11n', '802.11n-5G', 'unknown']),
         )
@@ -164,7 +166,7 @@ class TestCollectorParse(unittest.TestCase):
         col.poll_wlcs()
         self.assertEqual(len(responses.calls), 3)
         col.parse_metrics()
-        self.assertEqual(
+        self.assertDictEqual(
             col.clients,
             {
                 ('w1-tolos.cpe.arnes.si', '802.11g', '1_eduroam'): 0,
@@ -184,7 +186,7 @@ class TestCollectorParse(unittest.TestCase):
                 ('w1-volantis.cpe.arnes.si', 'unknown', '2_eduroam'): 0,
             },
         )
-        self.assertEqual(
+        self.assertDictEqual(
             col.ap_info,
             {
                 'w1-tolos.cpe.arnes.si': [
@@ -192,6 +194,7 @@ class TestCollectorParse(unittest.TestCase):
                     'w1-tolos.cpe.arnes.si',
                     'connected',
                     'authorized',
+                    'v5.6-build6508',
                     'tolos_FAP221E',
                     'FAP221E',
                     'tolos',
@@ -201,13 +204,14 @@ class TestCollectorParse(unittest.TestCase):
                     'w1-volantis.cpe.arnes.si',
                     'connected',
                     'authorized',
+                    'v6.0-build0057',
                     'volantis_FAP221E',
                     'FAP221E',
                     'volantis',
                 ],
             },
         )
-        self.assertEqual(
+        self.assertDictEqual(
             col.wifi_info,
             {
                 '1_eduroam': ('1_eduroam', 'eduroam'),
@@ -215,7 +219,7 @@ class TestCollectorParse(unittest.TestCase):
                 '2_eduroam': ('2_eduroam', 'eduroam'),
             },
         )
-        self.assertEqual(
+        self.assertSetEqual(
             col.radio_types,
             set(['802.11ac', '802.11g', '802.11n', '802.11n-5G', 'unknown']),
         )
@@ -256,7 +260,7 @@ class TestCollectorParse(unittest.TestCase):
         self.assertEqual(len(responses.calls), 3)
         col.parse_metrics()
         self.assertIn('extra.radio', col.radio_types)
-        self.assertEqual(
+        self.assertDictEqual(
             col.clients,
             {
                 ('w1-tolos.cpe.arnes.si', '802.11g', '1_eduroam'): 0,

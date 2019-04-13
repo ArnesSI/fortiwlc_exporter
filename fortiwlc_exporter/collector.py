@@ -57,6 +57,7 @@ class FortiwlcCollector:
                 'ap_name',
                 'ap_status',
                 'ap_state',
+                'os_version',
                 'profile',
                 'model',
                 'campus',

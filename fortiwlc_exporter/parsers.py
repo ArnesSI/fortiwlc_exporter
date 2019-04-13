@@ -13,14 +13,33 @@ def ap_profile_string(ap):
     return model, campus, ap_profile
 
 
+def get_ap_os_version(ap):
+    """Parses os_version from AP data
+
+    Removes model from start of os version if found.
+    
+    Args:
+        ap (dict): ap data returned from FortiOS managed-ap REST endpoint
+    
+    Returns:
+        str: OS version on 'unknown' id not detected
+    """
+
+    if 'os_version' not in ap:
+        return 'unknown'
+    return ap['os_version'].split('-', 1)[-1]
+
+
 def parse_ap_data(ap_data, wlc_name):
     """ Parses AP data from WLC API into format suitable for metric export """
     model, campus, profile = ap_profile_string(ap_data)
+    os_version = get_ap_os_version(ap_data)
     ap = [
         wlc_name,
         ap_data['name'],
         ap_data['status'],
         ap_data['state'],
+        os_version,
         profile,
         model,
     ]

@@ -56,7 +56,7 @@ class BaseServerRunner(unittest.TestCase):
         expected_lines.sort()
         resp_lines.sort()
 
-        self.assertEqual(resp_lines, expected_lines)
+        self.assertListEqual(resp_lines, expected_lines)
         self._responses_calls = len(responses.calls)
 
 
