@@ -11,6 +11,7 @@ Source0: dist/%{srcname}-%{version}.tar.gz
 Source1: %{srcname}.service
 Source2: %{srcname}.yaml
 
+Requires(pre): shadow-utils
 %{?systemd_requires}
 BuildRequires: systemd
 BuildRequires: python34-devel
@@ -29,6 +30,13 @@ pyinstaller --onefile fortiwlc_exporter/exporter.py -n fortiwlc_exporter
 install -p -D -m 755 dist/fortiwlc_exporter %{buildroot}%{_bindir}/fortiwlc_exporter
 install -p -D -m 644 %{_sourcedir}/fortiwlc_exporter.service %{buildroot}%{_unitdir}/fortiwlc_exporter.service
 install -p -D -m 640 %{_sourcedir}/fortiwlc_exporter.yaml %{buildroot}%{_sysconfdir}/fortiwlc_exporter.yaml
+
+%pre
+getent group %{srcname} >/dev/null || groupadd -r %{srcname}
+getent passwd %{srcname} >/dev/null || \
+    useradd -r -g %{srcname} -d / -s /sbin/nologin \
+    -c "%{srcname} systemd user" %{srcname}
+exit 0
 
 %post
 %systemd_post fortiwlc_exporter.service
