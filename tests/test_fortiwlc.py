@@ -15,7 +15,7 @@ class TestFortiWLC(unittest.TestCase):
         )
         responses.add(responses.GET, url, json=response_data, status=200)
         wlc = FortiWLC('wlc.ansoext.arnes.si', '123')
-        wlc_data = wlc.get_managed_ap()
+        wlc_data = wlc.get_managed_ap()['results']
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(wlc.name, 'wlc.ansoext.arnes.si')
         self.assertEqual(wlc.api_key, '123')
@@ -30,7 +30,7 @@ class TestFortiWLC(unittest.TestCase):
         )
         responses.add(responses.GET, url, json=response_data, status=200)
         wlc = FortiWLC('wlc.ansoext.arnes.si', '123')
-        wlc_data = wlc.get_vap_group()
+        wlc_data = wlc.get_vap_group()['results']
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(wlc.name, 'wlc.ansoext.arnes.si')
         self.assertEqual(wlc.api_key, '123')
@@ -47,7 +47,7 @@ class TestFortiWLC(unittest.TestCase):
         )
         responses.add(responses.GET, url, json=response_data, status=200)
         wlc = FortiWLC('wlc.ansoext.arnes.si', '123')
-        wlc_data = wlc.get_clients()
+        wlc_data = wlc.get_clients()['results']
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(wlc.name, 'wlc.ansoext.arnes.si')
         self.assertEqual(wlc.api_key, '123')
@@ -64,7 +64,7 @@ class TestFortiWLC(unittest.TestCase):
         )
         responses.add(responses.GET, url, json=response_data, status=200)
         wlc = FortiWLC('wlc.ansoext.arnes.si', '123')
-        wlc_data = wlc.get_clients()
+        wlc_data = wlc.get_clients()['results']
         self.assertEqual(len(responses.calls), 1)
         self.assertEqual(wlc.name, 'wlc.ansoext.arnes.si')
         self.assertEqual(wlc.api_key, '123')
