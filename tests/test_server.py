@@ -50,6 +50,7 @@ class BaseServerRunner(unittest.TestCase):
         resp_lines = [l for l in r.text.split('\n') if 'fortiwlc' in l]
 
         print('\n'.join(resp_lines))
+        print('--- ^ resp ^ --- v expected v ---')
         print('\n'.join(expected_lines))
 
         expected_lines.sort()
