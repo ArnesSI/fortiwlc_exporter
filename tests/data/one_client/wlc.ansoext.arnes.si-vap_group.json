@@ -1,51 +1,51 @@
 {
-    "http_method": "GET",
+    "action": "select", 
+    "build": 7874, 
+    "http_method": "GET", 
+    "name": "client", 
+    "path": "wifi", 
     "results": [
-    {
-        "comment": "SSID group for braavos",
-        "name": "SGR_braavos",
-        "q_origin_key": "SGR_braavos",
-        "vaps": []
-    },
-    {
-        "comment": "SSID group for meereen",
-        "name": "SGR_meereen",
-        "q_origin_key": "SGR_meereen",
-        "vaps": []
-    },
-    {
-        "comment": "SSID group for tolos",
-        "name": "SGR_tolos",
-        "q_origin_key": "SGR_tolos",
-        "vaps": [
-            {
-                "name": "1_eduroam",
-                "q_origin_key": "1_eduroam"
-            },
-            {
-                "name": "1_tolos_psk",
-                "q_origin_key": "1_tolos_psk"
-            }
-        ]
-    },
-    {
-        "comment": "SSID group for volantis",
-        "name": "SGR_volantis",
-        "q_origin_key": "SGR_volantis",
-        "vaps": [
-            {
-                "name": "2_eduroam",
-                "q_origin_key": "2_eduroam"
-            }
-        ]
-    }
-],
-"vdom": "root",
-"path": "wifi",
-"name": "client",
-"action": "select",
-"status": "success",
-"serial": "FGVM000000151466",
-"version": "v5.6.3",
-"build": 7874
+        {
+            "comment": "SSID group for braavos", 
+            "name": "SGR_braavos", 
+            "q_origin_key": "SGR_braavos", 
+            "vaps": []
+        }, 
+        {
+            "comment": "SSID group for meereen", 
+            "name": "SGR_meereen", 
+            "q_origin_key": "SGR_meereen", 
+            "vaps": []
+        }, 
+        {
+            "comment": "SSID group for tolos", 
+            "name": "SGR_tolos", 
+            "q_origin_key": "SGR_tolos", 
+            "vaps": [
+                {
+                    "name": "1_eduroam", 
+                    "q_origin_key": "1_eduroam"
+                }, 
+                {
+                    "name": "1_tolos_psk", 
+                    "q_origin_key": "1_tolos_psk"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for volantis", 
+            "name": "SGR_volantis", 
+            "q_origin_key": "SGR_volantis", 
+            "vaps": [
+                {
+                    "name": "2_eduroam", 
+                    "q_origin_key": "2_eduroam"
+                }
+            ]
+        }
+    ], 
+    "serial": "FGVM000000151466", 
+    "status": "success", 
+    "vdom": "root", 
+    "version": "v5.6.3"
 }

@@ -1,12 +1,551 @@
 {
-    "http_method": "GET",
-    "results": [{"name": "SGR_bb-o-jpbled-kr", "q_origin_key": "SGR_bb-o-jpbled-kr", "comment": "SSID group for bb-o-jpbled-kr", "vaps": [{"name": "49_eduroam", "q_origin_key": "49_eduroam"}]}, {"name": "SGR_d-drava-mb", "q_origin_key": "SGR_d-drava-mb", "comment": "SSID group for d-drava-mb", "vaps": [{"name": "6_eduroam", "q_origin_key": "6_eduroam"}]}, {"name": "SGR_holmec-o-fgprevalje-mb", "q_origin_key": "SGR_holmec-o-fgprevalje-mb", "comment": "SSID group for holmec-o-fgprevalje-mb", "vaps": [{"name": "21_eduroam", "q_origin_key": "21_eduroam"}]}, {"name": "SGR_kojsko-o-dobrovo-ng", "q_origin_key": "SGR_kojsko-o-dobrovo-ng", "comment": "SSID group for kojsko-o-dobrovo-ng", "vaps": [{"name": "2079_eduroam", "q_origin_key": "2079_eduroam"}]}, {"name": "SGR_lese-o-fgprevalje-mb", "q_origin_key": "SGR_lese-o-fgprevalje-mb", "comment": "SSID group for lese-o-fgprevalje-mb", "vaps": [{"name": "37_eduroam", "q_origin_key": "37_eduroam"}]}, {"name": "SGR_mekinje-o-fakam-lj", "q_origin_key": "SGR_mekinje-o-fakam-lj", "comment": "SSID group for mekinje-o-fakam-lj", "vaps": [{"name": "32_eduroam", "q_origin_key": "32_eduroam"}]}, {"name": "SGR_montessori-inst-lj", "q_origin_key": "SGR_montessori-inst-lj", "comment": "SSID group for montessori-inst-lj", "vaps": [{"name": "39_eduroam", "q_origin_key": "39_eduroam"}]}, {"name": "SGR_nevlje-o-fakam-lj", "q_origin_key": "SGR_nevlje-o-fakam-lj", "comment": "SSID group for nevlje-o-fakam-lj", "vaps": [{"name": "31_eduroam", "q_origin_key": "31_eduroam"}]}, {"name": "SGR_o-anegale-kk", "q_origin_key": "SGR_o-anegale-kk", "comment": "SSID group for o-anegale-kk", "vaps": [{"name": "19_eduroam", "q_origin_key": "19_eduroam"}]}, {"name": "SGR_o-aznidersica-po", "q_origin_key": "SGR_o-aznidersica-po", "comment": "SSID group for o-aznidersica-po", "vaps": [{"name": "888_eduroam", "q_origin_key": "888_eduroam"}]}, {"name": "SGR_o-beltinci-ms", "q_origin_key": "SGR_o-beltinci-ms", "comment": "SSID group for o-beltinci-ms", "vaps": [{"name": "45_eduroam", "q_origin_key": "45_eduroam"}]}, {"name": "SGR_o-blanca-kk", "q_origin_key": "SGR_o-blanca-kk", "comment": "SSID group for o-blanca-kk", "vaps": [{"name": "22_eduroam", "q_origin_key": "22_eduroam"}]}, {"name": "SGR_o-bostanj-kk", "q_origin_key": "SGR_o-bostanj-kk", "comment": "SSID group for o-bostanj-kk", "vaps": [{"name": "8_eduroam", "q_origin_key": "8_eduroam"}]}, {"name": "SGR_o-branik-ng", "q_origin_key": "SGR_o-branik-ng", "comment": "SSID group for o-branik-ng", "vaps": [{"name": "2_eduroam", "q_origin_key": "2_eduroam"}]}, {"name": "SGR_o-cepovan-ng", "q_origin_key": "SGR_o-cepovan-ng", "comment": "SSID group for o-cepovan-ng", "vaps": [{"name": "16_eduroam", "q_origin_key": "16_eduroam"}]}, {"name": "SGR_o-col-ng", "q_origin_key": "SGR_o-col-ng", "comment": "SSID group for o-col-ng", "vaps": [{"name": "23_eduroam", "q_origin_key": "23_eduroam"}]}, {"name": "SGR_o-cresnjevec-mb", "q_origin_key": "SGR_o-cresnjevec-mb", "comment": "SSID group for o-cresnjevec-mb", "vaps": [{"name": "41_eduroam", "q_origin_key": "41_eduroam"}]}, {"name": "SGR_o-dlokarja-ng", "q_origin_key": "SGR_o-dlokarja-ng", "comment": "SSID group for o-dlokarja-ng", "vaps": [{"name": "35_eduroam", "q_origin_key": "35_eduroam"}]}, {"name": "SGR_o-dobrovo-ng", "q_origin_key": "SGR_o-dobrovo-ng", "comment": "SSID group for o-dobrovo-ng", "vaps": [{"name": "47_eduroam", "q_origin_key": "47_eduroam"}]}, {"name": "SGR_o-dutovlje-po", "q_origin_key": "SGR_o-dutovlje-po", "comment": "SSID group for o-dutovlje-po", "vaps": [{"name": "17_eduroam", "q_origin_key": "17_eduroam"}]}, {"name": "SGR_o-gradec-lj", "q_origin_key": "SGR_o-gradec-lj", "comment": "SSID group for o-gradec-lj", "vaps": [{"name": "3_eduroam", "q_origin_key": "3_eduroam"}]}, {"name": "SGR_o-hrvatini-kp", "q_origin_key": "SGR_o-hrvatini-kp", "comment": "SSID group for o-hrvatini-kp", "vaps": [{"name": "10_eduroam", "q_origin_key": "10_eduroam"}]}, {"name": "SGR_o-ld-lj", "q_origin_key": "SGR_o-ld-lj", "comment": "SSID group for o-ld-lj", "vaps": [{"name": "40_eduroam", "q_origin_key": "40_eduroam"}]}, {"name": "SGR_o-mirna-nm", "q_origin_key": "SGR_o-mirna-nm", "comment": "SSID group for o-mirna-nm", "vaps": [{"name": "24_eduroam", "q_origin_key": "24_eduroam"}]}, {"name": "SGR_o-muta-ra", "q_origin_key": "SGR_o-muta-ra", "comment": "SSID group for o-muta-ra", "vaps": [{"name": "38_eduroam", "q_origin_key": "38_eduroam"}]}, {"name": "SGR_o-podbrdo-ng", "q_origin_key": "SGR_o-podbrdo-ng", "comment": "SSID group for o-podbrdo-ng", "vaps": [{"name": "36_eduroam", "q_origin_key": "36_eduroam"}, {"name": "36_guest", "q_origin_key": "36_guest"}, {"name": "36_admin", "q_origin_key": "36_admin"}, {"name": "36_ucenci", "q_origin_key": "36_ucenci"}]}, {"name": "SGR_o-podgora-po", "q_origin_key": "SGR_o-podgora-po", "comment": "SSID group for o-podgora-po", "vaps": [{"name": "25_eduroam", "q_origin_key": "25_eduroam"}]}, {"name": "SGR_o-pregarje-kp", "q_origin_key": "SGR_o-pregarje-kp", "comment": "SSID group for o-pregarje-kp", "vaps": [{"name": "26_eduroam", "q_origin_key": "26_eduroam"}]}, {"name": "SGR_o-pvbistrica-ms", "q_origin_key": "SGR_o-pvbistrica-ms", "comment": "SSID group for o-pvbistrica-ms", "vaps": [{"name": "44_eduroam", "q_origin_key": "44_eduroam"}]}, {"name": "SGR_o-sostanj-ce", "q_origin_key": "SGR_o-sostanj-ce", "comment": "SSID group for o-sostanj-ce", "vaps": [{"name": "34_eduroam", "q_origin_key": "34_eduroam"}]}, {"name": "SGR_o-stanjel-komen-po", "q_origin_key": "SGR_o-stanjel-komen-po", "comment": "SSID group for o-stanjel-komen-po", "vaps": []}, {"name": "SGR_osv-ankaran-kp", "q_origin_key": "SGR_osv-ankaran-kp", "comment": "SSID group for osv-ankaran-kp", "vaps": [{"name": "27881_eduroam", "q_origin_key": "27881_eduroam"}, {"name": "27881_OSAnkaran", "q_origin_key": "27881_OSAnkaran"}]}, {"name": "SGR_podkraj-o-col-ng", "q_origin_key": "SGR_podkraj-o-col-ng", "comment": "SSID group for podkraj-o-col-ng", "vaps": [{"name": "1_eduroam", "q_origin_key": "1_eduroam"}]}, {"name": "SGR_polsnik-o-litija-lj", "q_origin_key": "SGR_polsnik-o-litija-lj", "comment": "SSID group for polsnik-o-litija-lj", "vaps": [{"name": "7_eduroam", "q_origin_key": "7_eduroam"}]}, {"name": "SGR_s-gm-lj", "q_origin_key": "SGR_s-gm-lj", "comment": "SSID group for s-gm-lj", "vaps": [{"name": "5_eduroam", "q_origin_key": "5_eduroam"}]}, {"name": "SGR_s-sfs-lj", "q_origin_key": "SGR_s-sfs-lj", "comment": "SSID group for s-sfs-lj", "vaps": [{"name": "30_eduroam", "q_origin_key": "30_eduroam"}, {"name": "30_gostje", "q_origin_key": "30_gostje"}]}, {"name": "SGR_s-sg-vipava", "q_origin_key": "SGR_s-sg-vipava", "comment": "SSID group for s-sg-vipava", "vaps": [{"name": "42_eduroam", "q_origin_key": "42_eduroam"}]}, {"name": "SGR_s-skss-mb", "q_origin_key": "SGR_s-skss-mb", "comment": "SSID group for s-skss-mb", "vaps": [{"name": "33_eduroam", "q_origin_key": "33_eduroam"}]}, {"name": "SGR_sava-o-litija-lj", "q_origin_key": "SGR_sava-o-litija-lj", "comment": "SSID group for sava-o-litija-lj", "vaps": [{"name": "12_eduroam", "q_origin_key": "12_eduroam"}]}, {"name": "SGR_sentanel-o-fgprevalje-mb", "q_origin_key": "SGR_sentanel-o-fgprevalje-mb", "comment": "SSID group for sentanel-o-fgprevalje-mb", "vaps": [{"name": "20_eduroam", "q_origin_key": "20_eduroam"}]}, {"name": "SGR_skrilje-o-dobravlje-ng", "q_origin_key": "SGR_skrilje-o-dobravlje-ng", "comment": "SSID group for skrilje-o-dobravlje-ng", "vaps": [{"name": "52_eduroam", "q_origin_key": "52_eduroam"}]}, {"name": "SGR_ss-gimpol-lj", "q_origin_key": "SGR_ss-gimpol-lj", "comment": "SSID group for ss-gimpol-lj", "vaps": []}, {"name": "SGR_tomaj-o-dutovlje-po", "q_origin_key": "SGR_tomaj-o-dutovlje-po", "comment": "SSID group for tomaj-o-dutovlje-po", "vaps": [{"name": "18_eduroam", "q_origin_key": "18_eduroam"}]}, {"name": "SGR_topolsica-o-sostanj-ce", "q_origin_key": "SGR_topolsica-o-sostanj-ce", "comment": "SSID group for topolsica-o-sostanj-ce", "vaps": [{"name": "50_eduroam", "q_origin_key": "50_eduroam"}]}, {"name": "SGR_tunjice-o-fakam-lj", "q_origin_key": "SGR_tunjice-o-fakam-lj", "comment": "SSID group for tunjice-o-fakam-lj", "vaps": [{"name": "28_eduroam", "q_origin_key": "28_eduroam"}]}, {"name": "SGR_vace-o-gradec-lj", "q_origin_key": "SGR_vace-o-gradec-lj", "comment": "SSID group for vace-o-gradec-lj", "vaps": [{"name": "11_eduroam", "q_origin_key": "11_eduroam"}]}, {"name": "SGR_vpec-o-fakam-lj", "q_origin_key": "SGR_vpec-o-fakam-lj", "comment": "SSID group for vpec-o-fakam-lj", "vaps": [{"name": "27_eduroam", "q_origin_key": "27_eduroam"}]}, {"name": "test", "q_origin_key": "test", "comment": "", "vaps": [{"name": "test_eduroam", "q_origin_key": "test_eduroam"}]}],
-  "vdom": "root",
-  "path": "wifi",
-  "name": "client",
-  "action": "select",
-  "status": "success",
-  "serial": "FGVM000000151466",
-  "version": "v5.6.3",
-  "build": 7874
+    "action": "select", 
+    "build": 7874, 
+    "http_method": "GET", 
+    "name": "client", 
+    "path": "wifi", 
+    "results": [
+        {
+            "comment": "SSID group for bb-o-jpbled-kr", 
+            "name": "SGR_bb-o-jpbled-kr", 
+            "q_origin_key": "SGR_bb-o-jpbled-kr", 
+            "vaps": [
+                {
+                    "name": "49_eduroam", 
+                    "q_origin_key": "49_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for d-drava-mb", 
+            "name": "SGR_d-drava-mb", 
+            "q_origin_key": "SGR_d-drava-mb", 
+            "vaps": [
+                {
+                    "name": "6_eduroam", 
+                    "q_origin_key": "6_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for holmec-o-fgprevalje-mb", 
+            "name": "SGR_holmec-o-fgprevalje-mb", 
+            "q_origin_key": "SGR_holmec-o-fgprevalje-mb", 
+            "vaps": [
+                {
+                    "name": "21_eduroam", 
+                    "q_origin_key": "21_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for kojsko-o-dobrovo-ng", 
+            "name": "SGR_kojsko-o-dobrovo-ng", 
+            "q_origin_key": "SGR_kojsko-o-dobrovo-ng", 
+            "vaps": [
+                {
+                    "name": "2079_eduroam", 
+                    "q_origin_key": "2079_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for lese-o-fgprevalje-mb", 
+            "name": "SGR_lese-o-fgprevalje-mb", 
+            "q_origin_key": "SGR_lese-o-fgprevalje-mb", 
+            "vaps": [
+                {
+                    "name": "37_eduroam", 
+                    "q_origin_key": "37_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for mekinje-o-fakam-lj", 
+            "name": "SGR_mekinje-o-fakam-lj", 
+            "q_origin_key": "SGR_mekinje-o-fakam-lj", 
+            "vaps": [
+                {
+                    "name": "32_eduroam", 
+                    "q_origin_key": "32_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for montessori-inst-lj", 
+            "name": "SGR_montessori-inst-lj", 
+            "q_origin_key": "SGR_montessori-inst-lj", 
+            "vaps": [
+                {
+                    "name": "39_eduroam", 
+                    "q_origin_key": "39_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for nevlje-o-fakam-lj", 
+            "name": "SGR_nevlje-o-fakam-lj", 
+            "q_origin_key": "SGR_nevlje-o-fakam-lj", 
+            "vaps": [
+                {
+                    "name": "31_eduroam", 
+                    "q_origin_key": "31_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-anegale-kk", 
+            "name": "SGR_o-anegale-kk", 
+            "q_origin_key": "SGR_o-anegale-kk", 
+            "vaps": [
+                {
+                    "name": "19_eduroam", 
+                    "q_origin_key": "19_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-aznidersica-po", 
+            "name": "SGR_o-aznidersica-po", 
+            "q_origin_key": "SGR_o-aznidersica-po", 
+            "vaps": [
+                {
+                    "name": "888_eduroam", 
+                    "q_origin_key": "888_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-beltinci-ms", 
+            "name": "SGR_o-beltinci-ms", 
+            "q_origin_key": "SGR_o-beltinci-ms", 
+            "vaps": [
+                {
+                    "name": "45_eduroam", 
+                    "q_origin_key": "45_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-blanca-kk", 
+            "name": "SGR_o-blanca-kk", 
+            "q_origin_key": "SGR_o-blanca-kk", 
+            "vaps": [
+                {
+                    "name": "22_eduroam", 
+                    "q_origin_key": "22_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-bostanj-kk", 
+            "name": "SGR_o-bostanj-kk", 
+            "q_origin_key": "SGR_o-bostanj-kk", 
+            "vaps": [
+                {
+                    "name": "8_eduroam", 
+                    "q_origin_key": "8_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-branik-ng", 
+            "name": "SGR_o-branik-ng", 
+            "q_origin_key": "SGR_o-branik-ng", 
+            "vaps": [
+                {
+                    "name": "2_eduroam", 
+                    "q_origin_key": "2_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-cepovan-ng", 
+            "name": "SGR_o-cepovan-ng", 
+            "q_origin_key": "SGR_o-cepovan-ng", 
+            "vaps": [
+                {
+                    "name": "16_eduroam", 
+                    "q_origin_key": "16_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-col-ng", 
+            "name": "SGR_o-col-ng", 
+            "q_origin_key": "SGR_o-col-ng", 
+            "vaps": [
+                {
+                    "name": "23_eduroam", 
+                    "q_origin_key": "23_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-cresnjevec-mb", 
+            "name": "SGR_o-cresnjevec-mb", 
+            "q_origin_key": "SGR_o-cresnjevec-mb", 
+            "vaps": [
+                {
+                    "name": "41_eduroam", 
+                    "q_origin_key": "41_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-dlokarja-ng", 
+            "name": "SGR_o-dlokarja-ng", 
+            "q_origin_key": "SGR_o-dlokarja-ng", 
+            "vaps": [
+                {
+                    "name": "35_eduroam", 
+                    "q_origin_key": "35_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-dobrovo-ng", 
+            "name": "SGR_o-dobrovo-ng", 
+            "q_origin_key": "SGR_o-dobrovo-ng", 
+            "vaps": [
+                {
+                    "name": "47_eduroam", 
+                    "q_origin_key": "47_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-dutovlje-po", 
+            "name": "SGR_o-dutovlje-po", 
+            "q_origin_key": "SGR_o-dutovlje-po", 
+            "vaps": [
+                {
+                    "name": "17_eduroam", 
+                    "q_origin_key": "17_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-gradec-lj", 
+            "name": "SGR_o-gradec-lj", 
+            "q_origin_key": "SGR_o-gradec-lj", 
+            "vaps": [
+                {
+                    "name": "3_eduroam", 
+                    "q_origin_key": "3_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-hrvatini-kp", 
+            "name": "SGR_o-hrvatini-kp", 
+            "q_origin_key": "SGR_o-hrvatini-kp", 
+            "vaps": [
+                {
+                    "name": "10_eduroam", 
+                    "q_origin_key": "10_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-ld-lj", 
+            "name": "SGR_o-ld-lj", 
+            "q_origin_key": "SGR_o-ld-lj", 
+            "vaps": [
+                {
+                    "name": "40_eduroam", 
+                    "q_origin_key": "40_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-mirna-nm", 
+            "name": "SGR_o-mirna-nm", 
+            "q_origin_key": "SGR_o-mirna-nm", 
+            "vaps": [
+                {
+                    "name": "24_eduroam", 
+                    "q_origin_key": "24_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-muta-ra", 
+            "name": "SGR_o-muta-ra", 
+            "q_origin_key": "SGR_o-muta-ra", 
+            "vaps": [
+                {
+                    "name": "38_eduroam", 
+                    "q_origin_key": "38_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-podbrdo-ng", 
+            "name": "SGR_o-podbrdo-ng", 
+            "q_origin_key": "SGR_o-podbrdo-ng", 
+            "vaps": [
+                {
+                    "name": "36_eduroam", 
+                    "q_origin_key": "36_eduroam"
+                }, 
+                {
+                    "name": "36_guest", 
+                    "q_origin_key": "36_guest"
+                }, 
+                {
+                    "name": "36_admin", 
+                    "q_origin_key": "36_admin"
+                }, 
+                {
+                    "name": "36_ucenci", 
+                    "q_origin_key": "36_ucenci"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-podgora-po", 
+            "name": "SGR_o-podgora-po", 
+            "q_origin_key": "SGR_o-podgora-po", 
+            "vaps": [
+                {
+                    "name": "25_eduroam", 
+                    "q_origin_key": "25_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-pregarje-kp", 
+            "name": "SGR_o-pregarje-kp", 
+            "q_origin_key": "SGR_o-pregarje-kp", 
+            "vaps": [
+                {
+                    "name": "26_eduroam", 
+                    "q_origin_key": "26_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-pvbistrica-ms", 
+            "name": "SGR_o-pvbistrica-ms", 
+            "q_origin_key": "SGR_o-pvbistrica-ms", 
+            "vaps": [
+                {
+                    "name": "44_eduroam", 
+                    "q_origin_key": "44_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-sostanj-ce", 
+            "name": "SGR_o-sostanj-ce", 
+            "q_origin_key": "SGR_o-sostanj-ce", 
+            "vaps": [
+                {
+                    "name": "34_eduroam", 
+                    "q_origin_key": "34_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for o-stanjel-komen-po", 
+            "name": "SGR_o-stanjel-komen-po", 
+            "q_origin_key": "SGR_o-stanjel-komen-po", 
+            "vaps": []
+        }, 
+        {
+            "comment": "SSID group for osv-ankaran-kp", 
+            "name": "SGR_osv-ankaran-kp", 
+            "q_origin_key": "SGR_osv-ankaran-kp", 
+            "vaps": [
+                {
+                    "name": "27881_eduroam", 
+                    "q_origin_key": "27881_eduroam"
+                }, 
+                {
+                    "name": "27881_OSAnkaran", 
+                    "q_origin_key": "27881_OSAnkaran"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for podkraj-o-col-ng", 
+            "name": "SGR_podkraj-o-col-ng", 
+            "q_origin_key": "SGR_podkraj-o-col-ng", 
+            "vaps": [
+                {
+                    "name": "1_eduroam", 
+                    "q_origin_key": "1_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for polsnik-o-litija-lj", 
+            "name": "SGR_polsnik-o-litija-lj", 
+            "q_origin_key": "SGR_polsnik-o-litija-lj", 
+            "vaps": [
+                {
+                    "name": "7_eduroam", 
+                    "q_origin_key": "7_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for s-gm-lj", 
+            "name": "SGR_s-gm-lj", 
+            "q_origin_key": "SGR_s-gm-lj", 
+            "vaps": [
+                {
+                    "name": "5_eduroam", 
+                    "q_origin_key": "5_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for s-sfs-lj", 
+            "name": "SGR_s-sfs-lj", 
+            "q_origin_key": "SGR_s-sfs-lj", 
+            "vaps": [
+                {
+                    "name": "30_eduroam", 
+                    "q_origin_key": "30_eduroam"
+                }, 
+                {
+                    "name": "30_gostje", 
+                    "q_origin_key": "30_gostje"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for s-sg-vipava", 
+            "name": "SGR_s-sg-vipava", 
+            "q_origin_key": "SGR_s-sg-vipava", 
+            "vaps": [
+                {
+                    "name": "42_eduroam", 
+                    "q_origin_key": "42_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for s-skss-mb", 
+            "name": "SGR_s-skss-mb", 
+            "q_origin_key": "SGR_s-skss-mb", 
+            "vaps": [
+                {
+                    "name": "33_eduroam", 
+                    "q_origin_key": "33_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for sava-o-litija-lj", 
+            "name": "SGR_sava-o-litija-lj", 
+            "q_origin_key": "SGR_sava-o-litija-lj", 
+            "vaps": [
+                {
+                    "name": "12_eduroam", 
+                    "q_origin_key": "12_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for sentanel-o-fgprevalje-mb", 
+            "name": "SGR_sentanel-o-fgprevalje-mb", 
+            "q_origin_key": "SGR_sentanel-o-fgprevalje-mb", 
+            "vaps": [
+                {
+                    "name": "20_eduroam", 
+                    "q_origin_key": "20_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for skrilje-o-dobravlje-ng", 
+            "name": "SGR_skrilje-o-dobravlje-ng", 
+            "q_origin_key": "SGR_skrilje-o-dobravlje-ng", 
+            "vaps": [
+                {
+                    "name": "52_eduroam", 
+                    "q_origin_key": "52_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for ss-gimpol-lj", 
+            "name": "SGR_ss-gimpol-lj", 
+            "q_origin_key": "SGR_ss-gimpol-lj", 
+            "vaps": []
+        }, 
+        {
+            "comment": "SSID group for tomaj-o-dutovlje-po", 
+            "name": "SGR_tomaj-o-dutovlje-po", 
+            "q_origin_key": "SGR_tomaj-o-dutovlje-po", 
+            "vaps": [
+                {
+                    "name": "18_eduroam", 
+                    "q_origin_key": "18_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for topolsica-o-sostanj-ce", 
+            "name": "SGR_topolsica-o-sostanj-ce", 
+            "q_origin_key": "SGR_topolsica-o-sostanj-ce", 
+            "vaps": [
+                {
+                    "name": "50_eduroam", 
+                    "q_origin_key": "50_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for tunjice-o-fakam-lj", 
+            "name": "SGR_tunjice-o-fakam-lj", 
+            "q_origin_key": "SGR_tunjice-o-fakam-lj", 
+            "vaps": [
+                {
+                    "name": "28_eduroam", 
+                    "q_origin_key": "28_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for vace-o-gradec-lj", 
+            "name": "SGR_vace-o-gradec-lj", 
+            "q_origin_key": "SGR_vace-o-gradec-lj", 
+            "vaps": [
+                {
+                    "name": "11_eduroam", 
+                    "q_origin_key": "11_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "SSID group for vpec-o-fakam-lj", 
+            "name": "SGR_vpec-o-fakam-lj", 
+            "q_origin_key": "SGR_vpec-o-fakam-lj", 
+            "vaps": [
+                {
+                    "name": "27_eduroam", 
+                    "q_origin_key": "27_eduroam"
+                }
+            ]
+        }, 
+        {
+            "comment": "", 
+            "name": "test", 
+            "q_origin_key": "test", 
+            "vaps": [
+                {
+                    "name": "test_eduroam", 
+                    "q_origin_key": "test_eduroam"
+                }
+            ]
+        }
+    ], 
+    "serial": "FGVM000000151466", 
+    "status": "success", 
+    "vdom": "root", 
+    "version": "v5.6.3"
 }
