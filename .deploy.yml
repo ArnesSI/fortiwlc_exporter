@@ -3,26 +3,43 @@
 - hosts: all
   remote_user: cd-fortiwlc-exporter
   gather_facts: false
+  become: yes
+  become_method: sudo
+
+  vars:
+    cd_environment: "{{ lookup('env', 'CI_ENVIRONMENT_SLUG') }}"
 
   tasks:
-    - debug:
-        var: build_id
-    - debug:
-        msg: "{{ lookup('env', 'DEPLOY_ENV') }}"
+    - name: CD environment
+      debug:
+        var: cd_environment
+  
+    - name: Include vars
+      include_vars: "deploy/{{ cd_environment }}_vars.yml"
 
-    - name: install package from local RPM
+    - name: copy RPM package to host
       copy:
-        src: ./rpms/x86_64/fortiwlc-exporter-*.el7.x86_64.rpm
+        src: "{{ lookup('fileglob', './rpms/x86_64/fortiwlc-exporter-*.el7.x86_64.rpm') }}"
         dest: /tmp/
       register: copy_result
+      when:
+        - cd_environment == "testing" or cd_environment == "staging"
     
-    - debug:
-        var: copy_result
+    - name: install copied RPM package
+      yum:
+        name: "{{ copy_result.dest }}"
+        state: present
+      when:
+        - cd_environment == "testing" or cd_environment == "staging"
+      notify:
+        - restart fortiwlc_exporter
   
     - name: install package from yum repo
       yum:
         name: fortiwlc-exporter
         state: present
+      when:
+        - cd_environment == "production"
       notify:
         - restart fortiwlc_exporter
 
@@ -30,6 +47,7 @@
       lineinfile:
         path: /etc/fortiwlc_exporter.yaml
         line: "{{ item }}"
+      no_log: yes
       loop:
         - "wlc_username: {{ wlc_username }}"
         - "wlc_password: {{ wlc_password }}"

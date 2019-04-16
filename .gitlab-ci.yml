@@ -95,5 +95,9 @@ deploy_to_staging:
     - staging
   environment:
     name: staging
+  dependencies: 
+    - build_rpm
   script:
+    - echo $ANSIBLE_VAULT_PASSWORD > v
+    - export ANSIBLE_VAULT_PASSWORD_FILE=v
     - deploy staging
