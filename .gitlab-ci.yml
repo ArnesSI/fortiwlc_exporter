@@ -3,6 +3,7 @@ stages:
   - build
   - test_package
   - publish
+  - deploy
 
 variables:
   PIP_INDEX_URL: https://zelenjak.arnes.si/nexus/repository/ArnesGroupPyPI/simple
@@ -86,3 +87,13 @@ publish_rpm:
     - tags
   tags:
     - generic
+
+deploy_to_staging:
+  stage: deploy
+  tags:
+    - cd
+    - staging
+  environment:
+    name: staging
+  script:
+    - deploy staging

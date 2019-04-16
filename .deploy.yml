@@ -1,0 +1,48 @@
+# Ansible playbook to deploy fortiwlc_exporter
+---
+- hosts: all
+  remote_user: cd-fortiwlc-exporter
+  gather_facts: false
+
+  tasks:
+    - debug:
+        var: build_id
+    - debug:
+        msg: "{{ lookup('env', 'DEPLOY_ENV') }}"
+
+    - name: install package from local RPM
+      copy:
+        src: ./rpms/x86_64/fortiwlc-exporter-*.el7.x86_64.rpm
+        dest: /tmp/
+      register: copy_result
+    
+    - debug:
+        var: copy_result
+  
+    - name: install package from yum repo
+      yum:
+        name: fortiwlc-exporter
+        state: present
+      notify:
+        - restart fortiwlc_exporter
+
+    - name: write settings
+      lineinfile:
+        path: /etc/fortiwlc_exporter.yaml
+        line: "{{ item }}"
+      loop:
+        - "wlc_username: {{ wlc_username }}"
+        - "wlc_password: {{ wlc_password }}"
+      notify:
+        - restart fortiwlc_exporter
+
+    - name: enable fortiwlc_exporter service on boot
+      service:
+        name: fortiwlc_exporter
+        enabled: yes
+
+  handlers: 
+    - name: restart fortiwlc_exporter
+      service:
+        name: fortiwlc_exporter
+        state: restarted
