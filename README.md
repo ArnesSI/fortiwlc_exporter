@@ -42,7 +42,7 @@ To scrape stats for a given WLC open URL: [http://[exporter]:[port]/probe?target
 
 Exporter returns these metrics:
 
-1. **`fortiwlc_client_count`**  
+1. **`fortiwlc_clients`**  
    Number of clients connected to a specific combination of access point, radio and wifi network. Labels:
    * `ap_name`: Name of access point
    * `radio_type`: Radio standard. Common values are: `802.11ac`, `802.11g`, `802.11n`, `802.11n-5G`, `unknown` It is unlikely, but additional values could occur
