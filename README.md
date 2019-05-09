@@ -43,10 +43,11 @@ To scrape stats for a given WLC open URL: [http://[exporter]:[port]/probe?target
 Exporter returns these metrics:
 
 1. **`fortiwlc_clients`**  
-   Number of clients connected to a specific combination of access point, radio and wifi network. Labels:
+   Number of clients connected to a specific combination of access point, radio and wifi network in a campus. Labels:
    * `ap_name`: Name of access point
    * `radio_type`: Radio standard. Common values are: `802.11ac`, `802.11g`, `802.11n`, `802.11n-5G`, `unknown` It is unlikely, but additional values could occur
    * `wifi_network`: Name of wireless network. Commonly build from campus_id and SSID
+   * `campus`: Campus slug of AP. Can be missing.
 2. **`fortiwlc_wifi_info`**  
    Wireless network (SSID) information. This is an info metric, so tis values is always 1. Labels:
    * `wifi_network`: Name of wireless network. Commonly build from campus_id and SSID. Guarantied to be unique
@@ -68,23 +69,23 @@ Exporter returns these metrics:
 Sample response:
 
 ```
-# HELP fortiwlc_clients Number of clients connected to a specific combination of access point, radio and wifi network.
+# HELP fortiwlc_clients Number of clients connected to a specific combination of access point, radio and wifi network in a campus.
 # TYPE fortiwlc_clients gauge
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11ac",wifi_network="1_tolos_psk"} 1.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11ac",wifi_network="1_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="unknown",wifi_network="1_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n",wifi_network="1_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11g",wifi_network="1_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="1_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="unknown",wifi_network="1_tolos_psk"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n",wifi_network="1_tolos_psk"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11g",wifi_network="1_tolos_psk"} 0.0
-fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="1_tolos_psk"} 0.0
-fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11ac",wifi_network="2_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="unknown",wifi_network="2_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11n",wifi_network="2_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11g",wifi_network="2_eduroam"} 0.0
-fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",radio_type="802.11n-5G",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11ac",wifi_network="1_tolos_psk"} 1.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11ac",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="unknown",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11n",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11g",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11n-5G",wifi_network="1_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="unknown",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11n",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11g",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-tolos.cpe.arnes.si",campus="tolos",radio_type="802.11n-5G",wifi_network="1_tolos_psk"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",radio_type="802.11ac",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",radio_type="unknown",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",radio_type="802.11n",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",radio_type="802.11g",wifi_network="2_eduroam"} 0.0
+fortiwlc_clients{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",radio_type="802.11n-5G",wifi_network="2_eduroam"} 0.0
 # HELP fortiwlc_ap_info Access point information
 # TYPE fortiwlc_ap_info gauge
 fortiwlc_ap_info{ap_name="w1-tolos.cpe.arnes.si",ap_state="authorized",ap_status="connected",campus="tolos",model="FAP221E",os_version="v5.6-build6508",profile="tolos_FAP221E",wlc="wlc.ansoext.arnes.si"} 1.0

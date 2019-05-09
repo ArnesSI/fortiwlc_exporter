@@ -18,9 +18,8 @@ def responses_add(test_case, host, resource, method=responses.GET):
         url = 'https://{}/api/v2/monitor/wifi/client/select/?vdom=root'.format(host)
     elif resource == 'managed_ap':
         url = 'https://{}/api/v2/monitor/wifi/managed_ap/select/?vdom=root'.format(host)
-    response_data = json.load(
-        open('./tests/data/{}/{}-{}.json'.format(test_case, host, resource))
-    )
+    with open('./tests/data/{}/{}-{}.json'.format(test_case, host, resource)) as f:
+        response_data = json.load(f)
     responses.add(method, url, json=response_data, status=200)
 
 
@@ -94,7 +93,6 @@ class TestCollectorParse(unittest.TestCase):
         col.poll_wlcs()
         self.assertEqual(len(responses.calls), 3)
         col.parse_metrics()
-        print(col.clients)
         self.assertDictEqual(
             col.clients,
             {
