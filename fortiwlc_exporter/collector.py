@@ -46,8 +46,8 @@ class FortiwlcCollector:
         self.fortiwlc_clients = GaugeMetricFamily(
             'fortiwlc_clients',
             'Number of clients connected to a specific combination of access '
-            'point, radio and wifi network.',
-            labels=['ap_name', 'radio_type', 'wifi_network'],
+            'point, radio and wifi network in a campus.',
+            labels=['ap_name', 'radio_type', 'wifi_network', 'campus'],
         )
         self.fortiwlc_ap_info = InfoMetricFamily(
             'fortiwlc_ap',
@@ -97,7 +97,12 @@ class FortiwlcCollector:
                 self.fortiwlc_up.add_metric([wlc.name], int(wlc.last_pool_ok))
 
         for key, count in self.clients.items():
-            self.fortiwlc_clients.add_metric(key, count)
+            ap_info = self.ap_info[key[0]]
+            if len(ap_info) > 7:
+                campus = ap_info[7]
+                self.fortiwlc_clients.add_metric(key + (campus,), count)
+            else:
+                self.fortiwlc_clients.add_metric(key, count)
 
         for _, labels in self.ap_info.items():
             self.fortiwlc_ap_info.add_metric(labels, {})
