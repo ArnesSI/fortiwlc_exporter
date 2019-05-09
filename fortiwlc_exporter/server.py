@@ -36,7 +36,7 @@ class FortiwlcExporterHandler(BaseHTTPRequestHandler):
         return generate_latest(registry)
 
     def do_GET(self):
-        logging.info('Got request...')
+        logging.debug('Got request...')
         url = urlparse.urlparse(self.path)
         if url.path == '/probe':
             params = urlparse.parse_qs(url.query)
@@ -53,7 +53,7 @@ class FortiwlcExporterHandler(BaseHTTPRequestHandler):
                 self.send_header('Content-Type', CONTENT_TYPE_LATEST)
                 self.end_headers()
                 self.wfile.write(output)
-                logging.info('Finished request.')
+                logging.debug('Finished request.')
             except TimeoutError:
                 logging.error('Collection timed out')
                 self.send_response(408)
