@@ -50,7 +50,7 @@ build_rpm:
   variables:
     LC_ALL: en_US.utf8
   script:
-    - yum install -y python34
+    - yum install -y python34 git
     - python3.4 -m ensurepip --default-pip
     - pip3.4 install --upgrade bumpversion poetry pyinstaller
     - poetry install --no-dev
