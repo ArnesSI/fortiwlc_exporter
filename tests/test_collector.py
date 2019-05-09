@@ -93,7 +93,6 @@ class TestCollectorParse(unittest.TestCase):
         col.poll_wlcs()
         self.assertEqual(len(responses.calls), 3)
         col.parse_metrics()
-        print(col.clients)
         self.assertDictEqual(
             col.clients,
             {
