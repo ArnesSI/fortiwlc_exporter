@@ -89,9 +89,10 @@ def parse_config_file(config_file):
         return None
     try:
         config = yaml.safe_load(config_file)
-        config_file.close()
     except yaml.parser.ParserError:
         raise ExporterConfigError('Could not parse configuration file.')
+    finally:
+        config_file.close()
     if not config:
         return None
 
