@@ -128,7 +128,7 @@ See Tests chapter below for more on running tests and code coverage.
 Start exporter:
 
 ```
-poetry run fortiwlc_exporter/exporter.py
+poetry run python fortiwlc_exporter/exporter.py
 ```
 
 ### Tests
