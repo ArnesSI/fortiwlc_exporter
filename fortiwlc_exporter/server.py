@@ -21,7 +21,7 @@ class FortiwlcExporterHandler(BaseHTTPRequestHandler):
         try:
             BaseHTTPRequestHandler.__init__(self, *args, **kwargs)
         except Exception as e:
-            logging.exception('Failed to handle request: %s', e)
+            logging.error('Failed to handle request', exc_info=e)
 
     @timeout()
     def collect(self, params):
@@ -60,7 +60,7 @@ class FortiwlcExporterHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 # self.wfile.write(traceback.format_exc())
             except Exception as e:
-                logging.error('Internal error: %s', e)
+                logging.error('Internal error', exc_info=e)
                 self.send_response(500)
                 self.end_headers()
                 # self.wfile.write(traceback.format_exc())
