@@ -14,7 +14,8 @@ Source2: %{srcname}.yaml
 Requires(pre): shadow-utils
 %{?systemd_requires}
 BuildRequires: systemd
-BuildRequires: python34-devel
+BuildRequires: python36-devel
+BuildRequires: python36-setuptools
 
 %description
 This project collects data from FortiNET WLC systems and generates export data
@@ -24,6 +25,8 @@ for Prometheus.
 %autosetup -n %{srcname}-%{version}
 
 %build
+python3 -m ensurepip --default-pip
+pip3 install pyinstaller
 pyinstaller --onefile %{srcname}/exporter.py -n %{srcname}
 
 %install
