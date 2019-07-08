@@ -27,6 +27,10 @@ for Prometheus.
 %build
 python3 -m ensurepip --default-pip
 pip3 install pyinstaller
+pip3 install --upgrade bumpversion poetry
+poetry install --no-dev
+poetry run pip freeze | grep -v fortiwlc-exporter > requirements.txt
+pip3 install -r requirements.txt
 pyinstaller --onefile %{srcname}/exporter.py -n %{srcname}
 
 %install

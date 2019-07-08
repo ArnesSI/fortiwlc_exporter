@@ -53,9 +53,6 @@ build_rpm:
     - yum install -y python36 git
     - python3.6 -m ensurepip --default-pip
     - pip3.6 install --upgrade bumpversion poetry
-    - poetry install --no-dev
-    - poetry run pip freeze | grep -v egg=fortiwlc_exporter > requirements.txt
-    - pip3.6 install -r requirements.txt
     - ./dev-version.sh
     - ./build.sh
   tags:
