@@ -1,3 +1,4 @@
+import logging
 from collections import defaultdict
 
 from prometheus_client.core import GaugeMetricFamily, InfoMetricFamily
@@ -96,19 +97,25 @@ class FortiwlcCollector:
             for wlc in self.wlcs:
                 self.fortiwlc_up.add_metric([wlc.name], int(wlc.last_pool_ok))
 
-        for key, count in self.clients.items():
-            ap_info = self.ap_info[key[0]]
-            if len(ap_info) > 7:
-                campus = ap_info[7]
-                self.fortiwlc_clients.add_metric(key + (campus,), count)
-            else:
-                self.fortiwlc_clients.add_metric(key, count)
+        try:
+            for key, count in self.clients.items():
+                ap_info = self.ap_info[key[0]]
+                if len(ap_info) > 7:
+                    campus = ap_info[7]
+                    self.fortiwlc_clients.add_metric(key + (campus,), count)
+                else:
+                    self.fortiwlc_clients.add_metric(key, count)
 
-        for _, labels in self.ap_info.items():
-            self.fortiwlc_ap_info.add_metric(labels, {})
+            for _, labels in self.ap_info.items():
+                self.fortiwlc_ap_info.add_metric(labels, {})
 
-        for _, labels in self.wifi_info.items():
-            self.fortiwlc_wifi_info.add_metric(labels, {})
+            for _, labels in self.wifi_info.items():
+                self.fortiwlc_wifi_info.add_metric(labels, {})
+        except Exception as e:
+            if settings.DEBUG:
+                raise
+            logging.error('Error returning metrics', exc_info=e)
+            self.fortiwlc_up.add_metric([], 0)
 
         yield self.fortiwlc_clients
         yield self.fortiwlc_ap_info
