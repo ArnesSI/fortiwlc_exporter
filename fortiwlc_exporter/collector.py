@@ -89,9 +89,10 @@ class FortiwlcCollector:
         try:
             self.poll_wlcs()
             self.parse_metrics()
-        except Exception:
+        except Exception as e:
             if settings.DEBUG:
                 raise
+            logging.error('Error polling or parsing metrics', exc_info=e)
             self.fortiwlc_up.add_metric([], 0)
         else:
             for wlc in self.wlcs:
