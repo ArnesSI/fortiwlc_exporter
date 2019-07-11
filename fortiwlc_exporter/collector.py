@@ -155,12 +155,12 @@ class FortiwlcCollector:
         """ Counts clients on each AP/radio type/SSID combo """
         for wlc in self.wlcs:
             for client in wlc.clients:
-                # temporaraly log to see maformed data
+                # sometimes we see malformed data
                 try:
                     key = (client['wtp_name'], client['radio_type'], client['vap_name'])
                 except KeyError:
-                    logging.error('malformed client entry: {}'.format(client))
-                    raise
+                    logging.error('KeyError for client entry: {}'.format(client))
+                    continue
                 self.clients[key] += 1
                 self.radio_types.add(client['radio_type'])
                 self.wifi_info[client['vap_name']] = (
