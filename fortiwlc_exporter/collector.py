@@ -83,55 +83,55 @@ class FortiwlcCollector:
 
         self.fortiwlc_receive_bytes_total = CounterMetricFamily(
             'fortiwlc_receive_bytes_total',
-            'Wired metrics',
+            'Total ammount of bytes received.',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_transmit_bytes_total = CounterMetricFamily(
             'fortiwlc_transmit_bytes_total',
-            'Wired metrics',
+            'Total ammount of bytes transmitted',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_receive_packets_total = CounterMetricFamily(
             'fortiwlc_receive_packets_total',
-            'Wired metrics',
+            'Total ammount of packets received',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_transmit_packets_total = CounterMetricFamily(
             'fortiwlc_transmit_packets_total',
-            'Wired metrics',
+            'Total ammount of packets transmitted',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_receive_errs_total = CounterMetricFamily(
             'fortiwlc_receive_errs_total',
-            'Wired metrics',
+            'Total ammount of errors received',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_transmit_errs_total = CounterMetricFamily(
             'fortiwlc_transmit_errs_total',
-            'Wired metrics',
+            'Total ammount of errors transmitted',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_receive_drop_total = CounterMetricFamily(
             'fortiwlc_receive_drop_total',
-            'Wired metrics',
+            'Total ammount of drops received',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_transmit_drop_total = CounterMetricFamily(
             'fortiwlc_transmit_drop_total',
-            'Wired metrics',
+            'Total ammount of drops transmitted',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
         self.fortiwlc_transmit_colls_total = CounterMetricFamily(
             'fortiwlc_transmit_colls_total',
-            'Wired metrics',
+            'Total ammount of collisions transmitted',
             labels=['wlc', 'ap_name', 'interface', 'campus'],
         )
 
