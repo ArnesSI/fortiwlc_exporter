@@ -148,16 +148,16 @@
             "status": "connected",
             "wired": [
                 {
-                    "bytes_rx": 104509570,
-                    "bytes_tx": 51826849,
+                    "bytes_rx": 0,
+                    "bytes_tx": 0,
                     "collisions": 0,
-                    "dropped_rx": 24441,
+                    "dropped_rx": 0,
                     "dropped_tx": 0,
                     "errors_rx": 0,
                     "errors_tx": 0,
                     "interface": "eth0",
-                    "packets_rx": 1163302,
-                    "packets_tx": 311406
+                    "packets_rx": 0,
+                    "packets_tx": 0
                 }
             ],
             "wtp_id": "FP221E3X17002259",
@@ -291,16 +291,16 @@
             "status": "connected",
             "wired": [
                 {
-                    "bytes_rx": 17456277,
-                    "bytes_tx": 9097698,
+                    "bytes_rx": 0,
+                    "bytes_tx": 0,
                     "collisions": 0,
-                    "dropped_rx": 6217,
+                    "dropped_rx": 0,
                     "dropped_tx": 0,
                     "errors_rx": 0,
                     "errors_tx": 0,
                     "interface": "eth0",
-                    "packets_rx": 193445,
-                    "packets_tx": 68157
+                    "packets_rx": 0,
+                    "packets_tx": 0
                 }
             ],
             "wtp_id": "FP221E3X17002282",

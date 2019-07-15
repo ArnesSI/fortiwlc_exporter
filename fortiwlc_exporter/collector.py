@@ -1,7 +1,11 @@
 import logging
 from collections import defaultdict
 
-from prometheus_client.core import GaugeMetricFamily, InfoMetricFamily
+from prometheus_client.core import (
+    GaugeMetricFamily,
+    InfoMetricFamily,
+    CounterMetricFamily,
+)
 
 from fortiwlc_exporter import settings
 from fortiwlc_exporter.exceptions import ExporterConfigError
@@ -22,6 +26,8 @@ class FortiwlcCollector:
             ['802.11ac', '802.11g', '802.11n', '802.11n-5G', 'unknown']
         )
         self.wifi_info = {}
+        self.wired_list = []
+        self.wired_metric_list = []
 
     def init_wlcs(self, names):
         """ Initializes FortiWLC instances """
@@ -75,6 +81,72 @@ class FortiwlcCollector:
             labels=['wlc'],
         )
 
+        self.fortiwlc_receive_bytes_total = CounterMetricFamily(
+            'fortiwlc_receive_bytes_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_transmit_bytes_total = CounterMetricFamily(
+            'fortiwlc_transmit_bytes_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_receive_packets_total = CounterMetricFamily(
+            'fortiwlc_receive_packets_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_transmit_packets_total = CounterMetricFamily(
+            'fortiwlc_transmit_packets_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_receive_errs_total = CounterMetricFamily(
+            'fortiwlc_receive_errs_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_transmit_errs_total = CounterMetricFamily(
+            'fortiwlc_transmit_errs_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_receive_drop_total = CounterMetricFamily(
+            'fortiwlc_receive_drop_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_transmit_drop_total = CounterMetricFamily(
+            'fortiwlc_transmit_drop_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_transmit_colls_total = CounterMetricFamily(
+            'fortiwlc_transmit_colls_total',
+            'Wired metrics',
+            labels=['wlc', 'ap_name', 'interface', 'campus'],
+        )
+
+        self.fortiwlc_wired = [
+            self.fortiwlc_receive_bytes_total,
+            self.fortiwlc_transmit_bytes_total,
+            self.fortiwlc_receive_packets_total,
+            self.fortiwlc_transmit_packets_total,
+            self.fortiwlc_receive_errs_total,
+            self.fortiwlc_transmit_errs_total,
+            self.fortiwlc_receive_drop_total,
+            self.fortiwlc_transmit_drop_total,
+            self.fortiwlc_transmit_colls_total,
+        ]
+
     def describe(self):
         self.init_metrics()
         yield self.fortiwlc_clients
@@ -118,10 +190,41 @@ class FortiwlcCollector:
             logging.error('Error returning metrics', exc_info=e)
             self.fortiwlc_up.add_metric([], 0)
 
+        for counter, con in enumerate(self.wired_list):
+            for metric in self.fortiwlc_wired:
+                if len(ap_info) > 7:
+                    campus = ap_info[7]
+                    labele = [
+                        self.wired_list[counter]['wlc'],
+                        self.wired_list[counter]['ap_name'],
+                        self.wired_list[counter]['interface'],
+                        campus,
+                    ]
+
+                else:
+                    labele = [
+                        self.wired_list[counter]['wlc'],
+                        self.wired_list[counter]['ap_name'],
+                        self.wired_list[counter]['interface'],
+                        '',
+                    ]
+
+                metric.add_metric(labele, self.wired_list[counter][metric.name[9:]])
+                self.wired_metric_list.append(metric)
+
         yield self.fortiwlc_clients
         yield self.fortiwlc_ap_info
         yield self.fortiwlc_wifi_info
         yield self.fortiwlc_up
+        yield self.fortiwlc_receive_bytes_total
+        yield self.fortiwlc_transmit_bytes_total
+        yield self.fortiwlc_receive_packets_total
+        yield self.fortiwlc_transmit_packets_total
+        yield self.fortiwlc_receive_errs_total
+        yield self.fortiwlc_transmit_errs_total
+        yield self.fortiwlc_receive_drop_total
+        yield self.fortiwlc_transmit_drop_total
+        yield self.fortiwlc_transmit_colls_total
 
     @timeit
     def poll_wlcs(self):
@@ -150,6 +253,24 @@ class FortiwlcCollector:
                         self.clients[
                             (ap_data['name'], radio_type, wifi_network[0])
                         ] += 0
+
+                for wc in ap_data['wired']:
+                    w_dict = {
+                        'wlc': wlc.name,
+                        'ap_name': ap_data['name'],
+                        'interface': wc['interface'],
+                        'campus': 'ne',
+                        'receive_bytes': wc['bytes_rx'],
+                        'transmit_bytes': wc['bytes_tx'],
+                        'receive_packets': wc['packets_rx'],
+                        'transmit_packets': wc['packets_tx'],
+                        'receive_errs': wc['errors_rx'],
+                        'transmit_errs': wc['errors_tx'],
+                        'receive_drop': wc['dropped_rx'],
+                        'transmit_drop': wc['dropped_tx'],
+                        'transmit_colls': wc['collisions'],
+                    }
+                    self.wired_list.append(w_dict)
 
     def parse_by_ssid(self):
         """ Counts clients on each AP/radio type/SSID combo """

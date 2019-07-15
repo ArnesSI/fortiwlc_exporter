@@ -27,3 +27,39 @@ fortiwlc_wifi_info{ssid="eduroam",wifi_network="2_eduroam"} 1.0
 # HELP fortiwlc_up Was the last scrape of data from FortiNET WLC instance successful.
 # TYPE fortiwlc_up gauge
 fortiwlc_up{wlc="wlc.ansoext.arnes.si"} 1.0
+# HELP fortiwlc_receive_bytes_total Wired metrics
+# TYPE fortiwlc_receive_bytes_total counter
+fortiwlc_receive_bytes_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_receive_bytes_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_transmit_bytes_total Wired metrics
+# TYPE fortiwlc_transmit_bytes_total counter
+fortiwlc_transmit_bytes_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_transmit_bytes_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_receive_packets_total Wired metrics
+# TYPE fortiwlc_receive_packets_total counter
+fortiwlc_receive_packets_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_receive_packets_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_transmit_packets_total Wired metrics
+# TYPE fortiwlc_transmit_packets_total counter
+fortiwlc_transmit_packets_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_transmit_packets_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_receive_errs_total Wired metrics
+# TYPE fortiwlc_receive_errs_total counter
+fortiwlc_receive_errs_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_receive_errs_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_transmit_errs_total Wired metrics
+# TYPE fortiwlc_transmit_errs_total counter
+fortiwlc_transmit_errs_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_transmit_errs_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_receive_drop_total Wired metrics
+# TYPE fortiwlc_receive_drop_total counter
+fortiwlc_receive_drop_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_receive_drop_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_transmit_drop_total Wired metrics
+# TYPE fortiwlc_transmit_drop_total counter
+fortiwlc_transmit_drop_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_transmit_drop_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+# HELP fortiwlc_transmit_colls_total Wired metrics
+# TYPE fortiwlc_transmit_colls_total counter
+fortiwlc_transmit_colls_total{ap_name="w1-tolos.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
+fortiwlc_transmit_colls_total{ap_name="w1-volantis.cpe.arnes.si",campus="volantis",interface="eth0",wlc="wlc.ansoext.arnes.si"} 0.0
