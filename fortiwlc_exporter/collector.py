@@ -153,6 +153,15 @@ class FortiwlcCollector:
         yield self.fortiwlc_ap_info
         yield self.fortiwlc_wifi_info
         yield self.fortiwlc_up
+        yield self.fortiwlc_receive_bytes_total
+        yield self.fortiwlc_transmit_bytes_total
+        yield self.fortiwlc_receive_packets_total
+        yield self.fortiwlc_transmit_packets_total
+        yield self.fortiwlc_receive_errs_total
+        yield self.fortiwlc_transmit_errs_total
+        yield self.fortiwlc_receive_drop_total
+        yield self.fortiwlc_transmit_drop_total
+        yield self.fortiwlc_transmit_colls_total
 
     @timeit
     def collect(self):
@@ -190,26 +199,26 @@ class FortiwlcCollector:
             logging.error('Error returning metrics', exc_info=e)
             self.fortiwlc_up.add_metric([], 0)
 
-        for counter, con in enumerate(self.wired_list):
+        for self.con in self.wired_list:
             for metric in self.fortiwlc_wired:
                 if len(ap_info) > 7:
                     campus = ap_info[7]
                     labele = [
-                        self.wired_list[counter]['wlc'],
-                        self.wired_list[counter]['ap_name'],
-                        self.wired_list[counter]['interface'],
+                        self.con['wlc'],
+                        self.con['ap_name'],
+                        self.con['interface'],
                         campus,
                     ]
 
                 else:
                     labele = [
-                        self.wired_list[counter]['wlc'],
-                        self.wired_list[counter]['ap_name'],
-                        self.wired_list[counter]['interface'],
-                        '',
+                        self.con['wlc'],
+                        self.con['ap_name'],
+                        self.con['interface'],
+                        None,
                     ]
 
-                metric.add_metric(labele, self.wired_list[counter][metric.name[9:]])
+                metric.add_metric(labele, self.con[metric.name[9:]])
                 self.wired_metric_list.append(metric)
 
         yield self.fortiwlc_clients
@@ -259,7 +268,6 @@ class FortiwlcCollector:
                         'wlc': wlc.name,
                         'ap_name': ap_data['name'],
                         'interface': wc['interface'],
-                        'campus': 'ne',
                         'receive_bytes': wc['bytes_rx'],
                         'transmit_bytes': wc['bytes_tx'],
                         'receive_packets': wc['packets_rx'],
