@@ -99,3 +99,5 @@ deploy_to_staging:
     - build_rpm
   script:
     - deploy staging
+  only:
+    - branches
