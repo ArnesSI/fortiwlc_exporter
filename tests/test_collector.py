@@ -314,6 +314,24 @@ class TestCollectorCollect(unittest.TestCase):
                 self.assertEqual(len(metric.samples), 0)
             elif metric.name == 'fortiwlc_wifi':
                 self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_receive_bytes':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_transmit_bytes':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_receive_packets':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_transmit_packets':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_receive_errs':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_transmit_errs':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_receive_drop':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_transmit_drop':
+                self.assertEqual(len(metric.samples), 0)
+            elif metric.name == 'fortiwlc_transmit_colls':
+                self.assertEqual(len(metric.samples), 0)
             else:
                 raise Exception('Unknown metric {}'.format(metric))
         col.poll_wlcs.assert_called_once()
