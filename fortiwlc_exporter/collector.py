@@ -193,33 +193,32 @@ class FortiwlcCollector:
 
             for _, labels in self.wifi_info.items():
                 self.fortiwlc_wifi_info.add_metric(labels, {})
+
+            for self.con in self.wired_list:
+                for metric in self.fortiwlc_wired:
+                    if len(ap_info) > 7:
+                        campus = ap_info[7]
+                        labele = [
+                            self.con['wlc'],
+                            self.con['ap_name'],
+                            self.con['interface'],
+                            campus,
+                        ]
+                    else:
+                        labele = [
+                            self.con['wlc'],
+                            self.con['ap_name'],
+                            self.con['interface'],
+                            None,
+                        ]
+                    metric.add_metric(labele, self.con[metric.name[9:]])
+                    self.wired_metric_list.append(metric)
+
         except Exception as e:
             if settings.DEBUG:
                 raise
             logging.error('Error returning metrics', exc_info=e)
             self.fortiwlc_up.add_metric([], 0)
-
-        for self.con in self.wired_list:
-            for metric in self.fortiwlc_wired:
-                if len(ap_info) > 7:
-                    campus = ap_info[7]
-                    labele = [
-                        self.con['wlc'],
-                        self.con['ap_name'],
-                        self.con['interface'],
-                        campus,
-                    ]
-
-                else:
-                    labele = [
-                        self.con['wlc'],
-                        self.con['ap_name'],
-                        self.con['interface'],
-                        None,
-                    ]
-
-                metric.add_metric(labele, self.con[metric.name[9:]])
-                self.wired_metric_list.append(metric)
 
         yield self.fortiwlc_clients
         yield self.fortiwlc_ap_info
