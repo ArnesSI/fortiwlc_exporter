@@ -43,14 +43,21 @@
       notify:
         - restart fortiwlc_exporter
 
-    - name: write settings
+    - name: write wlc username
       lineinfile:
         path: /etc/fortiwlc_exporter.yaml
-        line: "{{ item }}"
+        line: "wlc_username: {{ wlc_username }}"
+        regexp: "^wlc_username:\\s"
       no_log: yes
-      loop:
-        - "wlc_username: {{ wlc_username }}"
-        - "wlc_password: {{ wlc_password }}"
+      notify:
+        - restart fortiwlc_exporter
+
+    - name: write wlc password
+      lineinfile:
+        path: /etc/fortiwlc_exporter.yaml
+        line: "wlc_password: {{ wlc_password }}"
+        regexp: "^wlc_password:\\s"
+      no_log: yes
       notify:
         - restart fortiwlc_exporter
 
