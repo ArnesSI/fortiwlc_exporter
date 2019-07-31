@@ -1,0 +1,73 @@
+# Ansible playbook to deploy fortiwlc_exporter
+---
+- hosts: all
+  remote_user: cd-fortiwlc-exporter
+  gather_facts: false
+  become: yes
+  become_method: sudo
+
+  vars:
+    cd_environment: "{{ lookup('env', 'CI_ENVIRONMENT_SLUG') }}"
+
+  tasks:
+    - name: CD environment
+      debug:
+        var: cd_environment
+  
+    - name: Include vars
+      include_vars: "deploy/{{ cd_environment }}_vars.yml"
+
+    - name: copy RPM package to host
+      copy:
+        src: "{{ lookup('fileglob', './rpms/x86_64/fortiwlc-exporter-*.el7.x86_64.rpm') }}"
+        dest: /tmp/
+      register: copy_result
+      when:
+        - cd_environment == "testing" or cd_environment == "staging"
+    
+    - name: install copied RPM package
+      yum:
+        name: "{{ copy_result.dest }}"
+        state: present
+      when:
+        - cd_environment == "testing" or cd_environment == "staging"
+      notify:
+        - restart fortiwlc_exporter
+  
+    - name: install package from yum repo
+      yum:
+        name: fortiwlc-exporter
+        state: present
+      when:
+        - cd_environment == "production"
+      notify:
+        - restart fortiwlc_exporter
+
+    - name: write wlc username
+      lineinfile:
+        path: /etc/fortiwlc_exporter.yaml
+        line: "wlc_username: {{ wlc_username }}"
+        regexp: "^wlc_username:\\s"
+      no_log: yes
+      notify:
+        - restart fortiwlc_exporter
+
+    - name: write wlc password
+      lineinfile:
+        path: /etc/fortiwlc_exporter.yaml
+        line: "wlc_password: {{ wlc_password }}"
+        regexp: "^wlc_password:\\s"
+      no_log: yes
+      notify:
+        - restart fortiwlc_exporter
+
+    - name: enable fortiwlc_exporter service on boot
+      service:
+        name: fortiwlc_exporter
+        enabled: yes
+
+  handlers: 
+    - name: restart fortiwlc_exporter
+      service:
+        name: fortiwlc_exporter
+        state: restarted
