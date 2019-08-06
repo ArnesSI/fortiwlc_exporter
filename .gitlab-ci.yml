@@ -97,6 +97,9 @@ deploy_to_staging:
     name: staging
   dependencies: 
     - build_rpm
+  variables:
+    SSH_DEPLOY_KEY: "$SSH_DEPLOY_KEY_STAGING"
+    VAULT_PASSWORD: "$VAULT_PASSWORD_STAGING"
   script:
     - deploy staging
   only:
@@ -112,9 +115,10 @@ deploy_to_production:
   dependencies: 
     - publish_rpm
   variables:
-    SSH_DEPLOY_KEY: $$SSH_DEPLOY_KEY_PRODUCTION
-    VAULT_PASSWORD: $$VAULT_PASSWORD_PRODUCTION
+    SSH_DEPLOY_KEY: "$SSH_DEPLOY_KEY_PRODUCTION"
+    VAULT_PASSWORD: "$VAULT_PASSWORD_PRODUCTION"
   script:
     - deploy production
   only:
     - tags
+
