@@ -5,6 +5,7 @@
 
   vars:
     cd_environment: "{{ lookup('env', 'CI_ENVIRONMENT_SLUG') }}"
+    package_version: "{{ lookup('env', 'CI_COMMIT_TAG') }}"
 
   tasks:
     - name: CD environment
@@ -33,8 +34,10 @@
   
     - name: install package from yum repo
       yum:
-        name: fortiwlc-exporter
-        state: latest
+        name: "fortiwlc-exporter-{{ package_version }}"
+        state: present
+        allow_downgrade: yes
+        update_cache: yes
       when:
         - cd_environment == "production"
       notify:
