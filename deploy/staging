@@ -1,1 +1,1 @@
-vm2.ansoint.arnes.si
+vm2.ansoint.arnes.si ansible_user=cd-fortiwlc-exporter ansible_become=yes ansible_become_method=sudo
