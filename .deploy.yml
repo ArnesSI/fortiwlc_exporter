@@ -34,6 +34,7 @@
   
     - name: expire yum cache to force refreshing repo info
       shell: yum clean expire-cache
+      warn: no
       when:
         - cd_environment == "production"
 
