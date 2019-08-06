@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "fortiwlc_exporter"
-version = "2.2.6"
+version = "2.2.7"
 description = "Prometheus exporter for FortiOS WLC"
 readme = "README.md"
 authors = [
