@@ -47,6 +47,10 @@
         - cd_environment == "production"
       notify:
         - restart fortiwlc_exporter
+      retries: 3
+      delay: 5
+      register: result
+      until: result is not failed
 
     - name: write wlc username
       lineinfile:
