@@ -115,6 +115,8 @@ deploy_to_production:
     SSH_DEPLOY_KEY: "${SSH_DEPLOY_KEY_PRODUCTION}"
     VAULT_PASSWORD: "${VAULT_PASSWORD_PRODUCTION}"
   script:
+    - export SSH_DEPLOY_KEY="${SSH_DEPLOY_KEY_PRODUCTION}"
+    - export VAULT_PASSWORD="${VAULT_PASSWORD_PRODUCTION}"
     - deploy production
   only:
     - tags
