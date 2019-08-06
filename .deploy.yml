@@ -32,6 +32,11 @@
       notify:
         - restart fortiwlc_exporter
   
+    - name: expire yum cache to force refreshing repo info
+      shell: yum clean expire-cache
+      when:
+        - cd_environment == "production"
+
     - name: install package from yum repo
       yum:
         name: "fortiwlc-exporter-{{ package_version }}"
