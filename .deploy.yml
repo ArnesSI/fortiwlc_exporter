@@ -1,10 +1,7 @@
 # Ansible playbook to deploy fortiwlc_exporter
 ---
 - hosts: all
-  remote_user: cd-fortiwlc-exporter
   gather_facts: false
-  become: yes
-  become_method: sudo
 
   vars:
     cd_environment: "{{ lookup('env', 'CI_ENVIRONMENT_SLUG') }}"

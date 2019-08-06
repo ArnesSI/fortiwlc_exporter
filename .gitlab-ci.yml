@@ -101,3 +101,20 @@ deploy_to_staging:
     - deploy staging
   only:
     - branches
+
+deploy_to_production:
+  stage: deploy
+  tags:
+    - cd
+    - production
+  environment:
+    name: production
+  dependencies: 
+    - publish_rpm
+  variables:
+    SSH_DEPLOY_KEY: SSH_DEPLOY_KEY_PRODUCTION
+    VAULT_PASSWORD: VAULT_PASSWORD_PRODUCTION
+  script:
+    - deploy production
+  only:
+    - tags
