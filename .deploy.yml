@@ -34,7 +34,7 @@
     - name: install package from yum repo
       yum:
         name: fortiwlc-exporter
-        state: present
+        state: latest
       when:
         - cd_environment == "production"
       notify:
