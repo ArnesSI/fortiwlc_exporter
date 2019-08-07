@@ -194,24 +194,15 @@ class FortiwlcCollector:
             for _, labels in self.wifi_info.items():
                 self.fortiwlc_wifi_info.add_metric(labels, {})
 
-            for self.con in self.wired_list:
+            for con in self.wired_list:
+                ap_info = self.ap_info[con['ap_name']]
                 for metric in self.fortiwlc_wired:
                     if len(ap_info) > 7:
                         campus = ap_info[7]
-                        labele = [
-                            self.con['wlc'],
-                            self.con['ap_name'],
-                            self.con['interface'],
-                            campus,
-                        ]
+                        labele = [con['wlc'], con['ap_name'], con['interface'], campus]
                     else:
-                        labele = [
-                            self.con['wlc'],
-                            self.con['ap_name'],
-                            self.con['interface'],
-                            None,
-                        ]
-                    metric.add_metric(labele, self.con[metric.name[9:]])
+                        labele = [con['wlc'], con['ap_name'], con['interface'], None]
+                    metric.add_metric(labele, con[metric.name[9:]])
                     self.wired_metric_list.append(metric)
 
         except Exception as e:
