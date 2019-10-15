@@ -59,6 +59,7 @@ Exporter returns these metrics:
    * `ap_status`: Connection status. Common values: `connected`, `disconnected`, `connecting`
    * `ap_state`: Authorization state. Common values: `authorized`, `discovered`
    * `os_version`: Version of firmware running on access point. Can be `unknown`
+   * `serial_number`: Access point's serial number. Can be `unknown`
    * `profile`: Name of AP profile.
    * `model`: Model of AP.
    * `campus`: Campus slug. Derived from `profile`. Can be missing.

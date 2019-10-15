@@ -30,16 +30,31 @@ def get_ap_os_version(ap):
     return ap['os_version'].split('-', 1)[-1]
 
 
+def get_ap_serial_number(ap):
+    """Parses serial number from AP data
+
+    Args:
+        ap (dict): ap data returned from FortiOS managed-ap REST endpoint
+    
+    Returns:
+        str: serial number or 'unknown' id not found
+    """
+
+    return ap.get('serial', 'unknown')
+
+
 def parse_ap_data(ap_data, wlc_name):
     """ Parses AP data from WLC API into format suitable for metric export """
     model, campus, profile = ap_profile_string(ap_data)
     os_version = get_ap_os_version(ap_data)
+    serial_number = get_ap_serial_number(ap_data)
     ap = [
         wlc_name,
         ap_data['name'],
         ap_data['status'],
         ap_data['state'],
         os_version,
+        serial_number,
         profile,
         model,
     ]
