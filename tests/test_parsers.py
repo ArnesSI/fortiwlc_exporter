@@ -14,6 +14,7 @@ class TestApParser(unittest.TestCase):
             "connected",
             "authorized",
             'v5.6-build6508',
+            'FP221E3X17002259',
             "tolos_FAP221E",
             "FAP221E",
             "tolos",

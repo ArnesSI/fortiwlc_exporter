@@ -65,6 +65,7 @@ class FortiwlcCollector:
                 'ap_status',
                 'ap_state',
                 'os_version',
+                'serial_number',
                 'profile',
                 'model',
                 'campus',
@@ -182,8 +183,8 @@ class FortiwlcCollector:
         try:
             for key, count in self.clients.items():
                 ap_info = self.ap_info[key[0]]
-                if len(ap_info) > 7:
-                    campus = ap_info[7]
+                if len(ap_info) > 8:
+                    campus = ap_info[8]
                     self.fortiwlc_clients.add_metric(key + (campus,), count)
                 else:
                     self.fortiwlc_clients.add_metric(key, count)
@@ -197,8 +198,8 @@ class FortiwlcCollector:
             for con in self.wired_list:
                 ap_info = self.ap_info[con['ap_name']]
                 for metric in self.fortiwlc_wired:
-                    if len(ap_info) > 7:
-                        campus = ap_info[7]
+                    if len(ap_info) > 8:
+                        campus = ap_info[8]
                         labele = [con['wlc'], con['ap_name'], con['interface'], campus]
                     else:
                         labele = [con['wlc'], con['ap_name'], con['interface'], None]
